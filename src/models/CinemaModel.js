@@ -1,11 +1,11 @@
-// ===== Genre Model
+// ===== Cinema Model
 // import Database
 const Database = require('./Database')
 
 class CinemaModel extends Database {
-  create (name) {
+  create (name, poster, address, pricePerSeat, city) {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT name FROM genres WHERE name = ?'
+      const sql = 'SELECT name FROM cinemas WHERE name = ?'
       this.db.query(sql, name, (err, results) => {
         if (err) {
           return reject(err)
@@ -13,18 +13,18 @@ class CinemaModel extends Database {
           return resolve({
             status: 400,
             success: false,
-            message: 'Genre has been there'
+            message: 'Cinemas has been there'
           })
         } else {
-          const sql = 'INSERT INTO genres SET ?'
-          this.db.query(sql, { name }, (err) => {
+          const sql = 'INSERT INTO cinemas SET ?'
+          this.db.query(sql, { name, poster, address, pricePerSeat, city }, (err) => {
             if (err) {
               return reject(err)
             } else {
               return resolve({
                 status: 200,
                 success: true,
-                message: 'New genre has been created'
+                message: 'New cinema has been created'
               })
             }
           })
@@ -35,7 +35,7 @@ class CinemaModel extends Database {
 
   findAll (limit, offset, keyword, by, sort) {
     return new Promise((resolve, reject) => {
-      const sql = `SELECT * FROM genres  
+      const sql = `SELECT * FROM cinemas  
                    WHERE name LIKE "%${keyword}%"
                    ORDER BY ${by} ${sort} 
                    LIMIT ${limit} OFFSET ${offset}`
@@ -43,10 +43,20 @@ class CinemaModel extends Database {
         if (err) {
           return reject(err)
         } else {
+          results = results.map(item => {
+            return {
+              id: item.id,
+              name: item.name,
+              poster: `${process.env.URL}/uploads/${item.poster}`,
+              address: item.address,
+              pricePerSeat: item.pricePerSeat,
+              city: item.city
+            }
+          })
           return resolve({
             status: 200,
             success: true,
-            message: 'Get all genres successfully',
+            message: 'Get all cinema successfully',
             results: results
           })
         }
@@ -56,7 +66,7 @@ class CinemaModel extends Database {
 
   findAllById (id) {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT * FROM genres WHERE id = ?'
+      const sql = 'SELECT * FROM cinemas WHERE id = ?'
       this.db.query(sql, [id], (err, results) => {
         if (err) {
           return reject(err)
@@ -64,14 +74,24 @@ class CinemaModel extends Database {
           return resolve({
             status: 200,
             success: false,
-            message: `Genre with id ${id} not available`,
+            message: `Cinema with id ${id} not available`,
             results: results
           })
         } else {
+          results = results.map(item => {
+            return {
+              id: item.id,
+              name: item.name,
+              poster: `${process.env.URL}/uploads/${item.poster}`,
+              address: item.address,
+              pricePerSeat: item.pricePerSeat,
+              city: item.city
+            }
+          })
           return resolve({
             status: 200,
             success: true,
-            message: 'Get all genres successfully',
+            message: 'Get all cinemas successfully',
             results: results
           })
         }
@@ -81,7 +101,7 @@ class CinemaModel extends Database {
 
   destroy (id) {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT name FROM genres WHERE id = ?'
+      const sql = 'SELECT name, poster FROM cinemas WHERE id = ?'
       this.db.query(sql, id, (err, results) => {
         if (err) {
           return reject(err)
@@ -89,10 +109,10 @@ class CinemaModel extends Database {
           return resolve({
             status: 400,
             success: false,
-            message: 'Unknown Genre'
+            message: 'Unknown cinema'
           })
         } else {
-          const sql = 'DELETE FROM genres WHERE id = ?'
+          const sql = 'DELETE FROM cinemas WHERE id = ?'
           this.db.query(sql, [id], (err) => {
             if (err) {
               return reject(err)
@@ -100,7 +120,8 @@ class CinemaModel extends Database {
               return resolve({
                 status: 200,
                 success: true,
-                message: 'Genre has been deleted'
+                message: 'Cinema has been deleted',
+                poster: results[0].poster
               })
             }
           })
@@ -109,24 +130,31 @@ class CinemaModel extends Database {
     })
   }
 
-  update (id, name) {
+  update (id, poster, { name, address, pricePerSeat, city }) {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT name FROM genres WHERE id = ?'
+      const sql = 'SELECT * FROM cinemas WHERE id = ?'
       this.db.query(sql, id, (err, results) => {
         if (err) {
           return reject(err)
         } else {
-          const sql = 'UPDATE genres SET ? WHERE id = ?'
-          // console.log(results)
-          // name = name || results.name
-          this.db.query(sql, [{ name: name || results[0].name }, id], (err) => {
+          const sql = 'UPDATE cinemas SET ? WHERE id = ?'
+
+          this.db.query(sql, [
+            {
+              name: name || results[0].name,
+              poster: poster || results[0].poster,
+              address: address || results[0].address,
+              pricePerSeat: pricePerSeat || results[0].pricePerSeat,
+              city: city || results[0].city
+            }, id], (err) => {
             if (err) {
               return reject(err)
             } else {
               return resolve({
                 status: 200,
                 success: true,
-                message: 'New genre has been edited'
+                message: 'New cinema has been edited',
+                oldPoster: results[0].poster
               })
             }
           })

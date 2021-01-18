@@ -13,5 +13,11 @@ module.exports = {
   ],
   addGenreBody: [
     'name'
+  ],
+  addCinemasBody: [
+    'name',
+    'address',
+    'pricePerSeat',
+    'city'
   ]
 }
