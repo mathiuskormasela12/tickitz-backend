@@ -7,8 +7,11 @@ module.exports = (res, status, success, message, results, ...optionalProperty) =
       success,
       message,
       results,
-      previousMovie: optionalProperty ? prevMovie : null,
-      nextMovie: optionalProperty ? nextMovie : null
+      pageInfo: {
+        length: results.length,
+        previousMovie: optionalProperty ? prevMovie : null,
+        nextMovie: optionalProperty ? nextMovie : null
+      }
     })
   } else {
     return res.status(status).json({

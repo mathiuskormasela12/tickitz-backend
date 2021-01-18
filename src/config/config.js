@@ -10,5 +10,8 @@ module.exports = {
     'casts',
     'synopsis',
     'poster'
+  ],
+  addGenreBody: [
+    'name'
   ]
 }
