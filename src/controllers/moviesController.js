@@ -18,7 +18,8 @@ exports.create = async (req, res) => {
     duration,
     direct,
     casts,
-    synopsis
+    synopsis,
+    genreId
   } = req.body
 
   const poster = await upload(req, 'movies')
@@ -26,9 +27,9 @@ exports.create = async (req, res) => {
   if (typeof poster === 'object') {
     return response(res, poster.status, poster.success, poster.message)
   }
-
+  console.log(genreId)
   try {
-    const results = await movieModel.create(title, releaseDate, duration, direct, casts, synopsis, poster)
+    const results = await movieModel.create(title, releaseDate, duration, direct, casts, synopsis, poster, genreId)
 
     if (!results.success) {
       fs.unlink('./public/uploads/' + poster, err => {

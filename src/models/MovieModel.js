@@ -2,8 +2,11 @@
 // import Database
 const Database = require('./Database')
 
+// import models
+const genreModel = require('./GenreModel')
+
 class MovieModel extends Database {
-  create (title, releaseDate, duration, direct, casts, synopsis, poster) {
+  create (title, releaseDate, duration, direct, casts, synopsis, poster, genreId) {
     return new Promise((resolve, reject) => {
       const sql = 'SELECT title FROM movies WHERE title = ?'
       this.db.query(sql, title, (err, results) => {
@@ -16,11 +19,34 @@ class MovieModel extends Database {
             message: 'Movie has been there'
           })
         } else {
+          // const genresId = []
+          // genreId.forEach(async id => {
+          //   const genre = await genreModel.findAllById(Number(id))
+          //   genresId.push(genre.results[0].id)
+          // })
+
+          // if (genreId.length !== genresId.length) {
+          //   return resolve({
+          //     status: 400,
+          //     success: false,
+          //     message: 'Unknown genre'
+          //   })
+          // }
+
           const sql = 'INSERT INTO movies SET ?'
-          this.db.query(sql, { title, releaseDate, duration, direct, casts, synopsis, poster }, (err) => {
+          this.db.query(sql, { title, releaseDate, duration, direct, casts, synopsis, poster }, (err, result) => {
             if (err) {
               return reject(err)
             } else {
+              genreId.forEach(item => {
+                console.log(item)
+                this.db.query('INSERT INTO moviesGenres SET ?', { movie_id: result.insertId, genre_id: item }, err => {
+                  if (err) {
+                    return reject(err)
+                  }
+                })
+              })
+              console.log(result)
               return resolve({
                 status: 200,
                 success: true,
