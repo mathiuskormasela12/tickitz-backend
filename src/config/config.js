@@ -8,8 +8,7 @@ module.exports = {
     'duration',
     'direct',
     'casts',
-    'synopsis',
-    'poster'
+    'synopsis'
   ],
   addGenreBody: [
     'name'

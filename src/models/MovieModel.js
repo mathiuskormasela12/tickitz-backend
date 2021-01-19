@@ -1,30 +1,30 @@
-// ===== Cinema Model
+// ===== Movie Model
 // import Database
 const Database = require('./Database')
 
-class CinemaModel extends Database {
-  create (name, poster, address, pricePerSeat, city) {
+class MovieModel extends Database {
+  create (title, releaseDate, duration, direct, casts, synopsis, poster) {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT name FROM cinemas WHERE name = ?'
-      this.db.query(sql, name, (err, results) => {
+      const sql = 'SELECT title FROM movies WHERE title = ?'
+      this.db.query(sql, title, (err, results) => {
         if (err) {
           return reject(err)
         } else if (results.length > 0) {
           return resolve({
             status: 400,
             success: false,
-            message: 'Cinemas has been there'
+            message: 'Movie has been there'
           })
         } else {
-          const sql = 'INSERT INTO cinemas SET ?'
-          this.db.query(sql, { name, poster, address, pricePerSeat, city }, (err) => {
+          const sql = 'INSERT INTO movies SET ?'
+          this.db.query(sql, { title, releaseDate, duration, direct, casts, synopsis, poster }, (err) => {
             if (err) {
               return reject(err)
             } else {
               return resolve({
                 status: 200,
                 success: true,
-                message: 'New cinema has been created'
+                message: 'New movies has been created'
               })
             }
           })
@@ -35,8 +35,8 @@ class CinemaModel extends Database {
 
   findAll (limit, offset, keyword, by, sort) {
     return new Promise((resolve, reject) => {
-      const sql = `SELECT * FROM cinemas  
-                   WHERE name LIKE "%${keyword}%"
+      const sql = `SELECT * FROM movies
+                   WHERE title LIKE "%${keyword}%"
                    ORDER BY ${by} ${sort} 
                    LIMIT ${limit} OFFSET ${offset}`
       this.db.query(sql, (err, results) => {
@@ -46,17 +46,19 @@ class CinemaModel extends Database {
           results = results.map(item => {
             return {
               id: item.id,
-              name: item.name,
+              title: item.title,
               poster: `${process.env.URL}/uploads/${item.poster}`,
-              address: item.address,
-              pricePerSeat: item.pricePerSeat,
-              city: item.city
+              releaseDate: item.releaseDate,
+              duration: item.duration,
+              direct: item.direct,
+              casts: item.casts,
+              synopsis: item.synopsis
             }
           })
           return resolve({
             status: 200,
             success: true,
-            message: 'Get all cinema successfully',
+            message: 'Get all movies successfully',
             results: results
           })
         }
@@ -66,32 +68,46 @@ class CinemaModel extends Database {
 
   findAllById (id) {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT * FROM cinemas WHERE id = ?'
+      const sql = 'SELECT * FROM movies WHERE id = ?'
       this.db.query(sql, [id], (err, results) => {
         if (err) {
           return reject(err)
         } else if (results.length < 1) {
+          results = results.map(item => {
+            return {
+              id: item.id,
+              title: item.title,
+              poster: `${process.env.URL}/uploads/${item.poster}`,
+              releaseDate: item.releaseDate,
+              duration: item.duration,
+              direct: item.direct,
+              casts: item.casts,
+              synopsis: item.synopsis
+            }
+          })
           return resolve({
             status: 200,
             success: false,
-            message: `Cinema with id ${id} not available`,
+            message: `MOvie with id ${id} not available`,
             results: results
           })
         } else {
           results = results.map(item => {
             return {
               id: item.id,
-              name: item.name,
+              title: item.title,
               poster: `${process.env.URL}/uploads/${item.poster}`,
-              address: item.address,
-              pricePerSeat: item.pricePerSeat,
-              city: item.city
+              releaseDate: item.releaseDate,
+              duration: item.duration,
+              direct: item.direct,
+              casts: item.casts,
+              synopsis: item.synopsis
             }
           })
           return resolve({
             status: 200,
             success: true,
-            message: 'Get all cinemas successfully',
+            message: 'Get all movies successfully',
             results: results
           })
         }
@@ -101,7 +117,7 @@ class CinemaModel extends Database {
 
   destroy (id) {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT name, poster FROM cinemas WHERE id = ?'
+      const sql = 'SELECT title, poster FROM movies WHERE id = ?'
       this.db.query(sql, id, (err, results) => {
         if (err) {
           return reject(err)
@@ -109,10 +125,10 @@ class CinemaModel extends Database {
           return resolve({
             status: 400,
             success: false,
-            message: 'Unknown cinema'
+            message: 'Unknown movie'
           })
         } else {
-          const sql = 'DELETE FROM cinemas WHERE id = ?'
+          const sql = 'DELETE FROM movies WHERE id = ?'
           this.db.query(sql, [id], (err) => {
             if (err) {
               return reject(err)
@@ -120,7 +136,7 @@ class CinemaModel extends Database {
               return resolve({
                 status: 200,
                 success: true,
-                message: 'Cinema has been deleted',
+                message: 'Movie has been deleted',
                 poster: results[0].poster
               })
             }
@@ -130,22 +146,24 @@ class CinemaModel extends Database {
     })
   }
 
-  update (id, poster, { name, address, pricePerSeat, city }) {
+  update (id, poster, { title, releaseDate, duration, direct, casts, synopsis }) {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT * FROM cinemas WHERE id = ?'
+      const sql = 'SELECT * FROM movies WHERE id = ?'
       this.db.query(sql, id, (err, results) => {
         if (err) {
           return reject(err)
         } else {
-          const sql = 'UPDATE cinemas SET ? WHERE id = ?'
+          const sql = 'UPDATE movies SET ? WHERE id = ?'
 
           this.db.query(sql, [
             {
-              name: name || results[0].name,
+              title: title || results[0].title,
               poster: poster || results[0].poster,
-              address: address || results[0].address,
-              pricePerSeat: pricePerSeat || results[0].pricePerSeat,
-              city: city || results[0].city
+              releaseDate: releaseDate || results[0].releaseDate,
+              duration: duration || results[0].duration,
+              direct: direct || results[0].direct,
+              casts: casts || results[0].casts,
+              synopsis: synopsis || results[0].synopsis
             }, id], (err) => {
             if (err) {
               return reject(err)
@@ -153,7 +171,7 @@ class CinemaModel extends Database {
               return resolve({
                 status: 200,
                 success: true,
-                message: 'New cinema has been edited',
+                message: 'New movie has been edited',
                 oldPoster: results[0].poster
               })
             }
@@ -164,4 +182,4 @@ class CinemaModel extends Database {
   }
 }
 
-module.exports = new CinemaModel()
+module.exports = new MovieModel()
