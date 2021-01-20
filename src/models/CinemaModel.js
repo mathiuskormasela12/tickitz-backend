@@ -42,6 +42,13 @@ class CinemaModel extends Database {
       this.db.query(sql, (err, results) => {
         if (err) {
           return reject(err)
+        } else if (results.length < 1) {
+          return resolve({
+            status: 200,
+            success: false,
+            message: 'Cinema unavailable',
+            results: []
+          })
         } else {
           results = results.map(item => {
             return {

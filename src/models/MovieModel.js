@@ -81,26 +81,17 @@ class MovieModel extends Database {
                    genres.id = moviesGenres.genre_id
                    WHERE movies.title LIKE "%${keyword}%"
                    ORDER BY ${by} ${sort}`
-      this.db.query(sql, (err, results) => {
+      const d = this.db.query(sql, (err, results) => {
         if (err) {
           return reject(err)
+        } else if (results.length < 1) {
+          return resolve({
+            status: 200,
+            success: true,
+            message: 'movies unavailable',
+            results: []
+          })
         } else {
-          // results = results.map(item => {
-          //   return {
-          //     id: item.id,
-          //     title: item.title,
-          //     poster: `${process.env.URL}/uploads/${item.poster}`,
-          //     releaseDate: item.releaseDate,
-          //     duration: item.duration,
-          //     direct: item.direct,
-          //     casts: item.casts,
-          //     synopsis: item.synopsis
-          //   }
-          // })
-
-          // results = results.filter((item, index, arr) => {
-          //   return item.id !== arr[index >= arr.length ? 0 : 1].id
-          // })
           const movieGenres = []
           results.forEach((item, index, arr) => {
             movieGenres.push({
@@ -109,20 +100,22 @@ class MovieModel extends Database {
             })
           })
 
-          const data = []
-          results.forEach((item, index, arr) => {
-            if (item.id !== arr[index >= arr.length ? 0 : 1].id) {
-              data.push({
-                id: item.id,
-                title: item.title,
-                poster: `${process.env.URL}/uploads/${item.poster}`,
-                releaseDate: item.releaseDate,
-                duration: item.duration,
-                direct: item.direct,
-                casts: item.casts,
-                synopsis: item.synopsis,
-                genres: movieGenres.filter(genreItem => genreItem.id === item.id).map(item => item.genre).join(', ')
-              })
+          let data = results.filter((item, index, array) => {
+            console.log(item.id + ' ' + array[index + (index >= array.length - 1 ? 0 : 1)].id)
+            return ((item.id !== ((index >= array.length - 1 ? 0 : array[index + 1].id))))
+          })
+
+          data = data.map((item, index) => {
+            return {
+              id: item.id,
+              title: item.title,
+              poster: `${process.env.URL}/uploads/${item.poster}`,
+              releaseDate: item.releaseDate,
+              duration: item.duration,
+              direct: item.direct,
+              casts: item.casts,
+              synopsis: item.synopsis,
+              genres: movieGenres.filter(genreItem => genreItem.id === item.id).map(item => item.genre).join(', ')
             }
           })
           return resolve({
