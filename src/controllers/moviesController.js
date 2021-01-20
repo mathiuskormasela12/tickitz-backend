@@ -11,6 +11,9 @@ const upload = require('../helpers/upload')
 // import genre model
 const movieModel = require('../models/MovieModel')
 
+// Import pagination
+const pagination = require('../helpers/pagination')
+
 exports.create = async (req, res) => {
   const {
     title,
@@ -48,22 +51,17 @@ exports.create = async (req, res) => {
 exports.getAll = async (req, res) => {
   const {
     limit = 5,
-    page = 1,
     search = '',
     by = 'id',
     sort = 'ASC'
   } = req.query
 
-  const dataLimit = Number(limit) * Number(page)
-  const offset = (Number(page) - 1) * Number(limit)
-
   try {
-    const results = await movieModel.findAll(limit, offset, search, by, sort)
-    const nextResults = await movieModel.findAll(limit, offset + dataLimit, search, by, sort)
+    const result = await movieModel.findAll(search, by, sort)
 
-    const nextPageLink = nextResults.results.length > 0 ? `${process.env.APP_URL}/admin/genre?page=${Number(page) + 1}` : null
-    const prevPageLink = (offset - limit) >= 0 ? `${process.env.APP_URL}/admin/genre?page=${page - 1}` : null
-    return response(res, results.status, results.success, results.message, results.results, prevPageLink, nextPageLink)
+    pagination(result.results, req.query, limit, 'movies', (results, prevPageLink, nextPageLink) => {
+      return response(res, result.status, result.success, result.message, results, prevPageLink, nextPageLink)
+    })
   } catch (error) {
     response(res, 500, false, 'Server Error')
     throw new Error(error)

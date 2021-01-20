@@ -68,33 +68,68 @@ class MovieModel extends Database {
     })
   }
 
-  findAll (limit, offset, keyword, by, sort) {
+  findAll (keyword, by, sort) {
     return new Promise((resolve, reject) => {
-      const sql = `SELECT * FROM movies
-                   WHERE title LIKE "%${keyword}%"
-                   ORDER BY ${by} ${sort} 
-                   LIMIT ${limit} OFFSET ${offset}`
+      const sql = `SELECT movies.id, movies.title,
+                   movies.poster, movies.releaseDate,
+                   movies.duration, movies.direct,
+                   movies.casts, movies.synopsis,
+                   genres.name AS genres FROM movies
+                   INNER JOIN moviesGenres ON 
+                   movies.id = moviesGenres.movie_id
+                   INNER JOIN genres ON
+                   genres.id = moviesGenres.genre_id
+                   WHERE movies.title LIKE "%${keyword}%"
+                   ORDER BY ${by} ${sort}`
       this.db.query(sql, (err, results) => {
         if (err) {
           return reject(err)
         } else {
-          results = results.map(item => {
-            return {
+          // results = results.map(item => {
+          //   return {
+          //     id: item.id,
+          //     title: item.title,
+          //     poster: `${process.env.URL}/uploads/${item.poster}`,
+          //     releaseDate: item.releaseDate,
+          //     duration: item.duration,
+          //     direct: item.direct,
+          //     casts: item.casts,
+          //     synopsis: item.synopsis
+          //   }
+          // })
+
+          // results = results.filter((item, index, arr) => {
+          //   return item.id !== arr[index >= arr.length ? 0 : 1].id
+          // })
+          const movieGenres = []
+          results.forEach((item, index, arr) => {
+            movieGenres.push({
               id: item.id,
-              title: item.title,
-              poster: `${process.env.URL}/uploads/${item.poster}`,
-              releaseDate: item.releaseDate,
-              duration: item.duration,
-              direct: item.direct,
-              casts: item.casts,
-              synopsis: item.synopsis
+              genre: item.genres
+            })
+          })
+
+          const data = []
+          results.forEach((item, index, arr) => {
+            if (item.id !== arr[index >= arr.length ? 0 : 1].id) {
+              data.push({
+                id: item.id,
+                title: item.title,
+                poster: `${process.env.URL}/uploads/${item.poster}`,
+                releaseDate: item.releaseDate,
+                duration: item.duration,
+                direct: item.direct,
+                casts: item.casts,
+                synopsis: item.synopsis,
+                genres: movieGenres.filter(genreItem => genreItem.id === item.id).map(item => item.genre).join(', ')
+              })
             }
           })
           return resolve({
             status: 200,
             success: true,
             message: 'Get all movies successfully',
-            results: results
+            results: data
           })
         }
       })
