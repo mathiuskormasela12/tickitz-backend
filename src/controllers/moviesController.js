@@ -68,6 +68,26 @@ exports.getAll = async (req, res) => {
   }
 }
 
+exports.getAllByGenre = async (req, res) => {
+  const {
+    limit = 5,
+    search = '',
+    by = 'id',
+    sort = 'ASC'
+  } = req.query
+
+  try {
+    const result = await movieModel.findAllByGenre(req.params.genre, search, by, sort)
+
+    pagination(result.results, req.query, limit, 'movies', (results, prevPageLink, nextPageLink) => {
+      return response(res, result.status, result.success, result.message, results, prevPageLink, nextPageLink)
+    })
+  } catch (error) {
+    response(res, 500, false, 'Server Error')
+    throw new Error(error)
+  }
+}
+
 exports.getMovieById = async (req, res) => {
   const { id } = req.params
   console.log(id)

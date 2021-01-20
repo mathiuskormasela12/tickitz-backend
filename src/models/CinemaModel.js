@@ -54,10 +54,7 @@ class CinemaModel extends Database {
             return {
               id: item.id,
               name: item.name,
-              poster: `${process.env.URL}/uploads/${item.poster}`,
-              address: item.address,
-              pricePerSeat: item.pricePerSeat,
-              city: item.city
+              poster: `${process.env.URL}/uploads/${item.poster}`
             }
           })
           return resolve({
