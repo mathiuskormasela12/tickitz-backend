@@ -81,7 +81,7 @@ class MovieModel extends Database {
                    genres.id = moviesGenres.genre_id
                    WHERE movies.title LIKE "%${keyword}%"
                    ORDER BY ${by} ${sort}`
-      const d = this.db.query(sql, (err, results) => {
+      this.db.query(sql, (err, results) => {
         if (err) {
           return reject(err)
         } else if (results.length < 1) {
