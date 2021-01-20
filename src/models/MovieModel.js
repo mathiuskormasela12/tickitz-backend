@@ -2,9 +2,6 @@
 // import Database
 const Database = require('./Database')
 
-// import models
-const genreModel = require('./GenreModel')
-
 class MovieModel extends Database {
   create (title, releaseDate, duration, direct, casts, synopsis, poster, genreId) {
     return new Promise((resolve, reject) => {

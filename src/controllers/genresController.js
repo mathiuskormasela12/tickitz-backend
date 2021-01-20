@@ -30,8 +30,8 @@ exports.getAll = async (req, res) => {
   const offset = (Number(page) - 1) * Number(limit)
 
   try {
-    const results = await genreModel.findAll(dataLimit, offset, search, by, sort)
-    const nextResults = await genreModel.findAll(dataLimit, offset + dataLimit, search, by, sort)
+    const results = await genreModel.findAll(limit, offset, search, by, sort)
+    const nextResults = await genreModel.findAll(limit, offset + dataLimit, search, by, sort)
 
     const nextPageLink = nextResults.results.length > 0 ? `${process.env.APP_URL}/admin/genre?page=${Number(page) + 1}` : null
     const prevPageLink = (offset - limit) >= 0 ? `${process.env.APP_URL}/admin/genre?page=${page - 1}` : null
