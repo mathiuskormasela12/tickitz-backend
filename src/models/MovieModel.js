@@ -209,36 +209,106 @@ class MovieModel extends Database {
     })
   }
 
-  update (id, poster, { title, releaseDate, duration, direct, casts, synopsis }) {
+  update (id, poster, { title, releaseDate, duration, direct, casts, synopsis, genreId }) {
     return new Promise((resolve, reject) => {
       const sql = 'SELECT * FROM movies WHERE id = ?'
       this.db.query(sql, id, (err, results) => {
         if (err) {
           return reject(err)
         } else {
-          const sql = 'UPDATE movies SET ? WHERE id = ?'
+          if (typeof genreId === 'object' || typeof genreId === 'string') {
+            this.db.query(`SELECT * FROM genres WHERE id IN (${typeof genreId === 'string' ? genreId : genreId.map(item => item).join()})`, (err, genreResult) => {
+              const genresId = []
+              if (err) {
+                return reject(err)
+              } else {
+                genreResult.forEach(item => {
+                  genresId.push(item)
+                })
+              }
 
-          this.db.query(sql, [
-            {
-              title: title || results[0].title,
-              poster: poster || results[0].poster,
-              releaseDate: releaseDate || results[0].releaseDate,
-              duration: duration || results[0].duration,
-              direct: direct || results[0].direct,
-              casts: casts || results[0].casts,
-              synopsis: synopsis || results[0].synopsis
-            }, id], (err) => {
-            if (err) {
-              return reject(err)
-            } else {
-              return resolve({
-                status: 200,
-                success: true,
-                message: 'New movie has been edited',
-                oldPoster: results[0].poster
+              if ((genreId.length !== genresId.length && typeof genreId === 'object') || genreResult.length < 1) {
+                return resolve({
+                  status: 400,
+                  success: false,
+                  message: 'Unknown genre'
+                })
+              }
+
+              const sql = 'UPDATE movies SET ? WHERE id = ?'
+              this.db.query(sql, [
+                {
+                  title: title || results[0].title,
+                  poster: poster || results[0].poster,
+                  releaseDate: releaseDate || results[0].releaseDate,
+                  duration: duration || results[0].duration,
+                  direct: direct || results[0].direct,
+                  casts: casts || results[0].casts,
+                  synopsis: synopsis || results[0].synopsis
+                }, id], (err, result) => {
+                if (err) {
+                  return reject(err)
+                } else {
+                  if (typeof genreId === 'object') {
+                    genreId.forEach((item, index) => {
+                      this.db.query('SELECT id FROM moviesGenres WHERE movie_id = ?', Number(id), (err, result) => {
+                        if (err) {
+                          return reject(err)
+                        } else {
+                          this.db.query('UPDATE moviesGenres SET ? WHERE movie_id = ? AND id = ?', [{ genre_id: item }, Number(id), result[index].id], err => {
+                            if (err) {
+                              return reject(err)
+                            }
+                          })
+                        }
+                      })
+                    })
+                  } else {
+                    this.db.query('SELECT id FROM moviesGenres WHERE movie_id = ?', Number(id), (err, result) => {
+                      if (err) {
+                        return reject(err)
+                      } else {
+                        this.db.query('UPDATE moviesGenres SET ? WHERE movie_id = ? AND id = ?', [{ genre_id: genreId }, Number(id), result[0].id], err => {
+                          if (err) {
+                            return reject(err)
+                          }
+                        })
+                      }
+                    })
+                  }
+                  return resolve({
+                    status: 200,
+                    success: true,
+                    message: 'New movie has been edited',
+                    oldPoster: results[0].poster
+                  })
+                }
               })
-            }
-          })
+            })
+          } else {
+            const sql = 'UPDATE movies SET ? WHERE id = ?'
+            this.db.query(sql, [
+              {
+                title: title || results[0].title,
+                poster: poster || results[0].poster,
+                releaseDate: releaseDate || results[0].releaseDate,
+                duration: duration || results[0].duration,
+                direct: direct || results[0].direct,
+                casts: casts || results[0].casts,
+                synopsis: synopsis || results[0].synopsis
+              }, id], (err, result) => {
+              if (err) {
+                return reject(err)
+              } else {
+                return resolve({
+                  status: 200,
+                  success: true,
+                  message: 'New movie has been edited',
+                  oldPoster: results[0].poster
+                })
+              }
+            })
+          }
         }
       })
     })

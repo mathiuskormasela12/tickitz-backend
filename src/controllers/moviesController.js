@@ -120,7 +120,7 @@ exports.edit = async (req, res) => {
       })
     }
 
-    if (!results.success && typeof poster !== 'object') {
+    if (!results.success && typeof poster !== 'object' && results.oldPoster) {
       fs.unlink('./public/uploads/' + poster, err => {
         if (err) {
           console.log(err)
