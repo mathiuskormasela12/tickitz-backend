@@ -129,33 +129,91 @@ class MovieModel extends Database {
     })
   }
 
+  // findAllById (id) {
+  //   return new Promise((resolve, reject) => {
+  //     const sql = 'SELECT * FROM movies WHERE id = ?'
+  //     this.db.query(sql, [id], (err, results) => {
+  //       if (err) {
+  //         return reject(err)
+  //       } else if (results.length < 1) {
+  //         results = results.map(item => {
+  //           return {
+  //             id: item.id,
+  //             title: item.title,
+  //             poster: `${process.env.URL}/uploads/${item.poster}`,
+  //             releaseDate: item.releaseDate,
+  //             duration: item.duration,
+  //             direct: item.direct,
+  //             casts: item.casts,
+  //             synopsis: item.synopsis
+  //           }
+  //         })
+  //         return resolve({
+  //           status: 200,
+  //           success: false,
+  //           message: `MOvie with id ${id} not available`,
+  //           results: results
+  //         })
+  //       } else {
+  //         results = results.map(item => {
+  //           return {
+  //             id: item.id,
+  //             title: item.title,
+  //             poster: `${process.env.URL}/uploads/${item.poster}`,
+  //             releaseDate: item.releaseDate,
+  //             duration: item.duration,
+  //             direct: item.direct,
+  //             casts: item.casts,
+  //             synopsis: item.synopsis
+  //           }
+  //         })
+  //         return resolve({
+  //           status: 200,
+  //           success: true,
+  //           message: 'Get all movies successfully',
+  //           results: results
+  //         })
+  //       }
+  //     })
+  //   })
+  // }
   findAllById (id) {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT * FROM movies WHERE id = ?'
-      this.db.query(sql, [id], (err, results) => {
+      const sql = `SELECT movies.id, movies.title,
+                   movies.poster, movies.releaseDate,
+                   movies.duration, movies.direct,
+                   movies.casts, movies.synopsis,
+                   genres.name AS genres FROM movies
+                   INNER JOIN moviesGenres ON 
+                   movies.id = moviesGenres.movie_id
+                   INNER JOIN genres ON
+                   genres.id = moviesGenres.genre_id
+                   WHERE movies.id = ?`
+      this.db.query(sql, id, (err, results) => {
         if (err) {
           return reject(err)
         } else if (results.length < 1) {
-          results = results.map(item => {
-            return {
-              id: item.id,
-              title: item.title,
-              poster: `${process.env.URL}/uploads/${item.poster}`,
-              releaseDate: item.releaseDate,
-              duration: item.duration,
-              direct: item.direct,
-              casts: item.casts,
-              synopsis: item.synopsis
-            }
-          })
           return resolve({
             status: 200,
-            success: false,
-            message: `MOvie with id ${id} not available`,
-            results: results
+            success: true,
+            message: 'movies unavailable',
+            results: []
           })
         } else {
-          results = results.map(item => {
+          const movieGenres = []
+          results.forEach((item, index, arr) => {
+            movieGenres.push({
+              id: item.id,
+              genre: item.genres
+            })
+          })
+
+          let data = results.filter((item, index, array) => {
+            console.log(item.id + ' ' + array[index + (index >= array.length - 1 ? 0 : 1)].id)
+            return ((item.id !== ((index >= array.length - 1 ? 0 : array[index + 1].id))))
+          })
+
+          data = data.map((item, index) => {
             return {
               id: item.id,
               title: item.title,
@@ -164,14 +222,15 @@ class MovieModel extends Database {
               duration: item.duration,
               direct: item.direct,
               casts: item.casts,
-              synopsis: item.synopsis
+              synopsis: item.synopsis,
+              genres: movieGenres.filter(genreItem => genreItem.id === item.id).map(item => item.genre).join(', ')
             }
           })
           return resolve({
             status: 200,
             success: true,
             message: 'Get all movies successfully',
-            results: results
+            results: data
           })
         }
       })
