@@ -19,6 +19,9 @@ This is non-optimized minimal backend app with postgresql and node. Backend app 
   npx nodemon
   ```
 
+#Flowchart
+![alt text](https://github.com/mathiuskormasela12/tickitz-backend/blob/main/tickitz.png?raw=true)
+
 ## API SPECS
 - GET `/api/admin/cinemas` Route for get all cinema lists
 - POST `/api/admin/cinemas` Route for add new cinema
