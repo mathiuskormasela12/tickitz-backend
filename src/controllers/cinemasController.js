@@ -54,6 +54,10 @@ exports.getAll = async (req, res) => {
   const dataLimit = Number(limit) * Number(page)
   const offset = (Number(page) - 1) * Number(limit)
 
+  if (limit < 1) {
+    return response(res, 400, false, 'Bad Request')
+  }
+
   try {
     const results = await cinemaModel.findAll(limit, offset, search, by, sort)
     const nextResults = await cinemaModel.findAll(limit, offset + dataLimit, search, by, sort)
