@@ -10,7 +10,7 @@ module.exports = (req, name) => {
   const photo = req.files.poster
 
   const extValid = /jpg|jpeg|png/gi
-  const checkExt = extValid.test(photo.name.split('.')[1])
+  const checkExt = extValid.test(photo.name.split('.').pop())
   const checkMime = extValid.test(photo.mimetype)
 
   if (!checkExt && !checkMime) {
@@ -33,7 +33,7 @@ module.exports = (req, name) => {
   poster += '-'
   poster += Date.now()
   poster += '.'
-  poster += photo.name.split('.')[1].toLowerCase()
+  poster += photo.name.split('.').pop().toLowerCase()
 
   photo.mv('./public/uploads/' + poster)
   return poster
