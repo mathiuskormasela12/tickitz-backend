@@ -26,6 +26,14 @@ class MovieModel extends Database {
               })
             }
 
+            if (genresId.length < 1 && typeof genreId === 'string') {
+              return resolve({
+                status: 400,
+                success: false,
+                message: 'Unknown genre'
+              })
+            }
+
             if (genreId.length !== genresId.length && typeof genreId === 'object') {
               return resolve({
                 status: 400,
