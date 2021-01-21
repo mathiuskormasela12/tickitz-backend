@@ -19,7 +19,7 @@ This is non-optimized minimal backend app with postgresql and node. Backend app 
   npx nodemon
   ```
 
-#Flowchart
+# Flowchart
 ![alt text](https://github.com/mathiuskormasela12/tickitz-backend/blob/main/tickitz.png?raw=true)
 
 ## API SPECS
