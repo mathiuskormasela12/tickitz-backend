@@ -2,7 +2,7 @@
 module.exports = (res, status, success, message, results, ...optionalProperty) => {
   const [prevMovie, nextMovie] = optionalProperty
 
-  if (results) {
+  if (results && results.length >= 0) {
     return res.status(status).json({
       success,
       message,
