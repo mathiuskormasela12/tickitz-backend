@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 22 Jan 2021 pada 12.43
+-- Waktu pembuatan: 22 Jan 2021 pada 16.49
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 8.0.1
 
@@ -44,7 +44,8 @@ CREATE TABLE `cinemas` (
 
 INSERT INTO `cinemas` (`id`, `name`, `poster`, `address`, `pricePerSeat`, `city`, `createdAt`, `updatedAt`) VALUES
 (22, 'Ebv.id', 'ebv-1611233989959.png', 'Dwatt street no. 20', 20, 'Jakarta', '2021-01-21 12:59:49', '0000-00-00 00:00:00'),
-(23, 'CineOne 21', 'cine-1611234958107.png', 'Rose street 12', 20, 'Jakarta', '2021-01-21 13:15:58', '0000-00-00 00:00:00');
+(23, 'CineOne 21', 'cine-1611234958107.png', 'Rose street 12', 20, 'Jakarta', '2021-01-21 13:15:58', '0000-00-00 00:00:00'),
+(24, 'Hiflix', 'hiflix-1611325788047.png', 'Rose street 10', 20, 'Bandung', '2021-01-22 14:29:48', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -123,6 +124,13 @@ CREATE TABLE `movies` (
   `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data untuk tabel `movies`
+--
+
+INSERT INTO `movies` (`id`, `title`, `releaseDate`, `duration`, `category`, `direct`, `casts`, `synopsis`, `poster`, `createdAt`, `updatedAt`) VALUES
+(90, 'The Guardians  200', '2011-07-21', '00:01:24', 'PG-18', 'Max', 'Mike, Max, Andrew', 'after war', 'guardians-1611326386709.jpg', '2021-01-22 14:39:46', '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -136,6 +144,15 @@ CREATE TABLE `moviesGenres` (
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `moviesGenres`
+--
+
+INSERT INTO `moviesGenres` (`id`, `movie_id`, `genre_id`, `createdAt`, `updatedAt`) VALUES
+(97, 90, 15, '2021-01-22 14:39:46', '0000-00-00 00:00:00'),
+(98, 90, 12, '2021-01-22 14:39:46', '0000-00-00 00:00:00'),
+(99, 90, 14, '2021-01-22 14:39:46', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -195,16 +212,26 @@ CREATE TABLE `transactions` (
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `first_name` varchar(80) NOT NULL,
-  `last_name` varchar(80) NOT NULL,
+  `first_name` varchar(80) DEFAULT NULL,
+  `last_name` varchar(80) DEFAULT NULL,
   `email` varchar(80) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `poster` varchar(255) NOT NULL,
-  `phone` varchar(100) NOT NULL,
+  `poster` varchar(255) DEFAULT NULL,
+  `phone` varchar(100) DEFAULT NULL,
   `role` varchar(80) NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `users`
+--
+
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `poster`, `phone`, `role`, `createdAt`, `updatedAt`) VALUES
+(3, NULL, NULL, 'mathiuskorasela12@higo.id', '$2a$08$swsY7vLBfjf1zORU1NXqVeAJ4sPdjhRnvIxaFL5zQs13otCOkv19q', NULL, NULL, 'admin', '2021-01-22 13:53:11', '0000-00-00 00:00:00'),
+(4, NULL, NULL, 'kiko@gmail.com', '$2a$08$rihmxxMAbn8aAu0Eehvi2uY1rrtpQSRqUbmNZ2y0kwJdFiH0tz5z6', NULL, NULL, 'user', '2021-01-22 13:59:09', '0000-00-00 00:00:00'),
+(5, NULL, NULL, 'arkademy@gmail.com', '$2a$08$4BsjgKCrKfjIwlOpsWqBleToAGtJSvu1zlAYnnsTBqpDkFiWc37Mi', NULL, NULL, 'user', '2021-01-22 14:08:40', '0000-00-00 00:00:00'),
+(6, NULL, NULL, 'naruto@gmail.com', '$2a$08$gZrpVM4JEeisA07Zv843nO8e2hbCPzUDUap/8A5FCqwy3h6SKa2Qa', NULL, NULL, 'admin', '2021-01-22 14:19:25', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -287,7 +314,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `cinemas`
 --
 ALTER TABLE `cinemas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `genres`
@@ -311,13 +338,13 @@ ALTER TABLE `moviegoers`
 -- AUTO_INCREMENT untuk tabel `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT untuk tabel `moviesGenres`
 --
 ALTER TABLE `moviesGenres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT untuk tabel `show_times`
@@ -341,7 +368,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
