@@ -9,6 +9,7 @@ const genreController = require('../controllers/genresController')
 
 // import middlewares
 const isFormFill = require('../middlewares/isFormFill')
+const auth = require('../middlewares/auth')
 
 const isAddMovieFill = isFormFill(...config.addGenreBody)
 
@@ -18,11 +19,11 @@ const router = express.Router()
 // setup express file upload
 router.use(upload(config.uploadOptions))
 
-router.get('/', genreController.getAll)
-router.get('/:id', genreController.getGenreById)
-router.post('/', isAddMovieFill, genreController.create)
-router.put('/', isAddMovieFill, genreController.create)
-router.delete('/:id', genreController.remove)
-router.patch('/:id', genreController.edit)
+router.get('/', auth, genreController.getAll)
+router.get('/:id', auth, genreController.getGenreById)
+router.post('/', auth, isAddMovieFill, genreController.create)
+router.put('/', auth, isAddMovieFill, genreController.create)
+router.delete('/:id', auth, genreController.remove)
+router.patch('/:id', auth, genreController.edit)
 
 module.exports = router

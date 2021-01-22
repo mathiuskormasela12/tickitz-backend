@@ -9,6 +9,7 @@ const cinemaController = require('../controllers/cinemasController')
 
 // import middlewares
 const isFormFill = require('../middlewares/isFormFill')
+const auth = require('../middlewares/auth')
 
 const isAddCinemaFill = isFormFill(...config.addCinemasBody)
 
@@ -18,11 +19,11 @@ const router = express.Router()
 // setup express file upload
 router.use(upload(config.uploadOptions))
 
-router.get('/', cinemaController.getAll)
-router.get('/:id', cinemaController.getCinemaById)
-router.post('/', isAddCinemaFill, cinemaController.create)
-router.put('/', isAddCinemaFill, cinemaController.create)
-router.delete('/:id', cinemaController.remove)
-router.patch('/:id', cinemaController.edit)
+router.get('/', auth, cinemaController.getAll)
+router.get('/:id', auth, cinemaController.getCinemaById)
+router.post('/', auth, isAddCinemaFill, cinemaController.create)
+router.put('/', auth, isAddCinemaFill, cinemaController.create)
+router.delete('/:id', auth, cinemaController.remove)
+router.patch('/:id', auth, cinemaController.edit)
 
 module.exports = router

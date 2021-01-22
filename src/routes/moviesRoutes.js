@@ -9,6 +9,7 @@ const moviesController = require('../controllers/moviesController')
 
 // import middlewares
 const isFormFill = require('../middlewares/isFormFill')
+const auth = require('../middlewares/auth')
 
 const isAddMoviesFill = isFormFill(...config.addMovieBody)
 
@@ -18,11 +19,11 @@ const router = express.Router()
 // setup express file upload
 router.use(upload(config.uploadOptions))
 
-router.get('/', moviesController.getAll)
-router.get('/:id', moviesController.getMovieById)
-router.post('/', isAddMoviesFill, moviesController.create)
-router.put('/', isAddMoviesFill, moviesController.create)
-router.delete('/:id', moviesController.remove)
-router.patch('/:id', moviesController.edit)
+router.get('/', auth, moviesController.getAll)
+router.get('/:id', auth, moviesController.getMovieById)
+router.post('/', auth, isAddMoviesFill, moviesController.create)
+router.put('/', auth, isAddMoviesFill, moviesController.create)
+router.delete('/:id', auth, moviesController.remove)
+router.patch('/:id', auth, moviesController.edit)
 
 module.exports = router
