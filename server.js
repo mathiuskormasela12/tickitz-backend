@@ -48,10 +48,11 @@ const corsOptions = {
 // use cors options
 app.use(cors(corsOptions))
 
+app.use('/api', require('./src/routes/userRoutes'))
 app.use('/api/admin/movies', require('./src/routes/moviesRoutes'))
 app.use('/api/admin/genres', require('./src/routes/genresRoutes'))
 app.use('/api/admin/cinemas', require('./src/routes/cinemasRoutes'))
-app.use('/api', require('./src/routes/userRoutes'))
+app.use('/api/auth', require('./src/routes/authRoutes'))
 
 app.listen(PORT, () => {
   console.log(`App running at http://127.0.0.1:${PORT}/api`)

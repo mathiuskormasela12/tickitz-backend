@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 21 Jan 2021 pada 14.16
+-- Waktu pembuatan: 22 Jan 2021 pada 12.43
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 8.0.1
 
@@ -79,6 +79,33 @@ INSERT INTO `genres` (`id`, `name`, `createdAt`, `updatedAt`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `loyalty_point`
+--
+
+CREATE TABLE `loyalty_point` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `point` int(11) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `moviegoers`
+--
+
+CREATE TABLE `moviegoers` (
+  `id` int(11) NOT NULL,
+  `email` varchar(80) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `movies`
 --
 
@@ -86,7 +113,8 @@ CREATE TABLE `movies` (
   `id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `releaseDate` date NOT NULL,
-  `duration` int(11) NOT NULL,
+  `duration` time NOT NULL,
+  `category` varchar(50) NOT NULL,
   `direct` text NOT NULL,
   `casts` text NOT NULL,
   `synopsis` text NOT NULL,
@@ -109,6 +137,75 @@ CREATE TABLE `moviesGenres` (
   `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `show_times`
+--
+
+CREATE TABLE `show_times` (
+  `id` int(11) NOT NULL,
+  `showTimeDate` date NOT NULL,
+  `timeId` int(11) NOT NULL,
+  `cinemaId` int(11) NOT NULL,
+  `movieId` int(11) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updateAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `times`
+--
+
+CREATE TABLE `times` (
+  `id` int(11) NOT NULL,
+  `showTime` time NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transactions`
+--
+
+CREATE TABLE `transactions` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `ticketDate` date NOT NULL,
+  `ticketTime` time NOT NULL,
+  `cinemaName` varchar(100) NOT NULL,
+  `ticketCount` int(11) NOT NULL,
+  `totalPayment` int(11) NOT NULL,
+  `paymentMethod` varchar(50) NOT NULL,
+  `seats` varchar(100) NOT NULL,
+  `movieTitle` varchar(100) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(80) NOT NULL,
+  `last_name` varchar(80) NOT NULL,
+  `email` varchar(80) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `poster` varchar(255) NOT NULL,
+  `phone` varchar(100) NOT NULL,
+  `role` varchar(80) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Indexes for dumped tables
 --
@@ -126,6 +223,20 @@ ALTER TABLE `genres`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `loyalty_point`
+--
+ALTER TABLE `loyalty_point`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indeks untuk tabel `moviegoers`
+--
+ALTER TABLE `moviegoers`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- Indeks untuk tabel `movies`
 --
 ALTER TABLE `movies`
@@ -138,6 +249,35 @@ ALTER TABLE `moviesGenres`
   ADD PRIMARY KEY (`id`),
   ADD KEY `movie_id` (`movie_id`),
   ADD KEY `genre_id` (`genre_id`);
+
+--
+-- Indeks untuk tabel `show_times`
+--
+ALTER TABLE `show_times`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `timeId` (`timeId`),
+  ADD KEY `cinemaId` (`cinemaId`),
+  ADD KEY `movieId` (`movieId`);
+
+--
+-- Indeks untuk tabel `times`
+--
+ALTER TABLE `times`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `transactions`
+--
+ALTER TABLE `transactions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userId` (`userId`);
+
+--
+-- Indeks untuk tabel `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`email`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -156,6 +296,18 @@ ALTER TABLE `genres`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
+-- AUTO_INCREMENT untuk tabel `loyalty_point`
+--
+ALTER TABLE `loyalty_point`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `moviegoers`
+--
+ALTER TABLE `moviegoers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT untuk tabel `movies`
 --
 ALTER TABLE `movies`
@@ -168,8 +320,38 @@ ALTER TABLE `moviesGenres`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
+-- AUTO_INCREMENT untuk tabel `show_times`
+--
+ALTER TABLE `show_times`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `times`
+--
+ALTER TABLE `times`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `transactions`
+--
+ALTER TABLE `transactions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
+
+--
+-- Ketidakleluasaan untuk tabel `loyalty_point`
+--
+ALTER TABLE `loyalty_point`
+  ADD CONSTRAINT `loyalty_point_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `moviesGenres`
@@ -177,6 +359,20 @@ ALTER TABLE `moviesGenres`
 ALTER TABLE `moviesGenres`
   ADD CONSTRAINT `moviesGenres_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `movies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `moviesGenres_ibfk_2` FOREIGN KEY (`genre_id`) REFERENCES `genres` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `show_times`
+--
+ALTER TABLE `show_times`
+  ADD CONSTRAINT `show_times_ibfk_1` FOREIGN KEY (`timeId`) REFERENCES `times` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `show_times_ibfk_2` FOREIGN KEY (`cinemaId`) REFERENCES `cinemas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `show_times_ibfk_3` FOREIGN KEY (`movieId`) REFERENCES `movies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `transactions`
+--
+ALTER TABLE `transactions`
+  ADD CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

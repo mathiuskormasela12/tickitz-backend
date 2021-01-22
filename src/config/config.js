@@ -19,5 +19,15 @@ module.exports = {
     'address',
     'pricePerSeat',
     'city'
+  ],
+  registerBody: [
+    'email',
+    'password',
+    'password_confirm',
+    'role'
+  ],
+  loginBody: [
+    'email',
+    'password'
   ]
 }
