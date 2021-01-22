@@ -1,5 +1,5 @@
-# BACKEND APP WITH NODE AND POSTGRESQL
-This is non-optimized minimal backend app with postgresql and node. Backend app theme is "E-Commerce"
+# BACKEND APP WITH NODE AND MySQL
+This is non-optimized minimal backend app with mysql and node. Backend app theme is "Ticketing Online"
 
 ## Requirements
 - NodeJS v14 LTS
@@ -16,7 +16,7 @@ This is non-optimized minimal backend app with postgresql and node. Backend app 
   ```
 - And then
   ```
-  npx nodemon
+  npm start
   ```
 
 # Flowchart
@@ -34,5 +34,3 @@ This is non-optimized minimal backend app with postgresql and node. Backend app 
 - PUT `/api/admin/cinemas` Route for add new cinema
 - POST `/api/admin/genres` Route for add new genre
 - GET `/api/admin/genres` Route for get all genre
-- GET/POST `/api/v1/checkout` Route for view calculated items on invoice and confirm order
-- POST `/api/v1/payment/:invoiceId` Route for payment not paid invoice **(Not done yet)**
