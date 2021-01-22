@@ -39,7 +39,7 @@ class UserModel extends Database {
         } else if (result.length < 1) {
           resolve(false)
         } else {
-          resolve(result[0])
+          resolve(result)
         }
       })
     })

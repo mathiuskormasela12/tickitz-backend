@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
     response(res, 400, false, 'Password must include lower case and uppercase letters, numbers and symbol')
   } else if (req.body.password_confirm && (req.body.password !== req.body.password_confirm)) {
     response(res, 400, false, "Password don't match")
-  } else if (req.body.role !== 'admin' && req.body.role !== 'user') {
+  } else if (req.body.role && req.body.role !== 'admin' && req.body.role !== 'user') {
     response(res, 400, false, 'Incorrect role')
   } else {
     next()
