@@ -11,8 +11,6 @@ const users = require('../models/UserModel')
 const { SECRET } = process.env
 
 exports.login = async (req, res) => {
-  // const password = await bcrypt.hash(req.body.password, 8)
-
   try {
     const isExist = await users.getUserByEmail(req.body.email)
     const isPasswordSame = await bcrypt.compare(req.body.password, isExist[0].password)

@@ -1,8 +1,6 @@
 // ===== User Routes
 // import all modules
 const express = require('express')
-const upload = require('express-fileupload')
-const config = require('../config/config')
 
 // import movie controller
 const moviesController = require('../controllers/moviesController')
@@ -12,9 +10,6 @@ const cinemaController = require('../controllers/cinemasController')
 
 // init router
 const router = express.Router()
-
-// setup express file upload
-router.use(upload(config.uploadOptions))
 
 router.get('/movies', moviesController.getAll)
 router.get('/movies/:id', moviesController.getMovieById)

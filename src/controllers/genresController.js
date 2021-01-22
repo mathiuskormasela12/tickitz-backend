@@ -44,7 +44,6 @@ exports.getAll = async (req, res) => {
 
 exports.getGenreById = async (req, res) => {
   const { id } = req.params
-  console.log(id)
 
   try {
     const results = await genreModel.findAllById(id)

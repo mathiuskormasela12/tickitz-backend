@@ -3,7 +3,7 @@
 const Database = require('./Database')
 
 class MovieModel extends Database {
-  create (title, releaseDate, duration, direct, casts, synopsis, poster, genreId) {
+  create (title, category, releaseDate, duration, direct, casts, synopsis, poster, genreId) {
     return new Promise((resolve, reject) => {
       const sql = 'SELECT title FROM movies WHERE title = ?'
       this.db.query(sql, title, (err, results) => {
@@ -43,13 +43,12 @@ class MovieModel extends Database {
             }
 
             const sql = 'INSERT INTO movies SET ?'
-            this.db.query(sql, { title, releaseDate, duration, direct, casts, synopsis, poster }, (err, result) => {
+            this.db.query(sql, { title, category, releaseDate, duration, direct, casts, synopsis, poster }, (err, result) => {
               if (err) {
                 return reject(err)
               } else {
                 if (typeof genreId === 'object') {
                   genreId.forEach(item => {
-                    console.log(item)
                     this.db.query('INSERT INTO moviesGenres SET ?', { movie_id: result.insertId, genre_id: item }, err => {
                       if (err) {
                         return reject(err)
@@ -109,7 +108,6 @@ class MovieModel extends Database {
           })
 
           let data = results.filter((item, index, array) => {
-            console.log(item.id + ' ' + array[index + (index >= array.length - 1 ? 0 : 1)].id)
             return ((item.id !== ((index >= array.length - 1 ? 0 : array[index + 1].id))))
           })
 
@@ -168,7 +166,6 @@ class MovieModel extends Database {
           })
 
           let data = results.filter((item, index, array) => {
-            console.log(item.id + ' ' + array[index + (index >= array.length - 1 ? 0 : 1)].id)
             return ((item.id !== ((index >= array.length - 1 ? 0 : array[index + 1].id))))
           })
 
@@ -273,7 +270,6 @@ class MovieModel extends Database {
           })
 
           let data = results.filter((item, index, array) => {
-            console.log(item.id + ' ' + array[index + (index >= array.length - 1 ? 0 : 1)].id)
             return ((item.id !== ((index >= array.length - 1 ? 0 : array[index + 1].id))))
           })
 

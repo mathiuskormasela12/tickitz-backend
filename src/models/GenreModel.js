@@ -117,8 +117,7 @@ class GenreModel extends Database {
           return reject(err)
         } else {
           const sql = 'UPDATE genres SET ? WHERE id = ?'
-          // console.log(results)
-          // name = name || results.name
+
           this.db.query(sql, [{ name: name || results[0].name }, id], (err) => {
             if (err) {
               return reject(err)

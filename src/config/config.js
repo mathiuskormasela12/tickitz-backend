@@ -4,6 +4,7 @@ module.exports = {
   },
   addMovieBody: [
     'title',
+    'category',
     'releaseDate',
     'duration',
     'direct',

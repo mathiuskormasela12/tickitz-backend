@@ -73,7 +73,6 @@ exports.getAll = async (req, res) => {
 
 exports.getCinemaById = async (req, res) => {
   const { id } = req.params
-  console.log(id)
 
   try {
     const results = await cinemaModel.findAllById(id)
