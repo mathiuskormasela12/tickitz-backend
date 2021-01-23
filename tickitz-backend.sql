@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 23 Jan 2021 pada 06.51
+-- Waktu pembuatan: 23 Jan 2021 pada 15.10
 -- Versi server: 10.4.17-MariaDB
--- Versi PHP: 8.0.0
+-- Versi PHP: 8.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -229,7 +229,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `poster`, `phone`, `role`, `activated`, `createdAt`, `updatedAt`) VALUES
-(10, NULL, NULL, 'mathiuskormasela12@gmail.com', '$2a$08$g7TwdK9uSxtr8gshNt3obOWhdoL.tankJKgWwe2mZRubpnchKp/2i', NULL, NULL, 'admin', 1, '2021-01-23 04:43:41', '2021-01-23 04:54:46');
+(10, NULL, NULL, 'samdicova@gmail.com', '$2a$08$A7WAiV9eVZN8MRqEFjqHYuHBYkGyWjSZcnxccuWdcZqHVmFVoyTwW', NULL, NULL, 'admin', 1, '2021-01-23 04:43:41', '2021-01-23 14:06:37'),
+(23, NULL, NULL, 'mathiuskormasela12@gmail.com', '$2a$08$/EkZNIRSh0a8R3T/7Fwqtef9gemjhUUm95AfYi.WCLz4POpKcQb0W', NULL, NULL, 'admin', 1, '2021-01-23 11:13:19', '2021-01-23 14:01:08'),
+(24, NULL, NULL, 'mathiuskormasela12rpl@gmail.com', '$2a$08$RJI3XuOw2nVyRV/pg/bQiOHJu8t8NJES3z7SlJ6YMaeqTkL1pS//S', NULL, NULL, 'user', 1, '2021-01-23 11:18:02', '2021-01-23 11:24:36'),
+(25, NULL, NULL, 'samdicova12@gmail.com', '$2a$08$4q0pmxWubhVJtXV9D2YCm.Mzp7MDzNKRSh79hPDCP8gaPs33o0Bda', NULL, NULL, 'user', 1, '2021-01-23 11:29:08', '2021-01-23 11:35:29'),
+(26, NULL, NULL, 'admin@gmail.com', '$2a$08$qvF/z87UBpQhQeblhwhytuvYvac/kGo6ZkaAeGxKDVJpKQGxW9DNG', NULL, NULL, 'admin', 0, '2021-01-23 11:37:31', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -366,7 +370,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
