@@ -103,3 +103,46 @@ exports.activated = async (req, res) => {
     return response(res, 500, false, 'Server Error')
   }
 }
+
+exports.forgotPassword = async (req, res) => {
+  try {
+    const results = await users.getUserByCondition({
+      email: req.body.email
+    })
+    const title = 'Forgot Password'
+    const message = `<div>
+                <h2>Let's edit yout password, with the link below :</h2>
+                <p>
+                  <a href="${process.env.APP_URL}/auth/password/${results[0].id}/${req.body.email}">${process.env.APP_URL}/auth/password/${results[0].id}/${req.body.email}</a> 
+                </p>
+              </div>`
+    sendMail(req.body.email, title, message)
+    return response(res, 200, true, 'Check your email please for edit your password')
+  } catch (err) {
+    console.log(err)
+    return response(res, 500, false, 'Server Error')
+  }
+}
+
+exports.editPassword = async (req, res) => {
+  if (req.body.password.length > 15 || req.body.password.length < 5) {
+    return response(res, 400, false, 'Password min 5 character and max 15 character')
+  } else if (req.body.password.match(/[a-z]/g) === null || req.body.password.match(/\d/g) === null || req.body.password.match(/[A-Z]/g) === null || req.body.password.match(/[^a-z0-9]/gi) === null) {
+    return response(res, 400, false, 'Password must include lower case and uppercase letters, numbers and symbol')
+  }
+
+  try {
+    const hash = await bcrypt.hash(req.body.password, 8)
+    const body = { password: hash }
+    const results = await users.update(req.params.id, req.params.email, body)
+
+    if (!results) {
+      return response(res, 400, false, 'Failed to edit password')
+    } else {
+      return response(res, 200, true, 'Password has been updated')
+    }
+  } catch (err) {
+    console.log(err)
+    return response(res, 500, false, 'Server Error')
+  }
+}

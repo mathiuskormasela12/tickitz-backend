@@ -46,5 +46,11 @@ module.exports = {
   loginBody: [
     'email',
     'password'
+  ],
+  forgotPasswordBody: [
+    'email'
+  ],
+  editPasswordBody: [
+    'password'
   ]
 }

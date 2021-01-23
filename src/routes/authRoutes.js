@@ -13,6 +13,8 @@ const auth = require('../middlewares/auth')
 
 const isLoginFill = isFormFill(...config.loginBody)
 const isRegisterFill = isFormFill(...config.registerBody)
+const isForgotPasswordFill = isFormFill(...config.forgotPasswordBody)
+const isEditPasswordFill = isFormFill(...config.editPasswordBody)
 
 // init router
 const router = express.Router()
@@ -20,5 +22,7 @@ const router = express.Router()
 router.post('/login', isLoginFill, isAuthFormCorrect, authController.login)
 router.post('/register', auth, isRegisterFill, isAuthFormCorrect, authController.register)
 router.patch('/active', authController.activated)
+router.post('/password', isForgotPasswordFill, authController.forgotPassword)
+router.patch('/password/:id/:email', isEditPasswordFill, authController.editPassword)
 
 module.exports = router
