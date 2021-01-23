@@ -1,28 +1,23 @@
 // ===== Mailer
 // import all modules
 const mailer = require('nodemailer')
-
-const { EMAIL: user, EMAIL_PASSWORD: pass } = process.env
+const smtpTransport = require('nodemailer-smtp-transport')
+const config = require('../config/config')
 
 module.exports = (reciever, title, message) => {
-  const transporter = mailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user,
-      pass
-    }
-  })
+  const transporter = mailer.createTransport(smtpTransport(config.mailerOptions))
 
   const mailOptions = {
-    from: user,
+    from: config.mailerOptions.auth.user,
     to: reciever,
     subject: title,
     html: message
   }
 
-  transporter.sendMail(mailOptions, err => {
+  transporter.sendMail(mailOptions, (err, info) => {
     if (err) {
       throw err
     }
+    console.log(info)
   })
 }

@@ -1,6 +1,22 @@
+// ===== Config
+const {
+  EMAIL,
+  EMAIL_PASSWORD,
+  EMAIL_HOST,
+  EMAIL_SERVICE
+} = process.env
+
 module.exports = {
   uploadOptions: {
     createParentPath: true
+  },
+  mailerOptions: {
+    service: EMAIL_SERVICE,
+    host: EMAIL_HOST,
+    auth: {
+      user: EMAIL,
+      pass: EMAIL_PASSWORD
+    }
   },
   addMovieBody: [
     'title',
