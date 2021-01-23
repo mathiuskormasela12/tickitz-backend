@@ -10,7 +10,7 @@ class UserModel extends Database {
 
   create (email, password, role) {
     return new Promise((resolve, reject) => {
-      const body = { email, password, role }
+      const body = { email, password, role, activated: false }
       const sql = `INSERT INTO ${this.table} SET ?`
 
       this.db.query(sql, body, (err, result) => {
@@ -29,11 +29,26 @@ class UserModel extends Database {
     })
   }
 
-  getUserByEmail (email) {
+  update (id, email, body) {
     return new Promise((resolve, reject) => {
-      const sql = `SELECT * FROM ${this.table} WHERE email = ?`
+      const sql = `UPDATE ${this.table} SET ? WHERE id = ? AND email = ?`
+      this.db.query(sql, [body, id, email], (err, result) => {
+        if (err) {
+          return reject(err)
+        } else if (result.affectedRows < 1) {
+          resolve(false)
+        } else {
+          resolve(true)
+        }
+      })
+    })
+  }
 
-      this.db.query(sql, [email], (err, result) => {
+  getUserByCondition (data) {
+    return new Promise((resolve, reject) => {
+      const sql = `SELECT * FROM ${this.table} WHERE ${Object.keys(data).map((item, index) => `${item} = '${Object.values(data)[index]}'`).join(' AND ')}`
+
+      this.db.query(sql, (err, result) => {
         if (err) {
           return reject(err)
         } else if (result.length < 1) {

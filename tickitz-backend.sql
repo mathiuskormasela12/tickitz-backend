@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 22 Jan 2021 pada 16.49
+-- Waktu pembuatan: 23 Jan 2021 pada 06.51
 -- Versi server: 10.4.17-MariaDB
--- Versi PHP: 8.0.1
+-- Versi PHP: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -219,6 +219,7 @@ CREATE TABLE `users` (
   `poster` varchar(255) DEFAULT NULL,
   `phone` varchar(100) DEFAULT NULL,
   `role` varchar(80) NOT NULL,
+  `activated` tinyint(1) NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -227,11 +228,8 @@ CREATE TABLE `users` (
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `poster`, `phone`, `role`, `createdAt`, `updatedAt`) VALUES
-(3, NULL, NULL, 'mathiuskorasela12@higo.id', '$2a$08$swsY7vLBfjf1zORU1NXqVeAJ4sPdjhRnvIxaFL5zQs13otCOkv19q', NULL, NULL, 'admin', '2021-01-22 13:53:11', '0000-00-00 00:00:00'),
-(4, NULL, NULL, 'kiko@gmail.com', '$2a$08$rihmxxMAbn8aAu0Eehvi2uY1rrtpQSRqUbmNZ2y0kwJdFiH0tz5z6', NULL, NULL, 'user', '2021-01-22 13:59:09', '0000-00-00 00:00:00'),
-(5, NULL, NULL, 'arkademy@gmail.com', '$2a$08$4BsjgKCrKfjIwlOpsWqBleToAGtJSvu1zlAYnnsTBqpDkFiWc37Mi', NULL, NULL, 'user', '2021-01-22 14:08:40', '0000-00-00 00:00:00'),
-(6, NULL, NULL, 'naruto@gmail.com', '$2a$08$gZrpVM4JEeisA07Zv843nO8e2hbCPzUDUap/8A5FCqwy3h6SKa2Qa', NULL, NULL, 'admin', '2021-01-22 14:19:25', '0000-00-00 00:00:00');
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `poster`, `phone`, `role`, `activated`, `createdAt`, `updatedAt`) VALUES
+(10, NULL, NULL, 'mathiuskormasela12@gmail.com', '$2a$08$g7TwdK9uSxtr8gshNt3obOWhdoL.tankJKgWwe2mZRubpnchKp/2i', NULL, NULL, 'admin', 1, '2021-01-23 04:43:41', '2021-01-23 04:54:46');
 
 --
 -- Indexes for dumped tables
@@ -368,7 +366,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

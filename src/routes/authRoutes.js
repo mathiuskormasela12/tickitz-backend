@@ -19,5 +19,6 @@ const router = express.Router()
 
 router.post('/login', isLoginFill, isAuthFormCorrect, authController.login)
 router.post('/register', auth, isRegisterFill, isAuthFormCorrect, authController.register)
+router.patch('/active', authController.activated)
 
 module.exports = router
