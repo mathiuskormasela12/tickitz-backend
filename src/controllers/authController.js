@@ -19,7 +19,7 @@ exports.login = async (req, res) => {
 
     if (!isExist || !(await bcrypt.compare(req.body.password, isExist[0].password))) {
       return response(res, 400, false, 'Wrong email or password')
-    } else if (!isExist[0].activated && isExist[0].role === 'user') {
+    } else if (!isExist[0].activated) {
       return response(res, 400, false, "Your account haven't active")
     } else {
       const data = {

@@ -10,7 +10,14 @@ class UserModel extends Database {
 
   create (email, password, role) {
     return new Promise((resolve, reject) => {
-      const body = { email, password, role, activated: false }
+      const body = { email, password, role }
+
+      if (role === 'admin') {
+        body.activated = true
+      } else {
+        body.activated = false
+      }
+
       const sql = `INSERT INTO ${this.table} SET ?`
 
       this.db.query(sql, body, (err, result) => {
