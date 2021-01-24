@@ -19,7 +19,7 @@ const router = express.Router()
 // setup express file upload
 router.use(upload(config.uploadOptions))
 
-router.get('/', auth, moviesController.getAll)
+router.get('/', auth, moviesController.getAllAdmin)
 router.get('/:id', auth, moviesController.getMovieById)
 router.post('/', auth, isAddMoviesFill, moviesController.create)
 router.put('/', auth, isAddMoviesFill, moviesController.create)

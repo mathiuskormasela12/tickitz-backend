@@ -49,6 +49,30 @@ exports.create = async (req, res) => {
   }
 }
 
+exports.getAllAdmin = async (req, res) => {
+  const {
+    limit = 5,
+    search = '',
+    by = 'id',
+    sort = 'ASC'
+  } = req.query
+
+  try {
+    const result = await movieModel.findAll(search, by, sort)
+
+    if (limit < 1) {
+      return response(res, 400, false, 'Bad Request')
+    }
+
+    pagination(result.results, req.query, limit, 'admin/movies', (results, prevPageLink, nextPageLink) => {
+      return response(res, result.status, result.success, result.message, results, prevPageLink, nextPageLink)
+    })
+  } catch (error) {
+    response(res, 500, false, 'Server Error')
+    throw new Error(error)
+  }
+}
+
 exports.getAll = async (req, res) => {
   const {
     limit = 5,

@@ -33,8 +33,8 @@ exports.getAll = async (req, res) => {
     const results = await genreModel.findAll(limit, offset, search, by, sort)
     const nextResults = await genreModel.findAll(limit, offset + dataLimit, search, by, sort)
 
-    const nextPageLink = nextResults.results.length > 0 ? `${process.env.APP_URL}/admin/genre?page=${Number(page) + 1}` : null
-    const prevPageLink = (offset - limit) >= 0 ? `${process.env.APP_URL}/admin/genre?page=${page - 1}` : null
+    const nextPageLink = nextResults.results.length > 0 ? `${process.env.APP_URL}/admin/genres?${!req.query.page ? 'page=2&' : ''}${Object.keys(req.query).map((item, index) => `${item}=${(item === 'page') ? (Number(Object.values(req.query)[index]) + 1) : Object.values(req.query)[index]}`).join('&')}` : null
+    const prevPageLink = (offset - limit) >= 0 ? `${process.env.APP_URL}/admin/genres?${!req.query.page ? 'page=2&' : ''}${Object.keys(req.query).map((item, index) => `${item}=${(item === 'page') ? (Number(Object.values(req.query)[index]) - 1) : Object.values(req.query)[index]}`).join('&')}` : null
     return response(res, results.status, results.success, results.message, results.results, prevPageLink, nextPageLink)
   } catch (error) {
     response(res, 500, false, 'Server Error')

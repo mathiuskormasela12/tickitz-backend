@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 24, 2021 at 09:18 AM
+-- Generation Time: Jan 24, 2021 at 06:09 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -104,6 +104,13 @@ CREATE TABLE `moviegoers` (
   `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `moviegoers`
+--
+
+INSERT INTO `moviegoers` (`id`, `email`, `createdAt`, `updatedAt`) VALUES
+(1, 'mathiuskormasela12@gmail.com', '2021-01-24 12:12:33', '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -129,7 +136,8 @@ CREATE TABLE `movies` (
 --
 
 INSERT INTO `movies` (`id`, `title`, `releaseDate`, `duration`, `category`, `direct`, `casts`, `synopsis`, `poster`, `createdAt`, `updatedAt`) VALUES
-(90, 'The Guardians  200', '2011-07-21', '00:01:24', 'PG-18', 'Max', 'Mike, Max, Andrew', 'after war', 'guardians-1611326386709.jpg', '2021-01-22 14:39:46', '0000-00-00 00:00:00');
+(90, 'The Guardians  200', '2011-07-21', '00:01:24', 'PG-18', 'Max', 'Mike, Max, Andrew', 'after war', 'guardians-1611326386709.jpg', '2021-01-22 14:39:46', '0000-00-00 00:00:00'),
+(91, 'Naruto Shippuden', '2002-04-11', '00:00:24', 'PG-18', 'Masashi Kishimoto', 'Naruto, Sasuke, Sakura, Kakashi, Obito, Minato', 'The Nine-Tails attacking Konoha. Twelve years before the start of the series, the Nine-Tails attacked Konohagakure destroying much of the village and taking many lives. The leader of the village, the Fourth Hokage, sacrificed his life to seal the Nine-Tails into a newborn, Naruto Uzumaki.', 'naruto-1611504332286.jpg', '2021-01-24 16:05:32', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -152,7 +160,11 @@ CREATE TABLE `moviesGenres` (
 INSERT INTO `moviesGenres` (`id`, `movie_id`, `genre_id`, `createdAt`, `updatedAt`) VALUES
 (97, 90, 15, '2021-01-22 14:39:46', '0000-00-00 00:00:00'),
 (98, 90, 12, '2021-01-22 14:39:46', '0000-00-00 00:00:00'),
-(99, 90, 14, '2021-01-22 14:39:46', '0000-00-00 00:00:00');
+(99, 90, 14, '2021-01-22 14:39:46', '0000-00-00 00:00:00'),
+(100, 91, 13, '2021-01-24 16:05:32', '0000-00-00 00:00:00'),
+(101, 91, 14, '2021-01-24 16:05:32', '0000-00-00 00:00:00'),
+(102, 91, 15, '2021-01-24 16:05:32', '0000-00-00 00:00:00'),
+(103, 91, 17, '2021-01-24 16:05:32', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -168,6 +180,20 @@ CREATE TABLE `show_times` (
   `movieId` int(11) NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updateAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `soldSeats`
+--
+
+CREATE TABLE `soldSeats` (
+  `id` int(11) NOT NULL,
+  `showTimeId` int(11) NOT NULL,
+  `seatCode` char(3) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -290,6 +316,14 @@ ALTER TABLE `show_times`
   ADD KEY `movieId` (`movieId`);
 
 --
+-- Indexes for table `soldSeats`
+--
+ALTER TABLE `soldSeats`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `seatCode` (`seatCode`),
+  ADD KEY `showTimeId` (`showTimeId`);
+
+--
 -- Indexes for table `times`
 --
 ALTER TABLE `times`
@@ -335,24 +369,30 @@ ALTER TABLE `loyalty_point`
 -- AUTO_INCREMENT for table `moviegoers`
 --
 ALTER TABLE `moviegoers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `moviesGenres`
 --
 ALTER TABLE `moviesGenres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT for table `show_times`
 --
 ALTER TABLE `show_times`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `soldSeats`
+--
+ALTER TABLE `soldSeats`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -397,6 +437,12 @@ ALTER TABLE `show_times`
   ADD CONSTRAINT `show_times_ibfk_1` FOREIGN KEY (`timeId`) REFERENCES `times` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `show_times_ibfk_2` FOREIGN KEY (`cinemaId`) REFERENCES `cinemas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `show_times_ibfk_3` FOREIGN KEY (`movieId`) REFERENCES `movies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `soldSeats`
+--
+ALTER TABLE `soldSeats`
+  ADD CONSTRAINT `soldSeats_ibfk_1` FOREIGN KEY (`showTimeId`) REFERENCES `show_times` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `transactions`
