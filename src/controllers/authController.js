@@ -3,6 +3,7 @@
 const bcrypt = require('bcryptjs')
 const response = require('../helpers/response')
 const jwt = require('jsonwebtoken')
+const upload = require('../helpers/upload')
 
 // Import model
 const users = require('../models/UserModel')
@@ -140,6 +141,59 @@ exports.editPassword = async (req, res) => {
       return response(res, 400, false, 'Failed to edit password')
     } else {
       return response(res, 200, true, 'Password has been updated')
+    }
+  } catch (err) {
+    console.log(err)
+    return response(res, 500, false, 'Server Error')
+  }
+}
+
+exports.editUser = async (req, res) => {
+  try {
+    const previousResult = await users.getUserByCondition({
+      id: req.params.id
+    })
+    let poster = previousResult[0].poster
+    if (req.files) {
+      poster = await upload(req, 'profile photo')
+
+      if (typeof poster === 'object') {
+        return response(res, poster.status, poster.success, poster.message)
+      }
+    }
+
+    const hash = await bcrypt.hash(req.body.password, 8)
+    const body = {
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      email: req.body.email,
+      password: hash,
+      poster,
+      phone: req.body.phone
+    }
+    const results = await users.update(req.params.id, req.body.email, body)
+
+    if (!results) {
+      return response(res, 400, false, 'Failed to edit user account')
+    } else {
+      return response(res, 200, true, 'Your account has been updated')
+    }
+  } catch (err) {
+    console.log(err)
+    return response(res, 500, false, 'Server Error')
+  }
+}
+
+exports.getUserByid = async (req, res) => {
+  try {
+    const result = await users.getUserByCondition({
+      id: req.params.id
+    })
+
+    if (!result) {
+      return response(res, 400, false, `User with id ${req.params.id} unavailable`)
+    } else {
+      return response(res, 200, true, 'Successfully to get user with id ' + req.params.id, result[0])
     }
   } catch (err) {
     console.log(err)

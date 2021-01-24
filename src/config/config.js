@@ -52,5 +52,13 @@ module.exports = {
   ],
   editPasswordBody: [
     'password'
+  ],
+  editUserBody: [
+    'first_name',
+    'last_name',
+    'phone',
+    'email',
+    'password',
+    'password_confirm'
   ]
 }
