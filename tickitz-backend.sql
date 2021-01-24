@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 23 Jan 2021 pada 15.10
--- Versi server: 10.4.17-MariaDB
--- Versi PHP: 8.0.1
+-- Generation Time: Jan 24, 2021 at 05:16 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `cinemas`
+-- Table structure for table `cinemas`
 --
 
 CREATE TABLE `cinemas` (
@@ -39,7 +39,7 @@ CREATE TABLE `cinemas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `cinemas`
+-- Dumping data for table `cinemas`
 --
 
 INSERT INTO `cinemas` (`id`, `name`, `poster`, `address`, `pricePerSeat`, `city`, `createdAt`, `updatedAt`) VALUES
@@ -50,7 +50,7 @@ INSERT INTO `cinemas` (`id`, `name`, `poster`, `address`, `pricePerSeat`, `city`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `genres`
+-- Table structure for table `genres`
 --
 
 CREATE TABLE `genres` (
@@ -61,7 +61,7 @@ CREATE TABLE `genres` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `genres`
+-- Dumping data for table `genres`
 --
 
 INSERT INTO `genres` (`id`, `name`, `createdAt`, `updatedAt`) VALUES
@@ -80,7 +80,7 @@ INSERT INTO `genres` (`id`, `name`, `createdAt`, `updatedAt`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `loyalty_point`
+-- Table structure for table `loyalty_point`
 --
 
 CREATE TABLE `loyalty_point` (
@@ -94,7 +94,7 @@ CREATE TABLE `loyalty_point` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `moviegoers`
+-- Table structure for table `moviegoers`
 --
 
 CREATE TABLE `moviegoers` (
@@ -107,7 +107,7 @@ CREATE TABLE `moviegoers` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `movies`
+-- Table structure for table `movies`
 --
 
 CREATE TABLE `movies` (
@@ -125,7 +125,7 @@ CREATE TABLE `movies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `movies`
+-- Dumping data for table `movies`
 --
 
 INSERT INTO `movies` (`id`, `title`, `releaseDate`, `duration`, `category`, `direct`, `casts`, `synopsis`, `poster`, `createdAt`, `updatedAt`) VALUES
@@ -134,7 +134,7 @@ INSERT INTO `movies` (`id`, `title`, `releaseDate`, `duration`, `category`, `dir
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `moviesGenres`
+-- Table structure for table `moviesGenres`
 --
 
 CREATE TABLE `moviesGenres` (
@@ -146,7 +146,7 @@ CREATE TABLE `moviesGenres` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `moviesGenres`
+-- Dumping data for table `moviesGenres`
 --
 
 INSERT INTO `moviesGenres` (`id`, `movie_id`, `genre_id`, `createdAt`, `updatedAt`) VALUES
@@ -157,7 +157,7 @@ INSERT INTO `moviesGenres` (`id`, `movie_id`, `genre_id`, `createdAt`, `updatedA
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `show_times`
+-- Table structure for table `show_times`
 --
 
 CREATE TABLE `show_times` (
@@ -173,7 +173,7 @@ CREATE TABLE `show_times` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `times`
+-- Table structure for table `times`
 --
 
 CREATE TABLE `times` (
@@ -186,7 +186,7 @@ CREATE TABLE `times` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transactions`
+-- Table structure for table `transactions`
 --
 
 CREATE TABLE `transactions` (
@@ -207,7 +207,7 @@ CREATE TABLE `transactions` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -225,7 +225,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `poster`, `phone`, `role`, `activated`, `createdAt`, `updatedAt`) VALUES
@@ -233,46 +233,47 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `post
 (23, NULL, NULL, 'mathiuskormasela12@gmail.com', '$2a$08$/EkZNIRSh0a8R3T/7Fwqtef9gemjhUUm95AfYi.WCLz4POpKcQb0W', NULL, NULL, 'admin', 1, '2021-01-23 11:13:19', '2021-01-23 14:01:08'),
 (24, NULL, NULL, 'mathiuskormasela12rpl@gmail.com', '$2a$08$RJI3XuOw2nVyRV/pg/bQiOHJu8t8NJES3z7SlJ6YMaeqTkL1pS//S', NULL, NULL, 'user', 1, '2021-01-23 11:18:02', '2021-01-23 11:24:36'),
 (25, NULL, NULL, 'samdicova12@gmail.com', '$2a$08$4q0pmxWubhVJtXV9D2YCm.Mzp7MDzNKRSh79hPDCP8gaPs33o0Bda', NULL, NULL, 'user', 1, '2021-01-23 11:29:08', '2021-01-23 11:35:29'),
-(26, NULL, NULL, 'admin@gmail.com', '$2a$08$qvF/z87UBpQhQeblhwhytuvYvac/kGo6ZkaAeGxKDVJpKQGxW9DNG', NULL, NULL, 'admin', 0, '2021-01-23 11:37:31', '0000-00-00 00:00:00');
+(28, NULL, NULL, 'admin@gmail.com', '$2a$08$BwC.iLehin9lt1kzDId0JelXL7vXwjOmjblAHN/.y4gBoIww.C7ue', NULL, NULL, 'admin', 1, '2021-01-24 02:26:17', '0000-00-00 00:00:00'),
+(29, NULL, NULL, 'graciakormasela1002@gmail.com', '$2a$08$LtTZy3vpbyBxiyljx5VuBemrwb4wsk9tXFXwd4GA0w4A9lAige2i6', NULL, NULL, 'user', 1, '2021-01-24 02:31:12', '2021-01-24 02:36:52');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `cinemas`
+-- Indexes for table `cinemas`
 --
 ALTER TABLE `cinemas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `genres`
+-- Indexes for table `genres`
 --
 ALTER TABLE `genres`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `loyalty_point`
+-- Indexes for table `loyalty_point`
 --
 ALTER TABLE `loyalty_point`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indeks untuk tabel `moviegoers`
+-- Indexes for table `moviegoers`
 --
 ALTER TABLE `moviegoers`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indeks untuk tabel `movies`
+-- Indexes for table `movies`
 --
 ALTER TABLE `movies`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `moviesGenres`
+-- Indexes for table `moviesGenres`
 --
 ALTER TABLE `moviesGenres`
   ADD PRIMARY KEY (`id`),
@@ -280,7 +281,7 @@ ALTER TABLE `moviesGenres`
   ADD KEY `genre_id` (`genre_id`);
 
 --
--- Indeks untuk tabel `show_times`
+-- Indexes for table `show_times`
 --
 ALTER TABLE `show_times`
   ADD PRIMARY KEY (`id`),
@@ -289,108 +290,108 @@ ALTER TABLE `show_times`
   ADD KEY `movieId` (`movieId`);
 
 --
--- Indeks untuk tabel `times`
+-- Indexes for table `times`
 --
 ALTER TABLE `times`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `transactions`
+-- Indexes for table `transactions`
 --
 ALTER TABLE `transactions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `userId` (`userId`);
 
 --
--- Indeks untuk tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`email`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `cinemas`
+-- AUTO_INCREMENT for table `cinemas`
 --
 ALTER TABLE `cinemas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT untuk tabel `genres`
+-- AUTO_INCREMENT for table `genres`
 --
 ALTER TABLE `genres`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT untuk tabel `loyalty_point`
+-- AUTO_INCREMENT for table `loyalty_point`
 --
 ALTER TABLE `loyalty_point`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `moviegoers`
+-- AUTO_INCREMENT for table `moviegoers`
 --
 ALTER TABLE `moviegoers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `movies`
+-- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
--- AUTO_INCREMENT untuk tabel `moviesGenres`
+-- AUTO_INCREMENT for table `moviesGenres`
 --
 ALTER TABLE `moviesGenres`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
--- AUTO_INCREMENT untuk tabel `show_times`
+-- AUTO_INCREMENT for table `show_times`
 --
 ALTER TABLE `show_times`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `times`
+-- AUTO_INCREMENT for table `times`
 --
 ALTER TABLE `times`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `transactions`
+-- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `loyalty_point`
+-- Constraints for table `loyalty_point`
 --
 ALTER TABLE `loyalty_point`
   ADD CONSTRAINT `loyalty_point_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `moviesGenres`
+-- Constraints for table `moviesGenres`
 --
 ALTER TABLE `moviesGenres`
   ADD CONSTRAINT `moviesGenres_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `movies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `moviesGenres_ibfk_2` FOREIGN KEY (`genre_id`) REFERENCES `genres` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `show_times`
+-- Constraints for table `show_times`
 --
 ALTER TABLE `show_times`
   ADD CONSTRAINT `show_times_ibfk_1` FOREIGN KEY (`timeId`) REFERENCES `times` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -398,7 +399,7 @@ ALTER TABLE `show_times`
   ADD CONSTRAINT `show_times_ibfk_3` FOREIGN KEY (`movieId`) REFERENCES `movies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `transactions`
+-- Constraints for table `transactions`
 --
 ALTER TABLE `transactions`
   ADD CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
