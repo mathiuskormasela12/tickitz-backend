@@ -8,6 +8,12 @@ const moviesController = require('../controllers/moviesController')
 // import cinema controller
 const cinemaController = require('../controllers/cinemasController')
 
+// import moviegoers controllers
+const moviegoers = require('../controllers/moviegoers')
+
+// import moviegoers middleware
+const moviegoersMiddleware = require('../middlewares/moviegoers')
+
 // init router
 const router = express.Router()
 
@@ -16,5 +22,6 @@ router.get('/movies/:id', moviesController.getMovieById)
 router.get('/genre/:genre', moviesController.getAllByGenre)
 router.get('/cinemas', cinemaController.getAll)
 router.get('/:id', cinemaController.getCinemaById)
+router.post('/moviegoers', moviegoersMiddleware, moviegoers)
 
 module.exports = router

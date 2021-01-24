@@ -52,3 +52,11 @@ This is non-optimized minimal backend app with mysql and node js. Backend app th
 - GET `/api/admin/genres/:id` Route for get genre details
 - GET `/api/genre/:name` Route for get all movies by genre name
 
+
+- POST `/api/moviegoers` Route for add moviegoers
+- PATCH `/api/auth/active` Route for activated user account
+- PATCH `/api/auth/password` Route for send email for edit user password 
+- POST `/api/auth/register` Route for add new user
+- PATCH `/api/auth/password/:id/:email` Route for edit user password
+- PATCH `/api/auth/user/:id` Route for edit user profile
+- GET `/api/auth/user/:id` Route for get all user by id
