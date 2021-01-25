@@ -106,7 +106,8 @@ exports.getAllByGenre = async (req, res) => {
   } = req.query
 
   try {
-    const result = await movieModel.findAllByGenre(req.params.genre, search, by, sort)
+    const result = await movieModel.findAll(search, by, sort)
+    result.results = result.results.filter(item => item.genres.includes(req.params.genre))
 
     pagination(result.results, req.query, limit, 'movies', (results, prevPageLink, nextPageLink) => {
       return response(res, result.status, result.success, result.message, results, prevPageLink, nextPageLink)

@@ -25,11 +25,11 @@ const router = express.Router()
 router.use(upload(config.uploadOptions))
 
 router.post('/login', isLoginFill, isAuthFormCorrect, authController.login)
-router.post('/register', auth, isRegisterFill, isAuthFormCorrect, authController.register)
+router.post('/register', isRegisterFill, isAuthFormCorrect, authController.register)
 router.patch('/active', authController.activated)
 router.post('/password', isForgotPasswordFill, authController.forgotPassword)
 router.patch('/password/:id/:email', isEditPasswordFill, authController.editPassword)
-router.patch('/user/:id', auth, isEditUserFill, isAuthFormCorrect, authController.editUser)
-router.get('/user/:id', auth, authController.getUserByid)
+router.patch('/user/:id', auth.isUser, isEditUserFill, isAuthFormCorrect, authController.editUser)
+router.get('/user/:id', auth.isUser, authController.getUserByid)
 
 module.exports = router

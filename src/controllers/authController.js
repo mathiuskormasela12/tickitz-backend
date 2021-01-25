@@ -25,7 +25,7 @@ exports.login = async (req, res) => {
     } else {
       const data = {
         id: isExist[0].id,
-        username: isExist[0].username
+        role: isExist[0].role
       }
       const token = jwt.sign(data, SECRET, {
         expiresIn: '24h'

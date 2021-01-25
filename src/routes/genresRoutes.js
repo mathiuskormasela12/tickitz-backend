@@ -19,11 +19,11 @@ const router = express.Router()
 // setup express file upload
 router.use(upload(config.uploadOptions))
 
-router.get('/', auth, genreController.getAll)
-router.get('/:id', auth, genreController.getGenreById)
-router.post('/', auth, isAddMovieFill, genreController.create)
-router.put('/', auth, isAddMovieFill, genreController.create)
-router.delete('/:id', auth, genreController.remove)
-router.patch('/:id', auth, genreController.edit)
+router.get('/', auth.isAdmin, genreController.getAll)
+router.get('/:id', auth.isAdmin, genreController.getGenreById)
+router.post('/', auth.isAdmin, isAddMovieFill, genreController.create)
+router.put('/', auth.isAdmin, isAddMovieFill, genreController.create)
+router.delete('/:id', auth.isAdmin, genreController.remove)
+router.patch('/:id', auth.isAdmin, genreController.edit)
 
 module.exports = router

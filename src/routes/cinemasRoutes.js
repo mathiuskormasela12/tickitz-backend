@@ -19,11 +19,11 @@ const router = express.Router()
 // setup express file upload
 router.use(upload(config.uploadOptions))
 
-router.get('/', auth, cinemaController.getAll)
-router.get('/:id', auth, cinemaController.getCinemaById)
-router.post('/', auth, isAddCinemaFill, cinemaController.create)
-router.put('/', auth, isAddCinemaFill, cinemaController.create)
-router.delete('/:id', auth, cinemaController.remove)
-router.patch('/:id', auth, cinemaController.edit)
+router.get('/', auth.isAdmin, cinemaController.getAll)
+router.get('/:id', auth.isAdmin, cinemaController.getCinemaById)
+router.post('/', auth.isAdmin, isAddCinemaFill, cinemaController.create)
+router.put('/', auth.isAdmin, isAddCinemaFill, cinemaController.create)
+router.delete('/:id', auth.isAdmin, cinemaController.remove)
+router.patch('/:id', auth.isAdmin, cinemaController.edit)
 
 module.exports = router
