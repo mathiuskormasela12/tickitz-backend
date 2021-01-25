@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 24, 2021 at 06:09 PM
+-- Generation Time: Jan 25, 2021 at 03:34 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -137,7 +137,8 @@ CREATE TABLE `movies` (
 
 INSERT INTO `movies` (`id`, `title`, `releaseDate`, `duration`, `category`, `direct`, `casts`, `synopsis`, `poster`, `createdAt`, `updatedAt`) VALUES
 (90, 'The Guardians  200', '2011-07-21', '00:01:24', 'PG-18', 'Max', 'Mike, Max, Andrew', 'after war', 'guardians-1611326386709.jpg', '2021-01-22 14:39:46', '0000-00-00 00:00:00'),
-(91, 'Naruto Shippuden', '2002-04-11', '00:00:24', 'PG-18', 'Masashi Kishimoto', 'Naruto, Sasuke, Sakura, Kakashi, Obito, Minato', 'The Nine-Tails attacking Konoha. Twelve years before the start of the series, the Nine-Tails attacked Konohagakure destroying much of the village and taking many lives. The leader of the village, the Fourth Hokage, sacrificed his life to seal the Nine-Tails into a newborn, Naruto Uzumaki.', 'naruto-1611504332286.jpg', '2021-01-24 16:05:32', '0000-00-00 00:00:00');
+(91, 'Naruto Shippuden', '2002-04-11', '00:00:24', 'PG-18', 'Masashi Kishimoto', 'Naruto, Sasuke, Sakura, Kakashi, Obito, Minato', 'The Nine-Tails attacking Konoha. Twelve years before the start of the series, the Nine-Tails attacked Konohagakure destroying much of the village and taking many lives. The leader of the village, the Fourth Hokage, sacrificed his life to seal the Nine-Tails into a newborn, Naruto Uzumaki.', 'naruto-1611504332286.jpg', '2021-01-24 16:05:32', '0000-00-00 00:00:00'),
+(92, 'Boruto: Naruto The Next Generation', '2017-08-21', '00:00:24', 'PG-18', 'Masashi Kishimoto', 'Boruto, Sarada, Mitsuki, Naruto, Sasuke', 'Son of Naruto Uzumaki, Boruto, follows his father\'s footsteps along with his friends to become great ninja. Throughout all their adventures, Boruto is determined to make his mark in the ninja world and live outside of his father\'s shadow. Naruto was a young shinobi with an incorrigible knack for mischief.', 'boruto-1611553608356.jpg', '2021-01-25 05:46:48', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -164,7 +165,9 @@ INSERT INTO `moviesGenres` (`id`, `movie_id`, `genre_id`, `createdAt`, `updatedA
 (100, 91, 13, '2021-01-24 16:05:32', '0000-00-00 00:00:00'),
 (101, 91, 14, '2021-01-24 16:05:32', '0000-00-00 00:00:00'),
 (102, 91, 15, '2021-01-24 16:05:32', '0000-00-00 00:00:00'),
-(103, 91, 17, '2021-01-24 16:05:32', '0000-00-00 00:00:00');
+(103, 91, 17, '2021-01-24 16:05:32', '0000-00-00 00:00:00'),
+(104, 92, 13, '2021-01-25 05:46:48', '0000-00-00 00:00:00'),
+(105, 92, 15, '2021-01-25 05:46:48', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -182,6 +185,13 @@ CREATE TABLE `show_times` (
   `updateAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `show_times`
+--
+
+INSERT INTO `show_times` (`id`, `showTimeDate`, `timeId`, `cinemaId`, `movieId`, `createdAt`, `updateAt`) VALUES
+(1, '2021-01-04', 1, 23, 92, '2021-01-25 09:54:59', '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -196,6 +206,15 @@ CREATE TABLE `soldSeats` (
   `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `soldSeats`
+--
+
+INSERT INTO `soldSeats` (`id`, `showTimeId`, `seatCode`, `createdAt`, `updatedAt`) VALUES
+(61, 1, 'K1', '2021-01-25 14:13:37', '0000-00-00 00:00:00'),
+(62, 1, 'A12', '2021-01-25 14:13:37', '0000-00-00 00:00:00'),
+(63, 1, 'D2', '2021-01-25 14:13:37', '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -208,6 +227,14 @@ CREATE TABLE `times` (
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `times`
+--
+
+INSERT INTO `times` (`id`, `showTime`, `createdAt`, `updatedAt`) VALUES
+(1, '12:23:37', '2021-01-25 09:53:29', '0000-00-00 00:00:00'),
+(2, '08:43:07', '2021-01-25 09:53:32', '2021-01-25 09:54:06');
 
 -- --------------------------------------------------------
 
@@ -229,6 +256,13 @@ CREATE TABLE `transactions` (
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `userId`, `ticketDate`, `ticketTime`, `cinemaName`, `ticketCount`, `totalPayment`, `paymentMethod`, `seats`, `movieTitle`, `createdAt`, `updatedAt`) VALUES
+(29, 31, '2021-01-04', '12:23:37', 'cineOne 21', 3, 60, 'ovo', 'K1, A12, D2', 'Boruto: Naruto The Next Generation', '2021-01-25 14:13:37', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -260,7 +294,7 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `post
 (25, NULL, NULL, 'samdicova12@gmail.com', '$2a$08$4q0pmxWubhVJtXV9D2YCm.Mzp7MDzNKRSh79hPDCP8gaPs33o0Bda', NULL, NULL, 'user', 1, '2021-01-23 11:29:08', '2021-01-23 11:35:29'),
 (28, NULL, NULL, 'admin@gmail.com', '$2a$08$BwC.iLehin9lt1kzDId0JelXL7vXwjOmjblAHN/.y4gBoIww.C7ue', NULL, NULL, 'admin', 1, '2021-01-24 02:26:17', '0000-00-00 00:00:00'),
 (29, 'Tessalonika', 'Gracia', 'graciakormasela1002@gmail.com', '$2a$08$pxFOxqWX6SAnXKVOw1sJZe0PwKJXYu9uoMzw6JJl1G/VaHe2l3.Dq', NULL, '089273838', 'user', 1, '2021-01-24 02:31:12', '2021-01-24 06:10:14'),
-(30, 'Matthew', 'Kormasela', 'mathiuskormasela12@gmail.com', '$2a$08$xYGWIvIvn1o8g8EkZ8jiLO5QsvzOyaxYULXYSEAuTurw4CHllcTsC', 'boruto-1611475866192.jpg', '0895326176440', 'user', 1, '2021-01-24 08:02:53', '2021-01-24 08:11:06');
+(31, NULL, NULL, 'mathiuskormasela12@gmail.com', '$2a$08$3L5GM1v/b4zLu4IN6LpZZuQSKSgzwJX91xnBPMQBX11cnQTCv/hKu', NULL, NULL, 'user', 1, '2021-01-25 05:51:51', '2021-01-25 05:58:57');
 
 --
 -- Indexes for dumped tables
@@ -375,43 +409,43 @@ ALTER TABLE `moviegoers`
 -- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `moviesGenres`
 --
 ALTER TABLE `moviesGenres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `show_times`
 --
 ALTER TABLE `show_times`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `soldSeats`
 --
 ALTER TABLE `soldSeats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `times`
 --
 ALTER TABLE `times`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Constraints for dumped tables

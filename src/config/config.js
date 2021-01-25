@@ -60,5 +60,15 @@ module.exports = {
     'email',
     'password',
     'password_confirm'
+  ],
+  transaction: [
+    'ticketDate',
+    'ticketTime',
+    'cinemaName',
+    'ticketCount',
+    'totalPayment',
+    'paymentMethod',
+    'seats',
+    'movieTitle'
   ]
 }

@@ -53,6 +53,7 @@ app.use('/api/admin/movies', require('./src/routes/moviesRoutes'))
 app.use('/api/admin/genres', require('./src/routes/genresRoutes'))
 app.use('/api/admin/cinemas', require('./src/routes/cinemasRoutes'))
 app.use('/api/auth', require('./src/routes/authRoutes'))
+app.use('/api/transaction', require('./src/routes/transaction'))
 
 app.listen(PORT, () => {
   console.log(`App running at http://127.0.0.1:${PORT}/api`)
