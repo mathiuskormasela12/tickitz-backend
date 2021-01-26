@@ -20,6 +20,19 @@ class ShowTimeModel extends Database {
       })
     })
   }
+
+  findAllByCond (cond) {
+    const sql = `SELECT * FROM ${this.table} WHERE ${Object.keys(cond).map((item, index) => `${item}=${Object.values(cond)[index]}`).join(' AND ')}`
+    return new Promise((resolve, reject) => {
+      this.db.query(sql, (err, result) => {
+        if (err) {
+          return reject(err)
+        } else {
+          return resolve(result)
+        }
+      })
+    })
+  }
 }
 
 module.exports = new ShowTimeModel('show_times')

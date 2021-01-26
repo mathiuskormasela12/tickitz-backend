@@ -53,13 +53,35 @@ exports.create = async (req, res) => {
     })
 
     if (isTimeExist.length < 1) {
+      const deleteMovie = await movieModel.destroy(results.result.insertId)
+      if (deleteMovie.affectedRows < 1) {
+        return response(res, 400, false, 'Failed to delete movie')
+      }
+
       return response(res, 400, false, 'Unknown time id')
     }
 
     const isCinemaExist = await cinemas.findAllById(cinemaId)
 
     if (isCinemaExist.results.length < 1) {
+      const deleteMovie = await movieModel.destroy(results.result.insertId)
+      if (deleteMovie.affectedRows < 1) {
+        return response(res, 400, false, 'Failed to delete movie')
+      }
       return response(res, 400, false, 'Unknown cinema id')
+    }
+
+    const isShowTimeExists = await showTimes.findAllByCond({
+      timeId,
+      cinemaId
+    })
+
+    if (isShowTimeExists.length > 0) {
+      const deleteMovie = await movieModel.destroy(results.result.insertId)
+      if (deleteMovie.affectedRows < 1) {
+        return response(res, 400, false, 'Failed to delete movie')
+      }
+      return response(res, 400, false, 'Show time is exists')
     }
 
     const insertShowTimes = await showTimes.create({
@@ -70,6 +92,10 @@ exports.create = async (req, res) => {
     })
 
     if (insertShowTimes.affectedRows < 1) {
+      const deleteMovie = await movieModel.destroy(results.result.insertId)
+      if (deleteMovie.affectedRows < 1) {
+        return response(res, 400, false, 'Failed to delete movie')
+      }
       return response(res, 400, false, 'Failed to insert movie')
     }
 

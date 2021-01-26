@@ -26,9 +26,8 @@ exports.buy = async (req, res) => {
     if (!result) {
       return response(res, 400, false, 'Failed to buy ticket')
     } else {
-      const showTimeId = await transactions.getShowTimeId(req.body.ticketDate)
       const soldSeatsList = await soldSeats.getSoldSeatByCondition({
-        timeid: showTimeId[0].id,
+        id: req.body.showTimeId,
         movieId: req.body.movieId,
         cinemaId: req.body.cinemaId
       })
@@ -51,20 +50,16 @@ exports.buy = async (req, res) => {
         return response(res, 400, false, "Can't select same seat")
       }
 
-      if (showTimeId.length < 1) {
-        return response(res, 400, false, 'Unknown show times id')
-      } else {
-        try {
-          const result = await soldSeats.create(showTimeId[0].id, req.body.seats.split(','))
-          if (!result) {
-            return response(res, 400, false, 'Failed to add sold seat')
-          } else {
-            return response(res, 200, true, 'Success buy ticket')
-          }
-        } catch (err) {
-          console.log(err)
-          return response(res, 500, false, 'Server Error')
+      try {
+        const result = await soldSeats.create(req.body.showTimeId, req.body.seats.split(','))
+        if (!result) {
+          return response(res, 400, false, 'Failed to add sold seat')
+        } else {
+          return response(res, 200, true, 'Success buy ticket')
         }
+      } catch (err) {
+        console.log(err)
+        return response(res, 500, false, 'Server Error')
       }
     }
   } catch (err) {

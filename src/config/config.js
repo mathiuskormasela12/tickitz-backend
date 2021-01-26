@@ -68,8 +68,8 @@ module.exports = {
     'time'
   ],
   transaction: [
-    'ticketDate',
-    'ticketTime',
+    'showTimeId',
+    'timeId',
     'cinemaId',
     'ticketCount',
     'totalPayment',

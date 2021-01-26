@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 26, 2021 at 01:58 AM
+-- Generation Time: Jan 26, 2021 at 05:08 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -136,7 +136,9 @@ CREATE TABLE `movies` (
 --
 
 INSERT INTO `movies` (`id`, `title`, `releaseDate`, `duration`, `category`, `direct`, `casts`, `synopsis`, `poster`, `createdAt`, `updatedAt`) VALUES
-(97, 'Boruto: Naruto The Next Generation', '2017-08-21', '00:00:24', 'PG-18', 'Masashi Kishimoto', 'Boruto, Sarada, Mitsuki, Naruto, Sasuke', 'Son of Naruto Uzumaki, Boruto, follows his father\'s footsteps along with his friends to become great ninja. Throughout all their adventures, Boruto is determined to make his mark in the ninja world and live outside of his father\'s shadow. Naruto was a young shinobi with an incorrigible knack for mischief.', 'boruto-1611600077490.jpg', '2021-01-25 18:41:17', '0000-00-00 00:00:00');
+(118, 'Boruto: Naruto The Movie', '2020-10-21', '00:01:20', 'PG-18', 'Masashi Kishimoto', 'Boruto, Sarada, Mitsuki', 'lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', 'boruto-1611624622306.jpg', '2021-01-26 01:30:22', '0000-00-00 00:00:00'),
+(120, 'Boruto: Naruto the next generation', '2020-10-21', '00:01:20', 'PG-18', 'Masashi Kishimoto', 'Boruto, Sarada, Mitsuki', 'lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', 'boruto-1611624726137.jpg', '2021-01-26 01:32:06', '0000-00-00 00:00:00'),
+(122, 'The Guardsan', '2020-10-21', '00:01:20', 'PG-18', 'Mike Tyson', 'Mike, Jeanete, Alexa', 'lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', 'guardians-1611624832340.jpg', '2021-01-26 01:33:52', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -157,8 +159,18 @@ CREATE TABLE `moviesGenres` (
 --
 
 INSERT INTO `moviesGenres` (`id`, `movie_id`, `genre_id`, `createdAt`, `updatedAt`) VALUES
-(114, 97, 13, '2021-01-25 18:41:17', '0000-00-00 00:00:00'),
-(115, 97, 15, '2021-01-25 18:41:17', '0000-00-00 00:00:00');
+(196, 118, 12, '2021-01-26 01:30:22', '0000-00-00 00:00:00'),
+(197, 118, 14, '2021-01-26 01:30:22', '0000-00-00 00:00:00'),
+(198, 118, 15, '2021-01-26 01:30:22', '0000-00-00 00:00:00'),
+(199, 118, 16, '2021-01-26 01:30:22', '0000-00-00 00:00:00'),
+(204, 120, 12, '2021-01-26 01:32:06', '0000-00-00 00:00:00'),
+(205, 120, 14, '2021-01-26 01:32:06', '0000-00-00 00:00:00'),
+(206, 120, 15, '2021-01-26 01:32:06', '0000-00-00 00:00:00'),
+(207, 120, 16, '2021-01-26 01:32:06', '0000-00-00 00:00:00'),
+(212, 122, 12, '2021-01-26 01:33:52', '0000-00-00 00:00:00'),
+(213, 122, 14, '2021-01-26 01:33:52', '0000-00-00 00:00:00'),
+(214, 122, 15, '2021-01-26 01:33:52', '0000-00-00 00:00:00'),
+(215, 122, 16, '2021-01-26 01:33:52', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -181,7 +193,9 @@ CREATE TABLE `show_times` (
 --
 
 INSERT INTO `show_times` (`id`, `showTimeDate`, `timeId`, `cinemaId`, `movieId`, `createdAt`, `updateAt`) VALUES
-(5, '2021-02-10', 8, 23, 97, '2021-01-25 18:41:17', '0000-00-00 00:00:00');
+(14, '2021-02-10', 8, 23, 118, '2021-01-26 01:30:22', '0000-00-00 00:00:00'),
+(15, '2021-02-10', 8, 24, 120, '2021-01-26 01:32:06', '0000-00-00 00:00:00'),
+(16, '2021-02-10', 3, 24, 122, '2021-01-26 01:33:52', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -196,6 +210,15 @@ CREATE TABLE `soldSeats` (
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `soldSeats`
+--
+
+INSERT INTO `soldSeats` (`id`, `showTimeId`, `seatCode`, `createdAt`, `updatedAt`) VALUES
+(163, 14, 'E1', '2021-01-26 03:34:06', '0000-00-00 00:00:00'),
+(164, 14, 'F12', '2021-01-26 03:34:06', '0000-00-00 00:00:00'),
+(165, 14, 'A2', '2021-01-26 03:34:06', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -232,7 +255,7 @@ INSERT INTO `times` (`id`, `showTime`, `createdAt`, `updatedAt`) VALUES
 CREATE TABLE `transactions` (
   `id` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
-  `ticketDate` date NOT NULL,
+  `showTimeId` int(11) NOT NULL,
   `timeId` int(11) NOT NULL,
   `cinemaId` int(11) NOT NULL,
   `ticketCount` int(11) NOT NULL,
@@ -243,6 +266,13 @@ CREATE TABLE `transactions` (
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `userId`, `showTimeId`, `timeId`, `cinemaId`, `ticketCount`, `totalPayment`, `paymentMethod`, `seats`, `movieId`, `createdAt`, `updatedAt`) VALUES
+(83, 29, 14, 8, 23, 3, 60, 'ovo', 'E1, F12, A2', 118, '2021-01-26 03:34:06', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -350,7 +380,8 @@ ALTER TABLE `transactions`
   ADD KEY `userId` (`userId`),
   ADD KEY `cinemaId` (`cinemaId`),
   ADD KEY `movieId` (`movieId`),
-  ADD KEY `timeId` (`timeId`);
+  ADD KEY `timeId` (`timeId`),
+  ADD KEY `showTimeId` (`showTimeId`);
 
 --
 -- Indexes for table `users`
@@ -391,25 +422,25 @@ ALTER TABLE `moviegoers`
 -- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 
 --
 -- AUTO_INCREMENT for table `moviesGenres`
 --
 ALTER TABLE `moviesGenres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
 
 --
 -- AUTO_INCREMENT for table `show_times`
 --
 ALTER TABLE `show_times`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `soldSeats`
 --
 ALTER TABLE `soldSeats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
 
 --
 -- AUTO_INCREMENT for table `times`
@@ -421,7 +452,7 @@ ALTER TABLE `times`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -467,7 +498,8 @@ ALTER TABLE `transactions`
   ADD CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `transactions_ibfk_2` FOREIGN KEY (`cinemaId`) REFERENCES `cinemas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `transactions_ibfk_3` FOREIGN KEY (`movieId`) REFERENCES `movies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `transactions_ibfk_4` FOREIGN KEY (`timeId`) REFERENCES `times` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `transactions_ibfk_4` FOREIGN KEY (`timeId`) REFERENCES `times` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transactions_ibfk_5` FOREIGN KEY (`showTimeId`) REFERENCES `show_times` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
