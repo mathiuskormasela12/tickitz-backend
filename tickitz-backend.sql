@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 25, 2021 at 03:34 PM
+-- Generation Time: Jan 26, 2021 at 01:58 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -136,9 +136,7 @@ CREATE TABLE `movies` (
 --
 
 INSERT INTO `movies` (`id`, `title`, `releaseDate`, `duration`, `category`, `direct`, `casts`, `synopsis`, `poster`, `createdAt`, `updatedAt`) VALUES
-(90, 'The Guardians  200', '2011-07-21', '00:01:24', 'PG-18', 'Max', 'Mike, Max, Andrew', 'after war', 'guardians-1611326386709.jpg', '2021-01-22 14:39:46', '0000-00-00 00:00:00'),
-(91, 'Naruto Shippuden', '2002-04-11', '00:00:24', 'PG-18', 'Masashi Kishimoto', 'Naruto, Sasuke, Sakura, Kakashi, Obito, Minato', 'The Nine-Tails attacking Konoha. Twelve years before the start of the series, the Nine-Tails attacked Konohagakure destroying much of the village and taking many lives. The leader of the village, the Fourth Hokage, sacrificed his life to seal the Nine-Tails into a newborn, Naruto Uzumaki.', 'naruto-1611504332286.jpg', '2021-01-24 16:05:32', '0000-00-00 00:00:00'),
-(92, 'Boruto: Naruto The Next Generation', '2017-08-21', '00:00:24', 'PG-18', 'Masashi Kishimoto', 'Boruto, Sarada, Mitsuki, Naruto, Sasuke', 'Son of Naruto Uzumaki, Boruto, follows his father\'s footsteps along with his friends to become great ninja. Throughout all their adventures, Boruto is determined to make his mark in the ninja world and live outside of his father\'s shadow. Naruto was a young shinobi with an incorrigible knack for mischief.', 'boruto-1611553608356.jpg', '2021-01-25 05:46:48', '0000-00-00 00:00:00');
+(97, 'Boruto: Naruto The Next Generation', '2017-08-21', '00:00:24', 'PG-18', 'Masashi Kishimoto', 'Boruto, Sarada, Mitsuki, Naruto, Sasuke', 'Son of Naruto Uzumaki, Boruto, follows his father\'s footsteps along with his friends to become great ninja. Throughout all their adventures, Boruto is determined to make his mark in the ninja world and live outside of his father\'s shadow. Naruto was a young shinobi with an incorrigible knack for mischief.', 'boruto-1611600077490.jpg', '2021-01-25 18:41:17', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -159,15 +157,8 @@ CREATE TABLE `moviesGenres` (
 --
 
 INSERT INTO `moviesGenres` (`id`, `movie_id`, `genre_id`, `createdAt`, `updatedAt`) VALUES
-(97, 90, 15, '2021-01-22 14:39:46', '0000-00-00 00:00:00'),
-(98, 90, 12, '2021-01-22 14:39:46', '0000-00-00 00:00:00'),
-(99, 90, 14, '2021-01-22 14:39:46', '0000-00-00 00:00:00'),
-(100, 91, 13, '2021-01-24 16:05:32', '0000-00-00 00:00:00'),
-(101, 91, 14, '2021-01-24 16:05:32', '0000-00-00 00:00:00'),
-(102, 91, 15, '2021-01-24 16:05:32', '0000-00-00 00:00:00'),
-(103, 91, 17, '2021-01-24 16:05:32', '0000-00-00 00:00:00'),
-(104, 92, 13, '2021-01-25 05:46:48', '0000-00-00 00:00:00'),
-(105, 92, 15, '2021-01-25 05:46:48', '0000-00-00 00:00:00');
+(114, 97, 13, '2021-01-25 18:41:17', '0000-00-00 00:00:00'),
+(115, 97, 15, '2021-01-25 18:41:17', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -190,7 +181,7 @@ CREATE TABLE `show_times` (
 --
 
 INSERT INTO `show_times` (`id`, `showTimeDate`, `timeId`, `cinemaId`, `movieId`, `createdAt`, `updateAt`) VALUES
-(1, '2021-01-04', 1, 23, 92, '2021-01-25 09:54:59', '0000-00-00 00:00:00');
+(5, '2021-02-10', 8, 23, 97, '2021-01-25 18:41:17', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -205,15 +196,6 @@ CREATE TABLE `soldSeats` (
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `soldSeats`
---
-
-INSERT INTO `soldSeats` (`id`, `showTimeId`, `seatCode`, `createdAt`, `updatedAt`) VALUES
-(61, 1, 'K1', '2021-01-25 14:13:37', '0000-00-00 00:00:00'),
-(62, 1, 'A12', '2021-01-25 14:13:37', '0000-00-00 00:00:00'),
-(63, 1, 'D2', '2021-01-25 14:13:37', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -234,7 +216,12 @@ CREATE TABLE `times` (
 
 INSERT INTO `times` (`id`, `showTime`, `createdAt`, `updatedAt`) VALUES
 (1, '12:23:37', '2021-01-25 09:53:29', '0000-00-00 00:00:00'),
-(2, '08:43:07', '2021-01-25 09:53:32', '2021-01-25 09:54:06');
+(2, '08:43:07', '2021-01-25 09:53:32', '2021-01-25 09:54:06'),
+(3, '17:02:00', '2021-01-25 17:25:46', '0000-00-00 00:00:00'),
+(4, '09:12:00', '2021-01-25 17:26:51', '0000-00-00 00:00:00'),
+(5, '19:22:00', '2021-01-25 17:27:08', '0000-00-00 00:00:00'),
+(7, '10:52:00', '2021-01-25 17:27:25', '0000-00-00 00:00:00'),
+(8, '10:05:00', '2021-01-25 17:30:31', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -246,23 +233,16 @@ CREATE TABLE `transactions` (
   `id` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `ticketDate` date NOT NULL,
-  `ticketTime` time NOT NULL,
-  `cinemaName` varchar(100) NOT NULL,
+  `timeId` int(11) NOT NULL,
+  `cinemaId` int(11) NOT NULL,
   `ticketCount` int(11) NOT NULL,
   `totalPayment` int(11) NOT NULL,
   `paymentMethod` varchar(50) NOT NULL,
   `seats` varchar(100) NOT NULL,
-  `movieTitle` varchar(100) NOT NULL,
+  `movieId` int(11) NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `transactions`
---
-
-INSERT INTO `transactions` (`id`, `userId`, `ticketDate`, `ticketTime`, `cinemaName`, `ticketCount`, `totalPayment`, `paymentMethod`, `seats`, `movieTitle`, `createdAt`, `updatedAt`) VALUES
-(29, 31, '2021-01-04', '12:23:37', 'cineOne 21', 3, 60, 'ovo', 'K1, A12, D2', 'Boruto: Naruto The Next Generation', '2021-01-25 14:13:37', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -293,7 +273,7 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `post
 (24, NULL, NULL, 'mathiuskormasela12rpl@gmail.com', '$2a$08$RJI3XuOw2nVyRV/pg/bQiOHJu8t8NJES3z7SlJ6YMaeqTkL1pS//S', NULL, NULL, 'user', 1, '2021-01-23 11:18:02', '2021-01-23 11:24:36'),
 (25, NULL, NULL, 'samdicova12@gmail.com', '$2a$08$4q0pmxWubhVJtXV9D2YCm.Mzp7MDzNKRSh79hPDCP8gaPs33o0Bda', NULL, NULL, 'user', 1, '2021-01-23 11:29:08', '2021-01-23 11:35:29'),
 (28, NULL, NULL, 'admin@gmail.com', '$2a$08$BwC.iLehin9lt1kzDId0JelXL7vXwjOmjblAHN/.y4gBoIww.C7ue', NULL, NULL, 'admin', 1, '2021-01-24 02:26:17', '0000-00-00 00:00:00'),
-(29, 'Tessalonika', 'Gracia', 'graciakormasela1002@gmail.com', '$2a$08$pxFOxqWX6SAnXKVOw1sJZe0PwKJXYu9uoMzw6JJl1G/VaHe2l3.Dq', NULL, '089273838', 'user', 1, '2021-01-24 02:31:12', '2021-01-24 06:10:14'),
+(29, 'Tessalonika', 'Gracia', 'graciakormasela1002@gmail.com', '$2a$08$qZ5A20QE2aM/RG9lJLsNoOJEAK1UhPyeZC5FzxSom8ZuBkt.a44fG', NULL, '089273838', 'user', 1, '2021-01-24 02:31:12', '2021-01-25 14:54:01'),
 (31, NULL, NULL, 'mathiuskormasela12@gmail.com', '$2a$08$3L5GM1v/b4zLu4IN6LpZZuQSKSgzwJX91xnBPMQBX11cnQTCv/hKu', NULL, NULL, 'user', 1, '2021-01-25 05:51:51', '2021-01-25 05:58:57');
 
 --
@@ -354,7 +334,6 @@ ALTER TABLE `show_times`
 --
 ALTER TABLE `soldSeats`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `seatCode` (`seatCode`),
   ADD KEY `showTimeId` (`showTimeId`);
 
 --
@@ -368,7 +347,10 @@ ALTER TABLE `times`
 --
 ALTER TABLE `transactions`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `userId` (`userId`);
+  ADD KEY `userId` (`userId`),
+  ADD KEY `cinemaId` (`cinemaId`),
+  ADD KEY `movieId` (`movieId`),
+  ADD KEY `timeId` (`timeId`);
 
 --
 -- Indexes for table `users`
@@ -409,37 +391,37 @@ ALTER TABLE `moviegoers`
 -- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- AUTO_INCREMENT for table `moviesGenres`
 --
 ALTER TABLE `moviesGenres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT for table `show_times`
 --
 ALTER TABLE `show_times`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `soldSeats`
 --
 ALTER TABLE `soldSeats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `times`
 --
 ALTER TABLE `times`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -482,7 +464,10 @@ ALTER TABLE `soldSeats`
 -- Constraints for table `transactions`
 --
 ALTER TABLE `transactions`
-  ADD CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transactions_ibfk_2` FOREIGN KEY (`cinemaId`) REFERENCES `cinemas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transactions_ibfk_3` FOREIGN KEY (`movieId`) REFERENCES `movies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transactions_ibfk_4` FOREIGN KEY (`timeId`) REFERENCES `times` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

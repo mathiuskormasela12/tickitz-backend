@@ -26,7 +26,10 @@ module.exports = {
     'direct',
     'casts',
     'synopsis',
-    'genreId'
+    'genreId',
+    'cinemaId',
+    'timeId',
+    'showTimeDate'
   ],
   addGenreBody: [
     'name'
@@ -61,14 +64,17 @@ module.exports = {
     'password',
     'password_confirm'
   ],
+  addTime: [
+    'time'
+  ],
   transaction: [
     'ticketDate',
     'ticketTime',
-    'cinemaName',
+    'cinemaId',
     'ticketCount',
     'totalPayment',
     'paymentMethod',
     'seats',
-    'movieTitle'
+    'movieId'
   ]
 }

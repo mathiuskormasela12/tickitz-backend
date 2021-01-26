@@ -12,6 +12,7 @@ const isFormFill = require('../middlewares/isFormFill')
 const auth = require('../middlewares/auth')
 
 const isAddMoviesFill = isFormFill(...config.addMovieBody)
+const isAddTimeFill = isFormFill(...config.addTime)
 
 // init router
 const router = express.Router()
@@ -22,6 +23,7 @@ router.use(upload(config.uploadOptions))
 router.get('/', auth.isAdmin, moviesController.getAllAdmin)
 router.get('/:id', auth.isAdmin, moviesController.getMovieById)
 router.post('/', auth.isAdmin, isAddMoviesFill, moviesController.create)
+router.post('/time', auth.isAdmin, isAddTimeFill, moviesController.createTime)
 router.put('/', auth.isAdmin, isAddMoviesFill, moviesController.create)
 router.delete('/:id', auth.isAdmin, moviesController.remove)
 router.patch('/:id', auth.isAdmin, moviesController.edit)

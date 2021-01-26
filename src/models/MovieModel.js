@@ -3,6 +3,32 @@
 const Database = require('./Database')
 
 class MovieModel extends Database {
+  createTime (time) {
+    const sql = 'INSERT INTO times SET ?'
+    return new Promise((resolve, reject) => {
+      this.db.query(sql, { showTime: time }, (err, result) => {
+        if (err) {
+          return reject(err)
+        } else {
+          return resolve(result)
+        }
+      })
+    })
+  }
+
+  getTimeByCond (cond) {
+    const sql = `SELECT * FROM times WHERE ${Object.keys(cond).map((item, index) => `${item}=${Object.values(cond)[index]}`).join(' AND ')}`
+    return new Promise((resolve, reject) => {
+      this.db.query(sql, (err, result) => {
+        if (err) {
+          return reject(err)
+        } else {
+          return resolve(result)
+        }
+      })
+    })
+  }
+
   create (title, category, releaseDate, duration, direct, casts, synopsis, poster, genreId) {
     return new Promise((resolve, reject) => {
       const sql = 'SELECT title FROM movies WHERE title = ?'
@@ -65,7 +91,8 @@ class MovieModel extends Database {
                 return resolve({
                   status: 200,
                   success: true,
-                  message: 'New movies has been created'
+                  message: 'New movies has been created',
+                  result
                 })
               }
             })

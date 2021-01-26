@@ -11,6 +11,12 @@ const upload = require('../helpers/upload')
 // import genre model
 const movieModel = require('../models/MovieModel')
 
+// import show times model
+const showTimes = require('../models/ShowTimeModel')
+
+// import show cinemas model
+const cinemas = require('../models/CinemaModel')
+
 // Import pagination
 const pagination = require('../helpers/pagination')
 
@@ -23,7 +29,10 @@ exports.create = async (req, res) => {
     casts,
     synopsis,
     category,
-    genreId
+    genreId,
+    cinemaId,
+    timeId,
+    showTimeDate
   } = req.body
 
   const poster = await upload(req, 'movies')
@@ -34,6 +43,35 @@ exports.create = async (req, res) => {
 
   try {
     const results = await movieModel.create(title, category, releaseDate, duration, direct, casts, synopsis, poster, genreId)
+
+    if (!results.success) {
+      return response(res, results.status, results.success, results.message)
+    }
+
+    const isTimeExist = await movieModel.getTimeByCond({
+      id: timeId
+    })
+
+    if (isTimeExist.length < 1) {
+      return response(res, 400, false, 'Unknown time id')
+    }
+
+    const isCinemaExist = await cinemas.findAllById(cinemaId)
+
+    if (isCinemaExist.results.length < 1) {
+      return response(res, 400, false, 'Unknown cinema id')
+    }
+
+    const insertShowTimes = await showTimes.create({
+      showTimeDate,
+      timeId,
+      cinemaId,
+      movieId: results.result.insertId
+    })
+
+    if (insertShowTimes.affectedRows < 1) {
+      return response(res, 400, false, 'Failed to insert movie')
+    }
 
     if (!results.success) {
       fs.unlink('./public/uploads/' + poster, err => {
@@ -180,5 +218,25 @@ exports.edit = async (req, res) => {
   } catch (error) {
     response(res, 500, false, 'Server Error')
     throw new Error(error)
+  }
+}
+
+exports.createTime = async (req, res) => {
+  try {
+    const isExist = await movieModel.getTimeByCond({ showTime: req.body.time })
+
+    if (isExist.length > 0) {
+      return response(res, 400, false, 'Time exists')
+    }
+    const result = await movieModel.createTime(req.body.time)
+
+    if (result.affectedRows > 0) {
+      return response(res, 200, true, 'Successfully add new time')
+    } else {
+      return response(res, 400, false, 'Failed add new time')
+    }
+  } catch (err) {
+    response(res, 500, false, 'Server Error')
+    throw new Error(err)
   }
 }
