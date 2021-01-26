@@ -5,6 +5,9 @@ const fs = require('fs')
 // import response
 const response = require('../helpers/response')
 
+// import sendEmail
+const sendMail = require('../helpers/mailer')
+
 // import upload function
 const upload = require('../helpers/upload')
 
@@ -16,6 +19,9 @@ const showTimes = require('../models/ShowTimeModel')
 
 // import show cinemas model
 const cinemas = require('../models/CinemaModel')
+
+// import show movigoer model
+const moviegoers = require('../models/Moviegoers')
 
 // Import pagination
 const pagination = require('../helpers/pagination')
@@ -101,6 +107,18 @@ exports.createShowTime = async (req, res) => {
 
     if (insertShowTimes.affectedRows < 1) {
       return response(res, 400, false, 'Failed to insert movie')
+    }
+
+    const moviegoersEmail = await moviegoers.getAll()
+
+    if (moviegoersEmail.length > 0) {
+      moviegoersEmail.forEach(item => {
+        const title = 'Hey there is new movie'
+        const message = `<div>
+          <h2>Hei moviegoers Ticktiz have a new movies for you, lets buy now</h2>
+        </div>`
+        sendMail(item.email, title, message)
+      })
     }
 
     return response(res, 200, true, 'Successfull to add show times')
