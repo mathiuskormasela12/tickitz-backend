@@ -22,7 +22,7 @@ class ShowTimeModel extends Database {
   }
 
   findAllByCond (cond) {
-    const sql = `SELECT * FROM ${this.table} WHERE ${Object.keys(cond).map((item, index) => `${item}=${Object.values(cond)[index]}`).join(' AND ')}`
+    const sql = `SELECT * FROM ${this.table} WHERE ${Object.keys(cond).map((item, index) => `${item}='${Object.values(cond)[index]}'`).join(' AND ')}`
     return new Promise((resolve, reject) => {
       const x = this.db.query(sql, (err, result) => {
         if (err) {

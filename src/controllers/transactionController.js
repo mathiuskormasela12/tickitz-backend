@@ -18,7 +18,6 @@ exports.buy = async (req, res) => {
     }
 
     const isCinemaIdExists = await showTimes.findAllByCond({
-      movieId: req.body.movieId,
       cinemaId: req.body.cinemaId
     })
 
@@ -27,7 +26,6 @@ exports.buy = async (req, res) => {
     }
 
     const isShowTimeIdExists = await showTimes.findAllByCond({
-      movieId: req.body.movieId,
       id: req.body.showTimeId
     })
 
@@ -36,7 +34,6 @@ exports.buy = async (req, res) => {
     }
 
     const isTimeIdExists = await showTimes.findAllByCond({
-      movieId: req.body.movieId,
       timeId: req.body.timeId
     })
 

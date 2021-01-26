@@ -21,7 +21,7 @@ router.get('/movies', moviesController.getAll)
 router.get('/movies/:id', moviesController.getMovieById)
 router.get('/genre/:genre', moviesController.getAllByGenre)
 router.get('/cinemas', cinemaController.getAll)
-router.get('/:id', cinemaController.getCinemaById)
+router.get('/cinemas/:id', cinemaController.getCinemaById)
 router.post('/moviegoers', moviegoersMiddleware, moviegoers)
 
 module.exports = router

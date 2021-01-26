@@ -82,8 +82,10 @@ exports.createShowTime = async (req, res) => {
     }
 
     const isShowTimeExists = await showTimes.findAllByCond({
+      showTimeDate,
       timeId,
-      cinemaId
+      cinemaId,
+      movieId
     })
 
     if (isShowTimeExists.length > 0) {

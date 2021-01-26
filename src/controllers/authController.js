@@ -151,8 +151,9 @@ exports.editPassword = async (req, res) => {
 exports.editUser = async (req, res) => {
   try {
     const previousResult = await users.getUserByCondition({
-      id: req.params.id
+      id: req.data.id
     })
+    console.log(req.data)
     let poster = previousResult[0].poster
     if (req.files) {
       poster = await upload(req, 'profile photo')
@@ -171,7 +172,7 @@ exports.editUser = async (req, res) => {
       poster,
       phone: req.body.phone
     }
-    const results = await users.update(req.params.id, req.body.email, body)
+    const results = await users.update(req.data.id, req.body.email, body)
 
     if (!results) {
       return response(res, 400, false, 'Failed to edit user account')

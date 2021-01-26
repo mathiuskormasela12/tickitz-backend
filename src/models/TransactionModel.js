@@ -17,7 +17,7 @@ class TransactionModel extends Database {
       cinemaCity: body.cinemaCity,
       movieTitle: body.movieTitle,
       paymentMethod: body.paymentMethod,
-      ticketCount: body.seats.length,
+      ticketCount: body.seats.split(',').length,
       totalPayment: body.totalPayment,
       seats: body.seats,
       userId

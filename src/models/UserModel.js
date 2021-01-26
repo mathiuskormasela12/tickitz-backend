@@ -39,7 +39,7 @@ class UserModel extends Database {
   update (id, email, body) {
     return new Promise((resolve, reject) => {
       const sql = `UPDATE ${this.table} SET ? WHERE id = ? AND email = ?`
-      this.db.query(sql, [body, id, email], (err, result) => {
+      const b = this.db.query(sql, [body, id, email], (err, result) => {
         if (err) {
           return reject(err)
         } else if (result.affectedRows < 1) {
@@ -48,6 +48,7 @@ class UserModel extends Database {
           resolve(true)
         }
       })
+      console.log(b.sql)
     })
   }
 
