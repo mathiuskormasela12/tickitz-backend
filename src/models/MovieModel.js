@@ -29,10 +29,10 @@ class MovieModel extends Database {
     })
   }
 
-  create (title, category, releaseDate, duration, direct, casts, synopsis, poster, genreId, timeId, cinemaId) {
+  create (title, category, releaseDate, duration, direct, casts, synopsis, poster, genreId) {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT movies.title, show_times.movieId AS id FROM movies INNER JOIN show_times ON movies.id = show_times.movieId WHERE movies.title = ? AND show_times.timeId = ? AND show_times.cinemaId = ?'
-      this.db.query(sql, [title, timeId, cinemaId], (err, results) => {
+      const sql = 'SELECT * FROM movies WHERE title = ?'
+      this.db.query(sql, title, (err, results) => {
         if (err) {
           return reject(err)
         } else if (results.length > 0) {
@@ -88,11 +88,25 @@ class MovieModel extends Database {
                     }
                   })
                 }
+                const genreIdInt = genreId.map(item => Number(item))
                 return resolve({
                   status: 200,
                   success: true,
                   message: 'New movies has been created',
-                  result
+                  results: {
+                    id: result.insertId,
+                    title,
+                    category,
+                    releaseDate,
+                    duration,
+                    direct,
+                    casts,
+                    synopsis: synopsis.slice(0, 70).concat('...'),
+                    poster: process.env.URL.concat(`/uploads/${poster}`),
+                    genreId: [
+                      ...genreIdInt
+                    ]
+                  }
                 })
               }
             })

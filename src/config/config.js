@@ -26,10 +26,7 @@ module.exports = {
     'direct',
     'casts',
     'synopsis',
-    'genreId',
-    'cinemaId',
-    'timeId',
-    'showTimeDate'
+    'genreId'
   ],
   addGenreBody: [
     'name'
@@ -80,5 +77,10 @@ module.exports = {
     'cinemaName',
     'cinemaPoster',
     'cinemaCity'
+  ],
+  addShowTime: [
+    'cinemaId',
+    'timeId',
+    'showTimeDate'
   ]
 }

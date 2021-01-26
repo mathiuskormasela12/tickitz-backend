@@ -29,10 +29,7 @@ exports.create = async (req, res) => {
     casts,
     synopsis,
     category,
-    genreId,
-    cinemaId,
-    timeId,
-    showTimeDate
+    genreId
   } = req.body
 
   const poster = await upload(req, 'movies')
@@ -42,32 +39,45 @@ exports.create = async (req, res) => {
   }
 
   try {
-    const results = await movieModel.create(title, category, releaseDate, duration, direct, casts, synopsis, poster, genreId, timeId, cinemaId)
+    const results = await movieModel.create(title, category, releaseDate, duration, direct, casts, synopsis, poster, genreId)
 
     if (!results.success) {
-      return response(res, results.status, results.success, results.message)
+      fs.unlink('./public/uploads/' + poster, err => {
+        if (err) {
+          console.log(err)
+        }
+      })
     }
+    return response(res, results.status, results.success, results.message, results.results)
+  } catch (error) {
+    response(res, 500, false, 'Server Error')
+    throw new Error(error)
+  }
+}
+
+exports.createShowTime = async (req, res) => {
+  try {
+    const {
+      cinemaId,
+      timeId,
+      showTimeDate
+    } = req.body
+
+    const {
+      id: movieId
+    } = req.params
 
     const isTimeExist = await movieModel.getTimeByCond({
       id: timeId
     })
 
     if (isTimeExist.length < 1) {
-      const deleteMovie = await movieModel.destroy(results.result.insertId)
-      if (deleteMovie.affectedRows < 1) {
-        return response(res, 400, false, 'Failed to delete movie')
-      }
-
       return response(res, 400, false, 'Unknown time id')
     }
 
     const isCinemaExist = await cinemas.findAllById(cinemaId)
 
     if (isCinemaExist.results.length < 1) {
-      const deleteMovie = await movieModel.destroy(results.result.insertId)
-      if (deleteMovie.affectedRows < 1) {
-        return response(res, 400, false, 'Failed to delete movie')
-      }
       return response(res, 400, false, 'Unknown cinema id')
     }
 
@@ -77,10 +87,6 @@ exports.create = async (req, res) => {
     })
 
     if (isShowTimeExists.length > 0) {
-      const deleteMovie = await movieModel.destroy(results.result.insertId)
-      if (deleteMovie.affectedRows < 1) {
-        return response(res, 400, false, 'Failed to delete movie')
-      }
       return response(res, 400, false, 'Show time is exists')
     }
 
@@ -88,28 +94,17 @@ exports.create = async (req, res) => {
       showTimeDate,
       timeId,
       cinemaId,
-      movieId: results.result.insertId
+      movieId
     })
 
     if (insertShowTimes.affectedRows < 1) {
-      const deleteMovie = await movieModel.destroy(results.result.insertId)
-      if (deleteMovie.affectedRows < 1) {
-        return response(res, 400, false, 'Failed to delete movie')
-      }
       return response(res, 400, false, 'Failed to insert movie')
     }
 
-    if (!results.success) {
-      fs.unlink('./public/uploads/' + poster, err => {
-        if (err) {
-          console.log(err)
-        }
-      })
-    }
-    return response(res, results.status, results.success, results.message)
-  } catch (error) {
+    return response(res, 200, true, 'Successfull to add show times')
+  } catch (err) {
     response(res, 500, false, 'Server Error')
-    throw new Error(error)
+    throw new Error(err)
   }
 }
 
