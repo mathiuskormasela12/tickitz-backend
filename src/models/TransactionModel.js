@@ -10,17 +10,19 @@ class TransactionModel extends Database {
 
   create (userId, body) {
     const data = {
-      showTimeId: body.showTimeId,
-      timeId: body.timeId,
-      cinemaId: body.cinemaId,
-      ticketCount: body.ticketCount,
-      totalPayment: body.totalPayment,
+      showTimeDate: body.showTimeDate,
+      ticketTime: body.ticketTime,
+      cinemaName: body.cinemaName,
+      cinemaPoster: body.cinemaPoster,
+      cinemaCity: body.cinemaCity,
+      movieTitle: body.movieTitle,
       paymentMethod: body.paymentMethod,
+      ticketCount: body.seats.length,
+      totalPayment: body.totalPayment,
       seats: body.seats,
-      movieId: body.movieId,
       userId
     }
-    console.log(data)
+
     const sql = `INSERT INTO ${this.table} SET ?`
     return new Promise((resolve, reject) => {
       this.db.query(sql, data, (err, result) => {

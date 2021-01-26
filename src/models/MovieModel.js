@@ -17,7 +17,7 @@ class MovieModel extends Database {
   }
 
   getTimeByCond (cond) {
-    const sql = `SELECT * FROM times WHERE ${Object.keys(cond).map((item, index) => `${item}=${Object.values(cond)[index]}`).join(' AND ')}`
+    const sql = `SELECT * FROM times WHERE ${Object.keys(cond).map((item, index) => `${item}='${Object.values(cond)[index]}'`).join(' AND ')}`
     return new Promise((resolve, reject) => {
       this.db.query(sql, (err, result) => {
         if (err) {
@@ -29,10 +29,10 @@ class MovieModel extends Database {
     })
   }
 
-  create (title, category, releaseDate, duration, direct, casts, synopsis, poster, genreId) {
+  create (title, category, releaseDate, duration, direct, casts, synopsis, poster, genreId, timeId, cinemaId) {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT title FROM movies WHERE title = ?'
-      this.db.query(sql, title, (err, results) => {
+      const sql = 'SELECT movies.title, show_times.movieId AS id FROM movies INNER JOIN show_times ON movies.id = show_times.movieId WHERE movies.title = ? AND show_times.timeId = ? AND show_times.cinemaId = ?'
+      this.db.query(sql, [title, timeId, cinemaId], (err, results) => {
         if (err) {
           return reject(err)
         } else if (results.length > 0) {

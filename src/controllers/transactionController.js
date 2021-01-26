@@ -5,22 +5,39 @@ const response = require('../helpers/response')
 // import models
 const transactions = require('../models/TransactionModel')
 const soldSeats = require('../models/SoldSeatsModel')
-const cinemas = require('../models/CinemaModel')
-const movies = require('../models/MovieModel')
+const showTimes = require('../models/ShowTimeModel')
 
 exports.buy = async (req, res) => {
   try {
-    const isCinemaIdExists = await cinemas.findAllById(req.body.cinemaId)
-
-    if (isCinemaIdExists.results.length < 1) {
+    const isCinemaIdExists = await showTimes.findAllByCond({
+      cinemaId: req.body.cinemaId,
+      movieId: req.body.movieId
+    })
+    console.log(isCinemaIdExists)
+    if (isCinemaIdExists.length < 1) {
       return response(res, 400, false, 'Unknown cinema id')
     }
 
-    const isMovieIdExists = await movies.findAllById(req.body.movieId)
+    // const isMovieIdExists = await movies.findAllById(req.body.movieId)
+    const isMovieIdExists = await showTimes.findAllByCond({
+      movieId: req.body.movieId,
+      cinemaId: req.body.cinemaId
+    })
 
-    if (isMovieIdExists.results.length < 1) {
+    if (isMovieIdExists.length < 1) {
       return response(res, 400, false, 'Unknown movie id')
     }
+
+    const isShowTimeIdExists = await showTimes.findAllByCond({
+      movieId: req.body.movieId,
+      cinemaId: req.body.cinemaId,
+      id: req.body.showTimeId
+    })
+
+    if (isShowTimeIdExists.length < 1) {
+      return response(res, 400, false, 'Unknown show time id')
+    }
+
     const result = await transactions.create(req.data.id, req.body)
 
     if (!result) {
@@ -33,6 +50,7 @@ exports.buy = async (req, res) => {
       })
 
       const isSoldSeatExists = []
+
       soldSeatsList.forEach(item => {
         if (req.body.seats.includes(item.seatCode.trim())) {
           isSoldSeatExists.push(true)

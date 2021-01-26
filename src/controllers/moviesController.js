@@ -42,7 +42,7 @@ exports.create = async (req, res) => {
   }
 
   try {
-    const results = await movieModel.create(title, category, releaseDate, duration, direct, casts, synopsis, poster, genreId)
+    const results = await movieModel.create(title, category, releaseDate, duration, direct, casts, synopsis, poster, genreId, timeId, cinemaId)
 
     if (!results.success) {
       return response(res, results.status, results.success, results.message)
@@ -263,6 +263,7 @@ exports.createTime = async (req, res) => {
     }
   } catch (err) {
     response(res, 500, false, 'Server Error')
-    throw new Error(err)
+    // throw new Error(err)
+    console.log(err)
   }
 }

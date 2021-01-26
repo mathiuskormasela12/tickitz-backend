@@ -71,10 +71,14 @@ module.exports = {
     'showTimeId',
     'timeId',
     'cinemaId',
-    'ticketCount',
     'totalPayment',
     'paymentMethod',
     'seats',
-    'movieId'
+    'movieId',
+    'showTimeDate',
+    'ticketTime',
+    'cinemaName',
+    'cinemaPoster',
+    'cinemaCity'
   ]
 }
