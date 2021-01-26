@@ -15,5 +15,7 @@ const isTransactionFill = isFormFill(...config.transaction)
 const router = express.Router()
 
 router.post('/', auth.isUser, isTransactionFill, transaction.buy)
+router.get('/history', auth.isUser, transaction.getUserOrderHistory)
+router.get('/history/:id', auth.isUser, transaction.getUserOrderHistoryDetail)
 
 module.exports = router

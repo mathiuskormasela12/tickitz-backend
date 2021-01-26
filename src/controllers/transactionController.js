@@ -100,3 +100,41 @@ exports.buy = async (req, res) => {
     return response(res, 500, false, 'Server Error')
   }
 }
+
+exports.getUserOrderHistory = async (req, res) => {
+  try {
+    const results = await transactions.getOrderHistory(req.data.id)
+
+    if (results.length < 1) {
+      return response(res, 400, false, 'Empty order history', results)
+    } else {
+      const orderHistory = {
+        ...results[0],
+        cinemaPoster: process.env.URL.concat('/uploads/', results[0].cinemaPoster)
+      }
+      return response(res, 200, true, 'Get Order History Successfully', orderHistory)
+    }
+  } catch (err) {
+    console.log(err)
+    return response(res, 500, false, 'Server Error')
+  }
+}
+
+exports.getUserOrderHistoryDetail = async (req, res) => {
+  try {
+    const results = await transactions.getOrderHistoryDetail(req.params.id, req.data.id)
+
+    if (results.length < 1) {
+      return response(res, 400, false, 'Empty order history', results)
+    } else {
+      const orderHistory = {
+        ...results[0],
+        cinemaPoster: process.env.URL.concat('/uploads/', results[0].cinemaPoster)
+      }
+      return response(res, 200, true, 'Get Order History Successfully', orderHistory)
+    }
+  } catch (err) {
+    console.log(err)
+    return response(res, 500, false, 'Server Error')
+  }
+}

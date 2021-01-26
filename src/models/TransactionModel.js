@@ -52,6 +52,32 @@ class TransactionModel extends Database {
     })
   }
 
+  getOrderHistory (userId) {
+    const sql = `SELECT id, showTimeDate, ticketTime, cinemaPoster, cinemaName FROM ${this.table} WHERE userId = ?`
+    return new Promise((resolve, reject) => {
+      this.db.query(sql, userId, (err, result) => {
+        if (err) {
+          return reject(err)
+        } else {
+          return resolve(result)
+        }
+      })
+    })
+  }
+
+  getOrderHistoryDetail (id, userId) {
+    const sql = `SELECT * FROM ${this.table} WHERE userId = ? AND id = ?`
+    return new Promise((resolve, reject) => {
+      this.db.query(sql, [userId, id], (err, result) => {
+        if (err) {
+          return reject(err)
+        } else {
+          return resolve(result)
+        }
+      })
+    })
+  }
+
   delete (id) {
     const sql = `DELETE FROM ${this.table} WHERE id = ?`
     return new Promise((resolve, reject) => {

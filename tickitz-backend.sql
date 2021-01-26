@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 26, 2021 at 05:53 PM
+-- Generation Time: Jan 26, 2021 at 06:35 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -245,7 +245,9 @@ INSERT INTO `soldSeats` (`id`, `showTimeId`, `seatCode`, `createdAt`, `updatedAt
 (256, 31, 'C2', '2021-01-26 15:15:00', '0000-00-00 00:00:00'),
 (257, 31, 'K1', '2021-01-26 15:15:00', '0000-00-00 00:00:00'),
 (258, 31, 'C1', '2021-01-26 15:15:00', '0000-00-00 00:00:00'),
-(259, 31, 'D2', '2021-01-26 15:15:00', '0000-00-00 00:00:00');
+(259, 31, 'D2', '2021-01-26 15:15:00', '0000-00-00 00:00:00'),
+(263, 34, 'A14', '2021-01-26 17:13:32', '0000-00-00 00:00:00'),
+(264, 34, 'A11', '2021-01-26 17:13:32', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -306,7 +308,8 @@ INSERT INTO `transactions` (`id`, `userId`, `showTimeDate`, `ticketTime`, `cinem
 (141, 29, '2021-01-30', '15:30:00', 'Ebv.id', 'ebv-1611233989959.png', 'Jakarta', 14, 60, 'ovo', 'C2, K1, C1, D2', 'Boruto: Naruto The Next Generation', '2021-01-26 14:48:30', '0000-00-00 00:00:00'),
 (144, 29, '2021-01-30', '15:30:00', 'Ebv.id', 'ebv-1611233989959.png', 'Jakarta', 4, 60, 'ovo', 'C2, K1, C1, D2', 'Boruto: Naruto The Next Generation', '2021-01-26 14:59:53', '0000-00-00 00:00:00'),
 (147, 29, '2021-08-07', '15:30:00', 'Ebv.id', 'ebv-1611233989959.png', 'Jakarta', 4, 60, 'ovo', 'C2, K1, C1, D2', 'Boruto: Naruto The Next Generation', '2021-01-26 15:15:00', '0000-00-00 00:00:00'),
-(148, 29, '2021-12-07', '15:30:00', 'Hiflix', 'hiflix-1611325788047.png', 'Banding', 3, 60, 'ovo', 'A2, A1, C3', 'Start-Up', '2021-01-26 16:49:21', '0000-00-00 00:00:00');
+(148, 29, '2021-12-07', '15:30:00', 'Hiflix', 'hiflix-1611325788047.png', 'Banding', 3, 60, 'ovo', 'A2, A1, C3', 'Start-Up', '2021-01-26 16:49:21', '0000-00-00 00:00:00'),
+(150, 34, '2021-12-07', '15:30:00', 'Hiflix', 'hiflix-1611325788047.png', 'Banding', 2, 60, 'ovo', 'A14, A11', 'Crash Landing On You', '2021-01-26 17:13:32', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -471,7 +474,7 @@ ALTER TABLE `show_times`
 -- AUTO_INCREMENT for table `soldSeats`
 --
 ALTER TABLE `soldSeats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=263;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=265;
 
 --
 -- AUTO_INCREMENT for table `times`
@@ -483,7 +486,7 @@ ALTER TABLE `times`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
 
 --
 -- AUTO_INCREMENT for table `users`
