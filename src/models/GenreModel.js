@@ -33,12 +33,11 @@ class GenreModel extends Database {
     })
   }
 
-  findAll (limit, offset, keyword, by, sort) {
+  findAll (keyword, by, sort) {
     return new Promise((resolve, reject) => {
       const sql = `SELECT * FROM genres  
                    WHERE name LIKE "%${keyword}%"
-                   ORDER BY ${by} ${sort} 
-                   LIMIT ${limit} OFFSET ${offset}`
+                   ORDER BY ${by} ${sort}`
       this.db.query(sql, (err, results) => {
         if (err) {
           return reject(err)

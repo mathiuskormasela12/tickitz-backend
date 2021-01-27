@@ -35,6 +35,27 @@ class ShowTimeModel extends Database {
       console.log(x.sql)
     })
   }
+
+  getShowTimes (id, keyword, by, sort, showTimeDate, location) {
+    const sql = `SELECT m.id AS movieId, m.title AS movieTitle, c.city, c.pricePerSeat, c.address, c.poster AS cinemaPoster, c.id AS cinemaId, c.name AS cinema, t.showTime AS time FROM cinemas c 
+    INNER JOIN show_times st ON c.id = st.cinemaId 
+    INNER JOIN times t ON st.timeId = t.id 
+    INNER JOIN movies m ON st.movieId = m.id
+    WHERE m.id = ? AND c.name LIKE "%${keyword}%"
+    ${location ? `AND c.city = '${location}'` : ''} ${showTimeDate ? `AND st.showTimeDate = '${showTimeDate}'` : ''} 
+    ORDER BY ${by} ${sort}`
+
+    return new Promise((resolve, reject) => {
+      const s = this.db.query(sql, id, (err, results) => {
+        if (err) {
+          return reject(err)
+        } else {
+          return resolve(results)
+        }
+      })
+      console.log(s.sql)
+    })
+  }
 }
 
 module.exports = new ShowTimeModel('show_times')

@@ -81,7 +81,7 @@ exports.buy = async (req, res) => {
         if (!results) {
           return response(res, 400, false, "Can't remove transaction")
         }
-        return response(res, 400, false, "Can't select same seat")
+        return response(res, 400, false, 'Sorry the selected seat has been used')
       }
 
       try {

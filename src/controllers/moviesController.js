@@ -131,7 +131,7 @@ exports.createShowTime = async (req, res) => {
 
 exports.getAllAdmin = async (req, res) => {
   const {
-    limit = 5,
+    limit = '5',
     search = '',
     by = 'id',
     sort = 'ASC'
@@ -140,7 +140,13 @@ exports.getAllAdmin = async (req, res) => {
   try {
     const result = await movieModel.findAll(search, by, sort)
 
-    if (limit < 1) {
+    if (limit < 1 || limit.match(/\d/) === null) {
+      return response(res, 400, false, 'Bad Request')
+    } else if (limit.match(/[0-9]/gi) !== null && limit.match(/[a-z]/gi) !== null) {
+      return response(res, 400, false, 'Bad Request')
+    }
+
+    if (sort.toLowerCase() !== 'asc' && sort.toLowerCase() !== 'desc') {
       return response(res, 400, false, 'Bad Request')
     }
 
@@ -155,7 +161,7 @@ exports.getAllAdmin = async (req, res) => {
 
 exports.getAll = async (req, res) => {
   const {
-    limit = 5,
+    limit = '5',
     search = '',
     by = 'id',
     sort = 'ASC'
@@ -164,7 +170,13 @@ exports.getAll = async (req, res) => {
   try {
     const result = await movieModel.findAll(search, by, sort)
 
-    if (limit < 1) {
+    if (limit < 1 || limit.match(/\d/) === null) {
+      return response(res, 400, false, 'Bad Request')
+    } else if (limit.match(/[0-9]/gi) !== null && limit.match(/[a-z]/gi) !== null) {
+      return response(res, 400, false, 'Bad Request')
+    }
+
+    if (sort.toLowerCase() !== 'asc' && sort.toLowerCase() !== 'desc') {
       return response(res, 400, false, 'Bad Request')
     }
 
@@ -179,11 +191,21 @@ exports.getAll = async (req, res) => {
 
 exports.getAllByGenre = async (req, res) => {
   const {
-    limit = 5,
+    limit = '5',
     search = '',
     by = 'id',
     sort = 'ASC'
   } = req.query
+
+  if (limit < 1 || limit.match(/\d/) === null) {
+    return response(res, 400, false, 'Bad Request')
+  } else if (limit.match(/[0-9]/gi) !== null && limit.match(/[a-z]/gi) !== null) {
+    return response(res, 400, false, 'Bad Request')
+  }
+
+  if (sort.toLowerCase() !== 'asc' && sort.toLowerCase() !== 'desc') {
+    return response(res, 400, false, 'Bad Request')
+  }
 
   try {
     const result = await movieModel.findAll(search, by, sort)
@@ -305,10 +327,9 @@ exports.getAllMovieByMonth = async (req, res) => {
 exports.getAllMovieNow = async (req, res) => {
   try {
     const movies = await movieModel.findAllByMonth()
-    console.log(movies)
-    console.log('hello ')
+
     const results = movies.results.filter(item => {
-      return item.releaseDate.toLowerCase().includes(String(moment(Date.now()).format('MMMM YYYY')).toLowerCase())
+      return moment(new Date(item.releaseDate)).format('DD MMMM YYYY') === moment(Date.now()).format('DD MMMM YYYY')
     })
     if (results.length < 1) {
       return response(res, 400, false, 'There is not movie on this month')

@@ -110,6 +110,11 @@ exports.forgotPassword = async (req, res) => {
     const results = await users.getUserByCondition({
       email: req.body.email
     })
+
+    if (!results) {
+      return response(res, 400, false, 'wrong email')
+    }
+
     const title = 'Forgot Password'
     const message = `<div>
                 <h2>Let's edit yout password, with the link below :</h2>
@@ -194,7 +199,11 @@ exports.getUserByid = async (req, res) => {
     if (!result) {
       return response(res, 400, false, `User with id ${req.params.id} unavailable`)
     } else {
-      return response(res, 200, true, 'Successfully to get user with id ' + req.params.id, result[0])
+      const data = {
+        ...result[0],
+        poster: process.env.URL.concat('/uploads/', result[0].poster)
+      }
+      return response(res, 200, true, 'Successfully to get user with id ' + req.params.id, data)
     }
   } catch (err) {
     console.log(err)
