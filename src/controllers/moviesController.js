@@ -1,6 +1,7 @@
 // ===== Movie Controller
 // import package
 const fs = require('fs')
+const moment = require('moment')
 
 // import response
 const response = require('../helpers/response')
@@ -278,7 +279,44 @@ exports.createTime = async (req, res) => {
     }
   } catch (err) {
     response(res, 500, false, 'Server Error')
-    // throw new Error(err)
-    console.log(err)
+    throw new Error(err)
+  }
+}
+
+exports.getAllMovieByMonth = async (req, res) => {
+  const { month } = req.params
+
+  try {
+    const movies = await movieModel.findAllByMonth()
+    const results = movies.results.filter(item => {
+      return item.releaseDate.toLowerCase().includes(month.toLowerCase())
+    })
+    if (results.length < 1) {
+      return response(res, 400, false, 'There is not movie on month ' + month, results)
+    } else {
+      return response(res, 200, false, 'Successfully to get move by month', results)
+    }
+  } catch (err) {
+    response(res, 500, false, 'Server Error')
+    throw new Error(err)
+  }
+}
+
+exports.getAllMovieNow = async (req, res) => {
+  try {
+    const movies = await movieModel.findAllByMonth()
+    console.log(movies)
+    console.log('hello ')
+    const results = movies.results.filter(item => {
+      return item.releaseDate.toLowerCase().includes(String(moment(Date.now()).format('MMMM YYYY')).toLowerCase())
+    })
+    if (results.length < 1) {
+      return response(res, 400, false, 'There is not movie on this month')
+    } else {
+      return response(res, 200, false, 'Successfully to get movie on this month', results)
+    }
+  } catch (err) {
+    response(res, 500, false, 'Server Error')
+    throw new Error(err)
   }
 }

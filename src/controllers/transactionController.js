@@ -1,6 +1,7 @@
 // ===== Transaction Controller
 // import all modules
 const response = require('../helpers/response')
+const moment = require('moment')
 
 // import models
 const transactions = require('../models/TransactionModel')
@@ -108,10 +109,13 @@ exports.getUserOrderHistory = async (req, res) => {
     if (results.length < 1) {
       return response(res, 400, false, 'Empty order history', results)
     } else {
-      const orderHistory = {
-        ...results[0],
-        cinemaPoster: process.env.URL.concat('/uploads/', results[0].cinemaPoster)
-      }
+      const orderHistory = results.map((item, index, array) => {
+        return {
+          ...array[index],
+          showTimeDate: moment(item.showTimeDate).format('DD MMMM YYYY'),
+          cinemaPoster: process.env.URL.concat('/uploads/', item.cinemaPoster)
+        }
+      })
       return response(res, 200, true, 'Get Order History Successfully', orderHistory)
     }
   } catch (err) {
@@ -129,6 +133,7 @@ exports.getUserOrderHistoryDetail = async (req, res) => {
     } else {
       const orderHistory = {
         ...results[0],
+        showTimeDate: moment(results[0].showTimeDate).format('DD MMMM YYYY'),
         cinemaPoster: process.env.URL.concat('/uploads/', results[0].cinemaPoster)
       }
       return response(res, 200, true, 'Get Order History Successfully', orderHistory)

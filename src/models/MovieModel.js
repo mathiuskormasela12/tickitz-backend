@@ -1,4 +1,7 @@
 // ===== Movie Model
+// import all modules
+const moment = require('moment')
+
 // import Database
 const Database = require('./Database')
 
@@ -157,7 +160,7 @@ class MovieModel extends Database {
               id: item.id,
               title: item.title,
               poster: `${process.env.URL}/uploads/${item.poster}`,
-              releaseDate: item.releaseDate,
+              releaseDate: moment(item.releaseDate).format('DD MMMM YYYY'),
               duration: item.duration,
               genres: movieGenres.filter(genreItem => genreItem.id === item.id).map(item => item.genre).join(', ')
             }
@@ -213,7 +216,7 @@ class MovieModel extends Database {
               id: item.id,
               title: item.title,
               poster: `${process.env.URL}/uploads/${item.poster}`,
-              releaseDate: item.releaseDate,
+              releaseDate: moment(item.releaseDate).format('DD MMMM YYYY'),
               duration: item.duration,
               direct: item.direct,
               casts: item.casts,
@@ -363,6 +366,61 @@ class MovieModel extends Database {
               }
             })
           }
+        }
+      })
+    })
+  }
+
+  findAllByMonth () {
+    return new Promise((resolve, reject) => {
+      const sql = `SELECT movies.id, movies.title,
+                   movies.poster, movies.releaseDate,
+                   movies.duration, movies.direct,
+                   movies.casts, movies.synopsis,
+                   genres.name AS genres FROM movies
+                   INNER JOIN moviesGenres ON 
+                   movies.id = moviesGenres.movie_id
+                   INNER JOIN genres ON
+                   genres.id = moviesGenres.genre_id`
+      this.db.query(sql, (err, results) => {
+        if (err) {
+          return reject(err)
+        } else if (results.length < 1) {
+          return resolve({
+            status: 200,
+            success: true,
+            message: 'movies unavailable',
+            results: []
+          })
+        } else {
+          const movieGenres = []
+          results.forEach((item, index, arr) => {
+            movieGenres.push({
+              id: item.id,
+              genre: item.genres
+            })
+          })
+
+          let data = results.filter((item, index, array) => {
+            return ((item.id !== ((index >= array.length - 1 ? 0 : array[index + 1].id))))
+          })
+
+          data = data.map((item, index) => {
+            return {
+              id: item.id,
+              title: item.title,
+              poster: `${process.env.URL}/uploads/${item.poster}`,
+              releaseDate: moment(item.releaseDate).format('DD MMMM YYYY'),
+              duration: item.duration,
+              genres: movieGenres.filter(genreItem => genreItem.id === item.id).map(item => item.genre).join(', ')
+            }
+          })
+          return resolve({
+            status: 200,
+            success: true,
+            message: 'Get all movies successfully',
+            results: data
+          })
         }
       })
     })
