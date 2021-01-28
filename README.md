@@ -19,8 +19,12 @@ This is non-optimized minimal backend app with mysql and node js. Backend app th
   npm start
   ```
 
-# Flowchart
+# Flowchart General
 ![alt text](https://github.com/mathiuskormasela12/tickitz-backend/blob/main/tickitz.png?raw=true)
+
+
+# Flowchart Register
+![alt text](https://github.com/mathiuskormasela12/tickitz-backend/blob/main/register.png?raw=true)
 
 ## API SPECS
 - POST `/api/auth/register` Route for add new user
