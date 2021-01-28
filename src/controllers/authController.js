@@ -193,17 +193,17 @@ exports.editUser = async (req, res) => {
 exports.getUserByid = async (req, res) => {
   try {
     const result = await users.getUserByCondition({
-      id: req.params.id
+      id: req.data.id
     })
 
     if (!result) {
-      return response(res, 400, false, `User with id ${req.params.id} unavailable`)
+      return response(res, 400, false, `User with id ${req.data.id} unavailable`)
     } else {
       const data = {
         ...result[0],
         poster: process.env.URL.concat('/uploads/', result[0].poster)
       }
-      return response(res, 200, true, 'Successfully to get user with id ' + req.params.id, data)
+      return response(res, 200, true, 'Successfully to get user with id ' + req.data.id, data)
     }
   } catch (err) {
     console.log(err)

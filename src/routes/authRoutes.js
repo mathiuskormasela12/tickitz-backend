@@ -30,6 +30,6 @@ router.patch('/active', authController.activated)
 router.post('/password', isForgotPasswordFill, authController.forgotPassword)
 router.patch('/password/:id/:email', isEditPasswordFill, authController.editPassword)
 router.patch('/user', auth.isUser, isEditUserFill, isAuthFormCorrect, authController.editUser)
-router.get('/user/:id', auth.isUser, authController.getUserByid)
+router.get('/user', auth.isUser, authController.getUserByid)
 
 module.exports = router
