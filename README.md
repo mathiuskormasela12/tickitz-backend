@@ -25,6 +25,11 @@ This is non-optimized minimal backend app with mysql and node js. Backend app th
 ## API SPECS
 - POST `/api/auth/register` Route for add new user
 - POST `/api/auth/login` Route for login user
+- PATCH `/api/auth/active` Route for active user account
+- POST `/api/auth/password` Route for forgot password
+- PATCH `/api/auth/password/:id/:email` Route for edit password
+- PATCH `/api/auth/user` Route for edit user profile
+- PATCH `/api/auth/user/:id` Route for get user profile
 
 - POST `/api/admin/movies` Route for add new movie
 - PUT `/api/admin/movies` Route for add new movie
@@ -59,4 +64,14 @@ This is non-optimized minimal backend app with mysql and node js. Backend app th
 - POST `/api/auth/register` Route for add new user
 - PATCH `/api/auth/password/:id/:email` Route for edit user password
 - PATCH `/api/auth/user/:id` Route for edit user profile
+- GET `/api/auth/user/:id` Route for get all user by id
+- GET `/api/showing` Route for get movie showing
+- GET `/api/movies/month/:month` Route for get movie by month
+- GET `/api/auth/user/:id` Route for get all user by id
+- POST `/api/transaction` Route for post transaction
+- GET `/api/history` Route for get user all order history
+- GET `/api/history/:id` Route for get user order history detail
+- GET `/api/ticket/:id` Route for get movie show times
+- POST `/api/admin/movies/time` Route for post time
+- POST `/api/admin/movies/showtimes/:id` Route for post show times
 - GET `/api/auth/user/:id` Route for get all user by id
