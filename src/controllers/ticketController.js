@@ -29,7 +29,8 @@ exports.getTicketByMovieId = async (req, res) => {
   try {
     const showTimes = await showTimesModel.getShowTimes(req.params.id, search, by, sort, showTimeDate, location)
 
-    let data = showTimes.filter((item, index, array) => {
+    let data = showTimes.sort((a, b) => a.cinemaId - b.cinemaId)
+    data = showTimes.filter((item, index, array) => {
       console.log(item.cinema)
       return (item.movieId !== ((index >= array.length - 1 ? 0 : array[index + 1].movieId))) || (item.cinema.toLowerCase() !== ((index >= array.length - 1 ? 0 : array[index + 1].cinema.toLowerCase())))
     })
