@@ -37,7 +37,7 @@ class ShowTimeModel extends Database {
   }
 
   getShowTimes (id, keyword, by, sort, showTimeDate, location) {
-    const sql = `SELECT m.id AS movieId, m.title AS movieTitle, c.city, c.pricePerSeat, c.address, c.poster AS cinemaPoster, c.id AS cinemaId, c.name AS cinema, t.showTime AS time FROM cinemas c 
+    const sql = `SELECT m.id AS movieId, m.title AS movieTitle, c.city, st.id AS showTimeId, st.showTimeDate, c.pricePerSeat, c.address, c.poster AS cinemaPoster, c.id AS cinemaId, c.name AS cinema, t.showTime AS time FROM cinemas c 
     INNER JOIN show_times st ON c.id = st.cinemaId 
     INNER JOIN times t ON st.timeId = t.id 
     INNER JOIN movies m ON st.movieId = m.id
