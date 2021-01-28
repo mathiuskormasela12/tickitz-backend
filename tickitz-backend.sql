@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 26, 2021 at 06:35 PM
+-- Generation Time: Jan 28, 2021 at 05:31 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `cinemas` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `poster` varchar(255) NOT NULL,
+  `poster` varchar(255) DEFAULT NULL,
   `address` text NOT NULL,
   `pricePerSeat` int(11) NOT NULL,
   `city` varchar(255) NOT NULL,
@@ -46,7 +46,8 @@ INSERT INTO `cinemas` (`id`, `name`, `poster`, `address`, `pricePerSeat`, `city`
 (22, 'Ebv.id', 'ebv-1611233989959.png', 'Dwatt street no. 20', 20, 'Jakarta', '2021-01-21 12:59:49', '0000-00-00 00:00:00'),
 (23, 'CineOne 21', 'cine-1611234958107.png', 'Rose street 12', 20, 'Surabaya', '2021-01-21 13:15:58', '2021-01-26 08:05:16'),
 (24, 'Hiflix', 'hiflix-1611325788047.png', 'Rose street 10', 20, 'Bandung', '2021-01-22 14:29:48', '0000-00-00 00:00:00'),
-(25, 'Hiflix 2', 'hiflix-1611677571513.png', 'Rose street 20', 209, 'Malang', '2021-01-26 16:12:51', '0000-00-00 00:00:00');
+(25, 'Hiflix 2', 'hiflix-1611677571513.png', 'Rose street 20', 209, 'Malang', '2021-01-26 16:12:51', '0000-00-00 00:00:00'),
+(27, 'Hiflix 10', 'hiflix-1611769763994.png', 'Rose street 20', 209, 'ss', '2021-01-27 17:49:23', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -76,7 +77,8 @@ INSERT INTO `genres` (`id`, `name`, `createdAt`, `updatedAt`) VALUES
 (17, 'comedy', '2021-01-21 02:50:24', '0000-00-00 00:00:00'),
 (18, 'horor', '2021-01-21 02:50:24', '0000-00-00 00:00:00'),
 (19, 'romance', '2021-01-21 02:50:24', '0000-00-00 00:00:00'),
-(20, 'vampire', '2021-01-21 02:50:24', '0000-00-00 00:00:00');
+(20, 'vampire', '2021-01-21 02:50:24', '0000-00-00 00:00:00'),
+(26, 'fiksi ilmiah', '2021-01-27 18:35:55', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -110,8 +112,8 @@ CREATE TABLE `moviegoers` (
 --
 
 INSERT INTO `moviegoers` (`id`, `email`, `createdAt`, `updatedAt`) VALUES
-(1, 'mathiuskormasela12@gmail.com', '2021-01-24 12:12:33', '0000-00-00 00:00:00'),
-(2, 'mathiuskormasela12rpl@gmail.com', '2021-01-26 15:26:33', '0000-00-00 00:00:00');
+(2, 'mathiuskormasela12rpl@gmail.com', '2021-01-26 15:26:33', '0000-00-00 00:00:00'),
+(3, 'mathiuskormasela12@gmail.com', '2021-01-27 17:20:32', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -128,7 +130,7 @@ CREATE TABLE `movies` (
   `direct` text NOT NULL,
   `casts` text NOT NULL,
   `synopsis` text NOT NULL,
-  `poster` varchar(255) NOT NULL,
+  `poster` varchar(255) DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -140,7 +142,8 @@ CREATE TABLE `movies` (
 INSERT INTO `movies` (`id`, `title`, `releaseDate`, `duration`, `category`, `direct`, `casts`, `synopsis`, `poster`, `createdAt`, `updatedAt`) VALUES
 (135, 'Boruto: Naruto The Next Generation', '2016-07-21', '01:35:00', 'PG-18', 'Masashi Kishimoto', 'Boruto, Sarada, Mitsuki, Naruto, Kakashi', 'lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', 'boruto-1611663815464.jpg', '2021-01-26 12:23:35', '0000-00-00 00:00:00'),
 (136, 'Naruto Shippudden', '2005-02-01', '00:24:10', 'PG-18', 'Masashi Kishimoto', 'Naruto, Kakashi', 'lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', 'naruto-1611663916403.jpg', '2021-01-26 12:25:16', '0000-00-00 00:00:00'),
-(138, 'Crash Landing On You', '2020-01-20', '01:20:10', 'PG-18', 'Lee Jeoong-Hyo', 'Hyun Bi, Seon Ye Jin', 'lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', 'crush-1611678782052.jpeg', '2021-01-26 16:33:02', '0000-00-00 00:00:00');
+(138, 'Crash Landing On You', '2021-01-28', '01:20:10', 'PG-18', 'Lee Jeoong-Hyo', 'Hyun Bi, Seon Ye Jin', 'lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', 'crush-1611678782052.jpeg', '2021-01-26 16:33:02', '2021-01-27 04:57:39'),
+(140, 'My Love From The Star', '2021-01-27', '01:53:10', 'PG-18', 'Jang Tae-yoo', 'Kim So Hyun, Jun Ji Hyun', 'lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', 'star-1611772915631.jpeg', '2021-01-27 18:41:55', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -169,7 +172,10 @@ INSERT INTO `moviesGenres` (`id`, `movie_id`, `genre_id`, `createdAt`, `updatedA
 (269, 136, 15, '2021-01-26 12:25:16', '0000-00-00 00:00:00'),
 (273, 138, 10, '2021-01-26 16:33:02', '0000-00-00 00:00:00'),
 (274, 138, 19, '2021-01-26 16:33:02', '0000-00-00 00:00:00'),
-(275, 138, 17, '2021-01-26 16:33:02', '0000-00-00 00:00:00');
+(275, 138, 17, '2021-01-26 16:33:02', '0000-00-00 00:00:00'),
+(279, 140, 10, '2021-01-27 18:41:55', '0000-00-00 00:00:00'),
+(280, 140, 17, '2021-01-27 18:41:55', '0000-00-00 00:00:00'),
+(281, 140, 19, '2021-01-27 18:41:55', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -202,7 +208,11 @@ INSERT INTO `show_times` (`id`, `showTimeDate`, `timeId`, `cinemaId`, `movieId`,
 (31, '2021-08-07', 12, 22, 135, '2021-01-26 15:13:32', '0000-00-00 00:00:00'),
 (32, '2022-01-17', 11, 22, 135, '2021-01-26 16:22:25', '0000-00-00 00:00:00'),
 (33, '2022-01-17', 11, 22, 138, '2021-01-26 16:38:59', '0000-00-00 00:00:00'),
-(34, '2021-12-07', 12, 23, 138, '2021-01-26 16:39:39', '0000-00-00 00:00:00');
+(34, '2021-12-07', 12, 23, 138, '2021-01-26 16:39:39', '0000-00-00 00:00:00'),
+(38, '2021-07-27', 13, 22, 138, '2021-01-26 17:47:44', '0000-00-00 00:00:00'),
+(41, '2021-08-10', 10, 22, 135, '2021-01-27 14:23:28', '0000-00-00 00:00:00'),
+(42, '2021-02-10', 11, 23, 138, '2021-01-27 15:17:13', '0000-00-00 00:00:00'),
+(43, '2021-02-10', 11, 23, 140, '2021-01-27 18:45:38', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -247,7 +257,12 @@ INSERT INTO `soldSeats` (`id`, `showTimeId`, `seatCode`, `createdAt`, `updatedAt
 (258, 31, 'C1', '2021-01-26 15:15:00', '0000-00-00 00:00:00'),
 (259, 31, 'D2', '2021-01-26 15:15:00', '0000-00-00 00:00:00'),
 (263, 34, 'A14', '2021-01-26 17:13:32', '0000-00-00 00:00:00'),
-(264, 34, 'A11', '2021-01-26 17:13:32', '0000-00-00 00:00:00');
+(264, 34, 'A11', '2021-01-26 17:13:32', '0000-00-00 00:00:00'),
+(267, 43, 'D14', '2021-01-27 18:54:08', '0000-00-00 00:00:00'),
+(268, 43, 'F11', '2021-01-27 18:54:08', '0000-00-00 00:00:00'),
+(269, 43, 'C14', '2021-01-28 03:14:36', '0000-00-00 00:00:00'),
+(270, 43, 'A11', '2021-01-28 03:14:36', '0000-00-00 00:00:00'),
+(271, 43, 'F10', '2021-01-28 03:14:36', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -272,7 +287,8 @@ INSERT INTO `times` (`id`, `showTime`, `createdAt`, `updatedAt`) VALUES
 (11, '10:30:00', '2021-01-26 05:22:05', '0000-00-00 00:00:00'),
 (12, '15:30:00', '2021-01-26 05:22:14', '0000-00-00 00:00:00'),
 (13, '16:20:08', '2021-01-26 05:22:21', '0000-00-00 00:00:00'),
-(14, '12:45:03', '2021-01-26 16:23:29', '0000-00-00 00:00:00');
+(14, '12:45:03', '2021-01-26 16:23:29', '0000-00-00 00:00:00'),
+(15, '17:15:03', '2021-01-27 18:45:11', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -309,7 +325,8 @@ INSERT INTO `transactions` (`id`, `userId`, `showTimeDate`, `ticketTime`, `cinem
 (144, 29, '2021-01-30', '15:30:00', 'Ebv.id', 'ebv-1611233989959.png', 'Jakarta', 4, 60, 'ovo', 'C2, K1, C1, D2', 'Boruto: Naruto The Next Generation', '2021-01-26 14:59:53', '0000-00-00 00:00:00'),
 (147, 29, '2021-08-07', '15:30:00', 'Ebv.id', 'ebv-1611233989959.png', 'Jakarta', 4, 60, 'ovo', 'C2, K1, C1, D2', 'Boruto: Naruto The Next Generation', '2021-01-26 15:15:00', '0000-00-00 00:00:00'),
 (148, 29, '2021-12-07', '15:30:00', 'Hiflix', 'hiflix-1611325788047.png', 'Banding', 3, 60, 'ovo', 'A2, A1, C3', 'Start-Up', '2021-01-26 16:49:21', '0000-00-00 00:00:00'),
-(150, 34, '2021-12-07', '15:30:00', 'Hiflix', 'hiflix-1611325788047.png', 'Banding', 2, 60, 'ovo', 'A14, A11', 'Crash Landing On You', '2021-01-26 17:13:32', '0000-00-00 00:00:00');
+(154, 28, '2021-07-27', '20:00:00', 'cibe onw', 'ebv-1611233989959.png', 'Jakarta', 2, 60, 'ovo', 'D14, F11', 'My Love From The Star', '2021-01-27 18:54:08', '0000-00-00 00:00:00'),
+(159, 28, '2021-07-27', '20:00:00', 'cibe onw', 'ebv-1611233989959.png', 'Jakarta', 3, 60, 'ovo', 'C14, A11, F10', 'My Love From The Star', '2021-01-28 03:14:36', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -337,12 +354,11 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `poster`, `phone`, `role`, `activated`, `createdAt`, `updatedAt`) VALUES
 (10, NULL, NULL, 'samdicova@gmail.com', '$2a$08$A7WAiV9eVZN8MRqEFjqHYuHBYkGyWjSZcnxccuWdcZqHVmFVoyTwW', NULL, NULL, 'admin', 1, '2021-01-23 04:43:41', '2021-01-23 14:06:37'),
-(25, NULL, NULL, 'samdicova12@gmail.com', '$2a$08$4q0pmxWubhVJtXV9D2YCm.Mzp7MDzNKRSh79hPDCP8gaPs33o0Bda', NULL, NULL, 'user', 1, '2021-01-23 11:29:08', '2021-01-23 11:35:29'),
 (28, NULL, NULL, 'admin@gmail.com', '$2a$08$BwC.iLehin9lt1kzDId0JelXL7vXwjOmjblAHN/.y4gBoIww.C7ue', NULL, NULL, 'admin', 1, '2021-01-24 02:26:17', '0000-00-00 00:00:00'),
 (29, 'Tessalonika', 'Gracia', 'graciakormasela1002@gmail.com', '$2a$08$qZ5A20QE2aM/RG9lJLsNoOJEAK1UhPyeZC5FzxSom8ZuBkt.a44fG', NULL, '089273838', 'user', 1, '2021-01-24 02:31:12', '2021-01-25 14:54:01'),
-(31, NULL, NULL, 'mathiuskormasela12@gmail.com', '$2a$08$3L5GM1v/b4zLu4IN6LpZZuQSKSgzwJX91xnBPMQBX11cnQTCv/hKu', NULL, NULL, 'user', 1, '2021-01-25 05:51:51', '2021-01-25 05:58:57'),
-(32, NULL, NULL, 'kiko@gmail.com', '$2a$08$Q1o9e7RqQe.WmjgMH91LVu.21nggFpit9wV21rQL2IL1UG2VAV7q.', NULL, NULL, 'admin', 1, '2021-01-26 15:35:25', '0000-00-00 00:00:00'),
-(34, 'Mathius', 'Kormasela', 'mathiuskormasela12rpl@gmail.com', '$2a$08$4quIfxiu9mJDrhLnXapb1utUmP296ewNaIILKVbTunlRKODF3rcEa', 'mysmtp-1611677413202.png', '0895326176440', 'user', 1, '2021-01-26 15:41:22', '2021-01-26 16:10:13');
+(35, NULL, NULL, 'superuser@gmail.com', '$2a$08$buLxrGJpGEQQmhVsJK8AfejHp2DFuI3OPuc91qRXMiNdo20mddxH2', NULL, NULL, 'admin', 1, '2021-01-27 17:35:02', '0000-00-00 00:00:00'),
+(36, 'Matthew', 'Kormasela', 'mathiuskormasela12@gmail.com', '$2a$08$R7KpYybrG9rZj0ScCO1DQeXz9OlBDhT/pTMbfxfEmH/ON4ioFeHwC', 'mysmtp-1611769493639.png', '0895326176440', 'user', 1, '2021-01-27 17:36:34', '2021-01-27 17:44:53'),
+(37, NULL, NULL, 'admin2@gmail.com', '$2a$08$3a9fHzeCfdALmWY5Ns9Y1OIDuzjbMjEWiIQ/y9HnwBQ.YJXNZnKvG', NULL, NULL, 'admin', 1, '2021-01-28 03:57:24', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -432,13 +448,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cinemas`
 --
 ALTER TABLE `cinemas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `genres`
 --
 ALTER TABLE `genres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `loyalty_point`
@@ -450,49 +466,49 @@ ALTER TABLE `loyalty_point`
 -- AUTO_INCREMENT for table `moviegoers`
 --
 ALTER TABLE `moviegoers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT for table `moviesGenres`
 --
 ALTER TABLE `moviesGenres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=276;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=285;
 
 --
 -- AUTO_INCREMENT for table `show_times`
 --
 ALTER TABLE `show_times`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `soldSeats`
 --
 ALTER TABLE `soldSeats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=265;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=272;
 
 --
 -- AUTO_INCREMENT for table `times`
 --
 ALTER TABLE `times`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- Constraints for dumped tables
