@@ -64,7 +64,7 @@ exports.getAll = async (req, res) => {
   try {
     const result = await cinemaModel.findAll(search, by, sort)
 
-    pagination(result.results, req.query, limit, 'movies', (results, prevPageLink, nextPageLink) => {
+    pagination(result.results, req.query, limit, 'cinemas', (results, prevPageLink, nextPageLink) => {
       return response(res, result.status, result.success, result.message, results, prevPageLink, nextPageLink)
     })
   } catch (error) {

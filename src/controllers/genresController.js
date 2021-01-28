@@ -38,7 +38,7 @@ exports.getAll = async (req, res) => {
 
   try {
     const result = await genreModel.findAll(search, by, sort)
-    pagination(result.results, req.query, limit, 'movies', (results, prevPageLink, nextPageLink) => {
+    pagination(result.results, req.query, limit, 'admin/genres', (results, prevPageLink, nextPageLink) => {
       return response(res, result.status, result.success, result.message, results, prevPageLink, nextPageLink)
     })
   } catch (error) {
