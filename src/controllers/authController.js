@@ -121,7 +121,7 @@ exports.forgotPassword = async (req, res) => {
     const message = `<div>
                 <h2>Let's edit yout password, with the link below :</h2>
                 <p>
-                  <a href="${process.env.APP_URL}/auth/password/${results[0].id}/${req.body.email}">${process.env.APP_URL}/auth/password/${results[0].id}/${req.body.email}</a> 
+                  <a href="${process.env.REACT_APP_URL}/reset-password?id=${results[0].id}&email=${cryptr.encrypt(req.body.email)}">Edit Password</a> 
                 </p>
               </div>`
     sendMail(req.body.email, title, message)
