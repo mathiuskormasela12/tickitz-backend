@@ -4,6 +4,8 @@ const bcrypt = require('bcryptjs')
 const response = require('../helpers/response')
 const jwt = require('jsonwebtoken')
 const upload = require('../helpers/upload')
+const Cryptr = require('cryptr')
+const cryptr = new Cryptr(process.env.REACT_APP_SECRET)
 
 // Import model
 const users = require('../models/UserModel')
@@ -56,7 +58,7 @@ exports.register = async (req, res) => {
             const message = `<div>
               <h2>Please activeted your account, with the link below :</h2>
               <p>
-                <a href="${process.env.APP_URL}/auth/active?id=${results.id}&email=${req.body.email}">Active Now !</a> 
+                <a href="${process.env.REACT_APP_URL}/active?id=${results.id}&email=${cryptr.encrypt(req.body.email)}">Active Now !</a> 
               </p>
             </div>`
             sendMail(req.body.email, title, message)
