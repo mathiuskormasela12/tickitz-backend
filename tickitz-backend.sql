@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 28, 2021 at 05:31 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.1
+-- Waktu pembuatan: 01 Feb 2021 pada 09.03
+-- Versi server: 10.4.17-MariaDB
+-- Versi PHP: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cinemas`
+-- Struktur dari tabel `cinemas`
 --
 
 CREATE TABLE `cinemas` (
@@ -39,7 +39,7 @@ CREATE TABLE `cinemas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `cinemas`
+-- Dumping data untuk tabel `cinemas`
 --
 
 INSERT INTO `cinemas` (`id`, `name`, `poster`, `address`, `pricePerSeat`, `city`, `createdAt`, `updatedAt`) VALUES
@@ -47,12 +47,14 @@ INSERT INTO `cinemas` (`id`, `name`, `poster`, `address`, `pricePerSeat`, `city`
 (23, 'CineOne 21', 'cine-1611234958107.png', 'Rose street 12', 20, 'Surabaya', '2021-01-21 13:15:58', '2021-01-26 08:05:16'),
 (24, 'Hiflix', 'hiflix-1611325788047.png', 'Rose street 10', 20, 'Bandung', '2021-01-22 14:29:48', '0000-00-00 00:00:00'),
 (25, 'Hiflix 2', 'hiflix-1611677571513.png', 'Rose street 20', 209, 'Malang', '2021-01-26 16:12:51', '0000-00-00 00:00:00'),
-(27, 'Hiflix 10', 'hiflix-1611769763994.png', 'Rose street 20', 209, 'ss', '2021-01-27 17:49:23', '0000-00-00 00:00:00');
+(27, 'Hiflix 10', 'hiflix-1611769763994.png', 'Rose street 20', 209, 'ss', '2021-01-27 17:49:23', '0000-00-00 00:00:00'),
+(30, 'LK21', 'hiflix-1611815853689.png', 'Rose street 20', 209, 'ss', '2021-01-28 06:37:33', '0000-00-00 00:00:00'),
+(33, 'Shine', 'cine-1611818225241.png', 'Jl, ss', 20, 'jakarta', '2021-01-28 07:17:05', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `genres`
+-- Struktur dari tabel `genres`
 --
 
 CREATE TABLE `genres` (
@@ -63,7 +65,7 @@ CREATE TABLE `genres` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `genres`
+-- Dumping data untuk tabel `genres`
 --
 
 INSERT INTO `genres` (`id`, `name`, `createdAt`, `updatedAt`) VALUES
@@ -77,13 +79,13 @@ INSERT INTO `genres` (`id`, `name`, `createdAt`, `updatedAt`) VALUES
 (17, 'comedy', '2021-01-21 02:50:24', '0000-00-00 00:00:00'),
 (18, 'horor', '2021-01-21 02:50:24', '0000-00-00 00:00:00'),
 (19, 'romance', '2021-01-21 02:50:24', '0000-00-00 00:00:00'),
-(20, 'vampire', '2021-01-21 02:50:24', '0000-00-00 00:00:00'),
-(26, 'fiksi ilmiah', '2021-01-27 18:35:55', '0000-00-00 00:00:00');
+(26, 'fiksi ilmiah', '2021-01-27 18:35:55', '0000-00-00 00:00:00'),
+(28, 'gore', '2021-01-28 07:19:14', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `loyalty_point`
+-- Struktur dari tabel `loyalty_point`
 --
 
 CREATE TABLE `loyalty_point` (
@@ -97,7 +99,7 @@ CREATE TABLE `loyalty_point` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `moviegoers`
+-- Struktur dari tabel `moviegoers`
 --
 
 CREATE TABLE `moviegoers` (
@@ -108,17 +110,18 @@ CREATE TABLE `moviegoers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `moviegoers`
+-- Dumping data untuk tabel `moviegoers`
 --
 
 INSERT INTO `moviegoers` (`id`, `email`, `createdAt`, `updatedAt`) VALUES
 (2, 'mathiuskormasela12rpl@gmail.com', '2021-01-26 15:26:33', '0000-00-00 00:00:00'),
-(3, 'mathiuskormasela12@gmail.com', '2021-01-27 17:20:32', '0000-00-00 00:00:00');
+(3, 'mathiuskormasela12@gmail.com', '2021-01-27 17:20:32', '0000-00-00 00:00:00'),
+(5, 'matthew0401001@gmail.com', '2021-01-28 07:13:20', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `movies`
+-- Struktur dari tabel `movies`
 --
 
 CREATE TABLE `movies` (
@@ -136,19 +139,20 @@ CREATE TABLE `movies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `movies`
+-- Dumping data untuk tabel `movies`
 --
 
 INSERT INTO `movies` (`id`, `title`, `releaseDate`, `duration`, `category`, `direct`, `casts`, `synopsis`, `poster`, `createdAt`, `updatedAt`) VALUES
-(135, 'Boruto: Naruto The Next Generation', '2016-07-21', '01:35:00', 'PG-18', 'Masashi Kishimoto', 'Boruto, Sarada, Mitsuki, Naruto, Kakashi', 'lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', 'boruto-1611663815464.jpg', '2021-01-26 12:23:35', '0000-00-00 00:00:00'),
+(135, 'Boruto: Naruto The Next Generation', '2016-07-21', '01:35:00', 'PG-18', 'Masashi Kishimoto', 'Boruto, Sarada, Mitsuki, Naruto, Kakashi', 'lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', 'startup-1611819391195.jpg', '2021-01-26 12:23:35', '2021-01-28 07:36:31'),
 (136, 'Naruto Shippudden', '2005-02-01', '00:24:10', 'PG-18', 'Masashi Kishimoto', 'Naruto, Kakashi', 'lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', 'naruto-1611663916403.jpg', '2021-01-26 12:25:16', '0000-00-00 00:00:00'),
 (138, 'Crash Landing On You', '2021-01-28', '01:20:10', 'PG-18', 'Lee Jeoong-Hyo', 'Hyun Bi, Seon Ye Jin', 'lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', 'crush-1611678782052.jpeg', '2021-01-26 16:33:02', '2021-01-27 04:57:39'),
-(140, 'My Love From The Star', '2021-01-27', '01:53:10', 'PG-18', 'Jang Tae-yoo', 'Kim So Hyun, Jun Ji Hyun', 'lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', 'star-1611772915631.jpeg', '2021-01-27 18:41:55', '0000-00-00 00:00:00');
+(140, 'My Love From The Star', '2021-01-27', '01:53:10', 'PG-18', 'Jang Tae-yoo', 'Kim So Hyun, Jun Ji Hyun', 'lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', 'star-1611772915631.jpeg', '2021-01-27 18:41:55', '0000-00-00 00:00:00'),
+(142, 'The Guardian', '2021-01-27', '01:53:10', 'PG-18', 'Jang Tae-yoo', 'Kim So Hyun, Jun Ji Hyun', 'lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', '19066-1611818624676.jpg', '2021-01-28 07:23:44', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `moviesGenres`
+-- Struktur dari tabel `moviesGenres`
 --
 
 CREATE TABLE `moviesGenres` (
@@ -160,7 +164,7 @@ CREATE TABLE `moviesGenres` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `moviesGenres`
+-- Dumping data untuk tabel `moviesGenres`
 --
 
 INSERT INTO `moviesGenres` (`id`, `movie_id`, `genre_id`, `createdAt`, `updatedAt`) VALUES
@@ -175,12 +179,15 @@ INSERT INTO `moviesGenres` (`id`, `movie_id`, `genre_id`, `createdAt`, `updatedA
 (275, 138, 17, '2021-01-26 16:33:02', '0000-00-00 00:00:00'),
 (279, 140, 10, '2021-01-27 18:41:55', '0000-00-00 00:00:00'),
 (280, 140, 17, '2021-01-27 18:41:55', '0000-00-00 00:00:00'),
-(281, 140, 19, '2021-01-27 18:41:55', '0000-00-00 00:00:00');
+(281, 140, 19, '2021-01-27 18:41:55', '0000-00-00 00:00:00'),
+(285, 142, 10, '2021-01-28 07:23:44', '0000-00-00 00:00:00'),
+(286, 142, 17, '2021-01-28 07:23:44', '0000-00-00 00:00:00'),
+(287, 142, 19, '2021-01-28 07:23:44', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `show_times`
+-- Struktur dari tabel `show_times`
 --
 
 CREATE TABLE `show_times` (
@@ -194,7 +201,7 @@ CREATE TABLE `show_times` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `show_times`
+-- Dumping data untuk tabel `show_times`
 --
 
 INSERT INTO `show_times` (`id`, `showTimeDate`, `timeId`, `cinemaId`, `movieId`, `createdAt`, `updateAt`) VALUES
@@ -212,12 +219,13 @@ INSERT INTO `show_times` (`id`, `showTimeDate`, `timeId`, `cinemaId`, `movieId`,
 (38, '2021-07-27', 13, 22, 138, '2021-01-26 17:47:44', '0000-00-00 00:00:00'),
 (41, '2021-08-10', 10, 22, 135, '2021-01-27 14:23:28', '0000-00-00 00:00:00'),
 (42, '2021-02-10', 11, 23, 138, '2021-01-27 15:17:13', '0000-00-00 00:00:00'),
-(43, '2021-02-10', 11, 23, 140, '2021-01-27 18:45:38', '0000-00-00 00:00:00');
+(43, '2021-02-10', 11, 23, 140, '2021-01-27 18:45:38', '0000-00-00 00:00:00'),
+(44, '2021-05-10', 10, 22, 142, '2021-01-28 07:25:44', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `soldSeats`
+-- Struktur dari tabel `soldSeats`
 --
 
 CREATE TABLE `soldSeats` (
@@ -229,7 +237,7 @@ CREATE TABLE `soldSeats` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `soldSeats`
+-- Dumping data untuk tabel `soldSeats`
 --
 
 INSERT INTO `soldSeats` (`id`, `showTimeId`, `seatCode`, `createdAt`, `updatedAt`) VALUES
@@ -262,12 +270,19 @@ INSERT INTO `soldSeats` (`id`, `showTimeId`, `seatCode`, `createdAt`, `updatedAt
 (268, 43, 'F11', '2021-01-27 18:54:08', '0000-00-00 00:00:00'),
 (269, 43, 'C14', '2021-01-28 03:14:36', '0000-00-00 00:00:00'),
 (270, 43, 'A11', '2021-01-28 03:14:36', '0000-00-00 00:00:00'),
-(271, 43, 'F10', '2021-01-28 03:14:36', '0000-00-00 00:00:00');
+(271, 43, 'F10', '2021-01-28 03:14:36', '0000-00-00 00:00:00'),
+(272, 44, 'C14', '2021-01-28 07:29:07', '0000-00-00 00:00:00'),
+(273, 44, 'A11', '2021-01-28 07:29:07', '0000-00-00 00:00:00'),
+(274, 44, 'F10', '2021-01-28 07:29:07', '0000-00-00 00:00:00'),
+(275, 44, 'A1', '2021-01-28 07:29:07', '0000-00-00 00:00:00'),
+(276, 43, 'B12', '2021-01-28 07:32:40', '0000-00-00 00:00:00'),
+(277, 43, 'C1', '2021-01-28 07:32:40', '0000-00-00 00:00:00'),
+(278, 43, 'D5', '2021-01-28 07:32:40', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `times`
+-- Struktur dari tabel `times`
 --
 
 CREATE TABLE `times` (
@@ -278,7 +293,7 @@ CREATE TABLE `times` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `times`
+-- Dumping data untuk tabel `times`
 --
 
 INSERT INTO `times` (`id`, `showTime`, `createdAt`, `updatedAt`) VALUES
@@ -288,12 +303,13 @@ INSERT INTO `times` (`id`, `showTime`, `createdAt`, `updatedAt`) VALUES
 (12, '15:30:00', '2021-01-26 05:22:14', '0000-00-00 00:00:00'),
 (13, '16:20:08', '2021-01-26 05:22:21', '0000-00-00 00:00:00'),
 (14, '12:45:03', '2021-01-26 16:23:29', '0000-00-00 00:00:00'),
-(15, '17:15:03', '2021-01-27 18:45:11', '0000-00-00 00:00:00');
+(15, '17:15:03', '2021-01-27 18:45:11', '0000-00-00 00:00:00'),
+(16, '09:15:03', '2021-01-28 07:26:29', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transactions`
+-- Struktur dari tabel `transactions`
 --
 
 CREATE TABLE `transactions` (
@@ -314,7 +330,7 @@ CREATE TABLE `transactions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `transactions`
+-- Dumping data untuk tabel `transactions`
 --
 
 INSERT INTO `transactions` (`id`, `userId`, `showTimeDate`, `ticketTime`, `cinemaName`, `cinemaPoster`, `cinemaCity`, `ticketCount`, `totalPayment`, `paymentMethod`, `seats`, `movieTitle`, `createdAt`, `updatedAt`) VALUES
@@ -326,12 +342,14 @@ INSERT INTO `transactions` (`id`, `userId`, `showTimeDate`, `ticketTime`, `cinem
 (147, 29, '2021-08-07', '15:30:00', 'Ebv.id', 'ebv-1611233989959.png', 'Jakarta', 4, 60, 'ovo', 'C2, K1, C1, D2', 'Boruto: Naruto The Next Generation', '2021-01-26 15:15:00', '0000-00-00 00:00:00'),
 (148, 29, '2021-12-07', '15:30:00', 'Hiflix', 'hiflix-1611325788047.png', 'Banding', 3, 60, 'ovo', 'A2, A1, C3', 'Start-Up', '2021-01-26 16:49:21', '0000-00-00 00:00:00'),
 (154, 28, '2021-07-27', '20:00:00', 'cibe onw', 'ebv-1611233989959.png', 'Jakarta', 2, 60, 'ovo', 'D14, F11', 'My Love From The Star', '2021-01-27 18:54:08', '0000-00-00 00:00:00'),
-(159, 28, '2021-07-27', '20:00:00', 'cibe onw', 'ebv-1611233989959.png', 'Jakarta', 3, 60, 'ovo', 'C14, A11, F10', 'My Love From The Star', '2021-01-28 03:14:36', '0000-00-00 00:00:00');
+(159, 28, '2021-07-27', '20:00:00', 'cibe onw', 'ebv-1611233989959.png', 'Jakarta', 3, 60, 'ovo', 'C14, A11, F10', 'My Love From The Star', '2021-01-28 03:14:36', '0000-00-00 00:00:00'),
+(162, 28, '2021-07-27', '20:00:00', 'cibe onw', 'ebv-1611233989959.png', 'Jakarta', 4, 60, 'ovo', 'C14, A11, F10,A1', 'My Love From The Star', '2021-01-28 07:29:07', '0000-00-00 00:00:00'),
+(166, 40, '2021-07-27', '20:00:00', 'cibe onw', 'ebv-1611233989959.png', 'Jakarta', 3, 60, 'ovo', 'B12, C1, D5', 'My Love From The Star', '2021-01-28 07:32:40', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -349,7 +367,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `poster`, `phone`, `role`, `activated`, `createdAt`, `updatedAt`) VALUES
@@ -357,47 +375,51 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `post
 (28, NULL, NULL, 'admin@gmail.com', '$2a$08$BwC.iLehin9lt1kzDId0JelXL7vXwjOmjblAHN/.y4gBoIww.C7ue', NULL, NULL, 'admin', 1, '2021-01-24 02:26:17', '0000-00-00 00:00:00'),
 (29, 'Tessalonika', 'Gracia', 'graciakormasela1002@gmail.com', '$2a$08$qZ5A20QE2aM/RG9lJLsNoOJEAK1UhPyeZC5FzxSom8ZuBkt.a44fG', NULL, '089273838', 'user', 1, '2021-01-24 02:31:12', '2021-01-25 14:54:01'),
 (35, NULL, NULL, 'superuser@gmail.com', '$2a$08$buLxrGJpGEQQmhVsJK8AfejHp2DFuI3OPuc91qRXMiNdo20mddxH2', NULL, NULL, 'admin', 1, '2021-01-27 17:35:02', '0000-00-00 00:00:00'),
-(36, 'Matthew', 'Kormasela', 'mathiuskormasela12@gmail.com', '$2a$08$R7KpYybrG9rZj0ScCO1DQeXz9OlBDhT/pTMbfxfEmH/ON4ioFeHwC', 'mysmtp-1611769493639.png', '0895326176440', 'user', 1, '2021-01-27 17:36:34', '2021-01-27 17:44:53'),
-(37, NULL, NULL, 'admin2@gmail.com', '$2a$08$3a9fHzeCfdALmWY5Ns9Y1OIDuzjbMjEWiIQ/y9HnwBQ.YJXNZnKvG', NULL, NULL, 'admin', 1, '2021-01-28 03:57:24', '0000-00-00 00:00:00');
+(36, 'Matt', 'Kormasela', 'mathiuskormasela12@gmail.com', '$2a$08$3Hc0C0QCMsWqp1H0C4IjdeEU4uLcC9qM8inatQlTihotQ4oRhAnhe', 'mysmtp-1611817800261.png', '0895326176440', 'user', 1, '2021-01-27 17:36:34', '2021-02-01 07:44:30'),
+(37, NULL, NULL, 'admin2@gmail.com', '$2a$08$3a9fHzeCfdALmWY5Ns9Y1OIDuzjbMjEWiIQ/y9HnwBQ.YJXNZnKvG', NULL, NULL, 'admin', 1, '2021-01-28 03:57:24', '0000-00-00 00:00:00'),
+(38, NULL, NULL, 'iu@gmail.com', '$2a$08$FU6RXMzOaDlofHFrlc8n4.Sreofa2hGrdeJQsS3.67lB9jFKoCyJC', NULL, NULL, 'admin', 1, '2021-01-28 06:17:04', '0000-00-00 00:00:00'),
+(40, 'Matthew', 'Kormasela', 'matthew0401001@gmail.com', '$2a$08$maw66hUIuv3pbW8XKKDfVOMWGZiDIp/L6q04yO5SYWcpf7Ij/8EpO', 'mysmtp-1611817674167.png', '0895326176440', 'user', 1, '2021-01-28 06:59:16', '2021-01-28 07:07:54'),
+(41, NULL, NULL, 'adminarka@gmail.com', '$2a$08$knjYNMO1fMEe8neTf7ae7eIYCmr7rZlU8ieGFMRZcuWV1FamuEl2C', NULL, NULL, 'admin', 1, '2021-01-28 07:03:21', '0000-00-00 00:00:00'),
+(47, NULL, NULL, 'evalinasianturi77@gmail.com', '$2a$08$2ZepVygKguHtThz9Z8HZ9u8WDILygek4n64AmujQZe/vwQJvyv6xe', NULL, NULL, 'user', 1, '2021-02-01 07:55:31', '2021-02-01 07:56:57');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `cinemas`
+-- Indeks untuk tabel `cinemas`
 --
 ALTER TABLE `cinemas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `genres`
+-- Indeks untuk tabel `genres`
 --
 ALTER TABLE `genres`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `loyalty_point`
+-- Indeks untuk tabel `loyalty_point`
 --
 ALTER TABLE `loyalty_point`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `moviegoers`
+-- Indeks untuk tabel `moviegoers`
 --
 ALTER TABLE `moviegoers`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexes for table `movies`
+-- Indeks untuk tabel `movies`
 --
 ALTER TABLE `movies`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `moviesGenres`
+-- Indeks untuk tabel `moviesGenres`
 --
 ALTER TABLE `moviesGenres`
   ADD PRIMARY KEY (`id`),
@@ -405,7 +427,7 @@ ALTER TABLE `moviesGenres`
   ADD KEY `genre_id` (`genre_id`);
 
 --
--- Indexes for table `show_times`
+-- Indeks untuk tabel `show_times`
 --
 ALTER TABLE `show_times`
   ADD PRIMARY KEY (`id`),
@@ -414,121 +436,121 @@ ALTER TABLE `show_times`
   ADD KEY `movieId` (`movieId`);
 
 --
--- Indexes for table `soldSeats`
+-- Indeks untuk tabel `soldSeats`
 --
 ALTER TABLE `soldSeats`
   ADD PRIMARY KEY (`id`),
   ADD KEY `showTimeId` (`showTimeId`);
 
 --
--- Indexes for table `times`
+-- Indeks untuk tabel `times`
 --
 ALTER TABLE `times`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `transactions`
+-- Indeks untuk tabel `transactions`
 --
 ALTER TABLE `transactions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `userId` (`userId`);
 
 --
--- Indexes for table `users`
+-- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `cinemas`
+-- AUTO_INCREMENT untuk tabel `cinemas`
 --
 ALTER TABLE `cinemas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
--- AUTO_INCREMENT for table `genres`
+-- AUTO_INCREMENT untuk tabel `genres`
 --
 ALTER TABLE `genres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT for table `loyalty_point`
+-- AUTO_INCREMENT untuk tabel `loyalty_point`
 --
 ALTER TABLE `loyalty_point`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `moviegoers`
+-- AUTO_INCREMENT untuk tabel `moviegoers`
 --
 ALTER TABLE `moviegoers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `movies`
+-- AUTO_INCREMENT untuk tabel `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
--- AUTO_INCREMENT for table `moviesGenres`
+-- AUTO_INCREMENT untuk tabel `moviesGenres`
 --
 ALTER TABLE `moviesGenres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=285;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=291;
 
 --
--- AUTO_INCREMENT for table `show_times`
+-- AUTO_INCREMENT untuk tabel `show_times`
 --
 ALTER TABLE `show_times`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
--- AUTO_INCREMENT for table `soldSeats`
+-- AUTO_INCREMENT untuk tabel `soldSeats`
 --
 ALTER TABLE `soldSeats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=272;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=279;
 
 --
--- AUTO_INCREMENT for table `times`
+-- AUTO_INCREMENT untuk tabel `times`
 --
 ALTER TABLE `times`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `transactions`
+-- AUTO_INCREMENT untuk tabel `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `loyalty_point`
+-- Ketidakleluasaan untuk tabel `loyalty_point`
 --
 ALTER TABLE `loyalty_point`
   ADD CONSTRAINT `loyalty_point_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `moviesGenres`
+-- Ketidakleluasaan untuk tabel `moviesGenres`
 --
 ALTER TABLE `moviesGenres`
   ADD CONSTRAINT `moviesGenres_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `movies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `moviesGenres_ibfk_2` FOREIGN KEY (`genre_id`) REFERENCES `genres` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `show_times`
+-- Ketidakleluasaan untuk tabel `show_times`
 --
 ALTER TABLE `show_times`
   ADD CONSTRAINT `show_times_ibfk_1` FOREIGN KEY (`timeId`) REFERENCES `times` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -536,13 +558,13 @@ ALTER TABLE `show_times`
   ADD CONSTRAINT `show_times_ibfk_3` FOREIGN KEY (`movieId`) REFERENCES `movies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `soldSeats`
+-- Ketidakleluasaan untuk tabel `soldSeats`
 --
 ALTER TABLE `soldSeats`
   ADD CONSTRAINT `soldSeats_ibfk_1` FOREIGN KEY (`showTimeId`) REFERENCES `show_times` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `transactions`
+-- Ketidakleluasaan untuk tabel `transactions`
 --
 ALTER TABLE `transactions`
   ADD CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
