@@ -316,7 +316,7 @@ exports.getAllMovieByMonth = async (req, res) => {
     if (results.length < 1) {
       return response(res, 400, false, 'There is not movie on month ' + month, results)
     } else {
-      return response(res, 200, false, 'Successfully to get move by month', results)
+      return response(res, 200, true, 'Successfully to get move by month', results)
     }
   } catch (err) {
     response(res, 500, false, 'Server Error')
