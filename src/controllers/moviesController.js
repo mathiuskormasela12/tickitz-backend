@@ -329,7 +329,7 @@ exports.getAllMovieNow = async (req, res) => {
     const movies = await movieModel.findAllByMonth()
 
     const results = movies.results.filter(item => {
-      return moment(new Date(item.releaseDate)).format('DD MMMM YYYY') === moment(Date.now()).format('DD MMMM YYYY')
+      return moment(new Date(item.releaseDate)).format('MMMM YYYY') === moment(Date.now()).format('MMMM YYYY')
     })
     if (results.length < 1) {
       return response(res, 400, false, 'There is not movie on this month')
