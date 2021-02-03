@@ -189,6 +189,21 @@ exports.getAll = async (req, res) => {
   }
 }
 
+exports.getAllTimes = async (req, res) => {
+  try {
+    const result = await movieModel.getAllTimes()
+
+    if (result.length < 1) {
+      return response(res, 400, false, 'Failed to get all times')
+    } else {
+      return response(res, 200, true, 'Success to get all times', result)
+    }
+  } catch (error) {
+    response(res, 500, false, 'Server Error')
+    throw new Error(error)
+  }
+}
+
 exports.getAllByGenre = async (req, res) => {
   const {
     limit = '5',
