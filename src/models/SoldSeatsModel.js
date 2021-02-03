@@ -25,6 +25,19 @@ class SoldSeatsModel extends Database {
     })
   }
 
+  getAll () {
+    const sql = `SELECT DISTINCT seatCode FROM ${this.table}`
+    return new Promise((resolve, reject) => {
+      this.db.query(sql, (err, result) => {
+        if (err) {
+          return reject(err)
+        } else {
+          return resolve(result)
+        }
+      })
+    })
+  }
+
   getSoldSeatByCondition (condition) {
     const sql = `SELECT ${this.table}.id, ${this.table}.seatCode, ${this.table}.showTimeId, show_times.cinemaId, show_times.movieId FROM ${this.table} INNER JOIN show_times ON ${this.table}.showTimeId = show_times.id WHERE ${Object.keys(condition).map((item, index) => `show_times.${item} = ${Object.values(condition)[index]}`).join(' AND ')}`
     return new Promise((resolve, reject) => {

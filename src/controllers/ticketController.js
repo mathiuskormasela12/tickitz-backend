@@ -5,6 +5,7 @@ const pagination = require('../helpers/pagination')
 
 // import all models
 const showTimesModel = require('../models/ShowTimeModel')
+const soldSeatsModel = require('../models/SoldSeatsModel')
 
 exports.getTicketByMovieId = async (req, res) => {
   const {
@@ -57,5 +58,21 @@ exports.getTicketByMovieId = async (req, res) => {
   } catch (err) {
     response(res, 500, false, 'Server Error')
     throw new Error(err)
+  }
+}
+
+exports.getAllSoldSeats = async (req, res) => {
+  try {
+    let result = await soldSeatsModel.getAll()
+
+    if (result.length < 1) {
+      return response(res, 400, false, 'Failed to get all sold seats')
+    } else {
+      result = result.map(item => item.seatCode)
+      return response(res, 200, true, 'Success to get all sold seats', result)
+    }
+  } catch (error) {
+    response(res, 500, false, 'Server Error')
+    throw new Error(error)
   }
 }
