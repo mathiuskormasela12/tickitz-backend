@@ -65,11 +65,11 @@ exports.getAllSoldSeats = async (req, res) => {
   const {
     movieId,
     cinemaId,
-    timeId
+    time
   } = req.params
 
   try {
-    let result = await soldSeatsModel.getAll(cinemaId, movieId, timeId)
+    let result = await soldSeatsModel.getAll(cinemaId, movieId, time)
 
     if (result.length < 1) {
       return response(res, 400, false, 'Failed to get all sold seats')
