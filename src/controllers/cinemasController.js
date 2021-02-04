@@ -73,6 +73,22 @@ exports.getAll = async (req, res) => {
   }
 }
 
+exports.getAllCities = async (req, res) => {
+  try {
+    const result = await cinemaModel.getCities()
+
+    if (result.length > 0) {
+      const cities = result.map(item => item.city)
+      return response(res, 200, true, 'Success to get all cinema cities', cities)
+    } else {
+      return response(res, 400, false, 'Failed to get all cinema cities', [])
+    }
+  } catch (error) {
+    response(res, 500, false, 'Server Error', [])
+    throw new Error(error)
+  }
+}
+
 exports.getCinemaById = async (req, res) => {
   const { id } = req.params
 

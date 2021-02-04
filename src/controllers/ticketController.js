@@ -62,8 +62,14 @@ exports.getTicketByMovieId = async (req, res) => {
 }
 
 exports.getAllSoldSeats = async (req, res) => {
+  const {
+    movieId,
+    cinemaId,
+    timeId
+  } = req.params
+
   try {
-    let result = await soldSeatsModel.getAll()
+    let result = await soldSeatsModel.getAll(cinemaId, movieId, timeId)
 
     if (result.length < 1) {
       return response(res, 400, false, 'Failed to get all sold seats')

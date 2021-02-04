@@ -67,6 +67,19 @@ class CinemaModel extends Database {
     })
   }
 
+  getCities () {
+    return new Promise((resolve, reject) => {
+      const sql = 'SELECT DISTINCT city FROM cinemas'
+      this.db.query(sql, (err, results) => {
+        if (err) {
+          return reject(err)
+        } else {
+          return resolve(results)
+        }
+      })
+    })
+  }
+
   findAllById (id) {
     return new Promise((resolve, reject) => {
       const sql = 'SELECT * FROM cinemas WHERE id = ?'
