@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 03 Feb 2021 pada 17.25
+-- Waktu pembuatan: 06 Feb 2021 pada 18.03
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 8.0.0
 
@@ -45,7 +45,7 @@ CREATE TABLE `cinemas` (
 INSERT INTO `cinemas` (`id`, `name`, `poster`, `address`, `pricePerSeat`, `city`, `createdAt`, `updatedAt`) VALUES
 (22, 'Ebv.id', 'ebv-1611233989959.png', 'Dwatt street no. 20', 20, 'Jakarta', '2021-01-21 12:59:49', '0000-00-00 00:00:00'),
 (23, 'CineOne 21', 'cine-1611234958107.png', 'Rose street 12', 20, 'Surabaya', '2021-01-21 13:15:58', '2021-01-26 08:05:16'),
-(24, 'Hiflix', 'hiflix-1611325788047.png', 'Rose street 10', 20, 'Bandung', '2021-01-22 14:29:48', '0000-00-00 00:00:00'),
+(24, 'Hiflix', 'hiflix-1611325788047.png', 'Rose street 10', 20, 'Jakarta', '2021-01-22 14:29:48', '2021-02-05 11:38:57'),
 (25, 'Hiflix 2', 'hiflix-1611677571513.png', 'Rose street 20', 209, 'Malang', '2021-01-26 16:12:51', '0000-00-00 00:00:00'),
 (27, 'Hiflix 10', 'hiflix-1611769763994.png', 'Rose street 20', 209, 'ss', '2021-01-27 17:49:23', '0000-00-00 00:00:00'),
 (30, 'LK21', 'hiflix-1611815853689.png', 'Rose street 20', 209, 'ss', '2021-01-28 06:37:33', '0000-00-00 00:00:00'),
@@ -116,8 +116,7 @@ CREATE TABLE `moviegoers` (
 INSERT INTO `moviegoers` (`id`, `email`, `createdAt`, `updatedAt`) VALUES
 (2, 'mathiuskormasela12rpl@gmail.com', '2021-01-26 15:26:33', '0000-00-00 00:00:00'),
 (3, 'mathiuskormasela12@gmail.com', '2021-01-27 17:20:32', '0000-00-00 00:00:00'),
-(5, 'matthew0401001@gmail.com', '2021-01-28 07:13:20', '0000-00-00 00:00:00'),
-(7, 'evalinasianturi77@gmail.com', '2021-02-02 13:20:55', '0000-00-00 00:00:00');
+(5, 'matthew0401001@gmail.com', '2021-01-28 07:13:20', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -372,7 +371,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `poster`, `phone`, `role`, `activated`, `createdAt`, `updatedAt`) VALUES
-(10, NULL, NULL, 'samdicova@gmail.com', '$2a$08$A7WAiV9eVZN8MRqEFjqHYuHBYkGyWjSZcnxccuWdcZqHVmFVoyTwW', NULL, NULL, 'admin', 1, '2021-01-23 04:43:41', '2021-01-23 14:06:37'),
+(10, NULL, NULL, 'samdicova@gmail.com', '$2a$08$wBgZY39nPf4kjR1Z9dELYuElB09WgPFC.1YTCfo0WjlY4lhshhxzq', NULL, NULL, 'admin', 1, '2021-01-23 04:43:41', '2021-02-04 01:46:46'),
 (28, NULL, NULL, 'admin@gmail.com', '$2a$08$BwC.iLehin9lt1kzDId0JelXL7vXwjOmjblAHN/.y4gBoIww.C7ue', NULL, NULL, 'admin', 1, '2021-01-24 02:26:17', '0000-00-00 00:00:00'),
 (29, 'Tessalonika', 'Gracia', 'graciakormasela1002@gmail.com', '$2a$08$qZ5A20QE2aM/RG9lJLsNoOJEAK1UhPyeZC5FzxSom8ZuBkt.a44fG', NULL, '089273838', 'user', 1, '2021-01-24 02:31:12', '2021-01-25 14:54:01'),
 (35, NULL, NULL, 'superuser@gmail.com', '$2a$08$buLxrGJpGEQQmhVsJK8AfejHp2DFuI3OPuc91qRXMiNdo20mddxH2', NULL, NULL, 'admin', 1, '2021-01-27 17:35:02', '0000-00-00 00:00:00'),
@@ -381,7 +380,7 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `post
 (38, NULL, NULL, 'iu@gmail.com', '$2a$08$FU6RXMzOaDlofHFrlc8n4.Sreofa2hGrdeJQsS3.67lB9jFKoCyJC', NULL, NULL, 'admin', 1, '2021-01-28 06:17:04', '0000-00-00 00:00:00'),
 (40, 'Matthew', 'Kormasela', 'matthew0401001@gmail.com', '$2a$08$maw66hUIuv3pbW8XKKDfVOMWGZiDIp/L6q04yO5SYWcpf7Ij/8EpO', 'mysmtp-1611817674167.png', '0895326176440', 'user', 1, '2021-01-28 06:59:16', '2021-01-28 07:07:54'),
 (41, NULL, NULL, 'adminarka@gmail.com', '$2a$08$knjYNMO1fMEe8neTf7ae7eIYCmr7rZlU8ieGFMRZcuWV1FamuEl2C', NULL, NULL, 'admin', 1, '2021-01-28 07:03:21', '0000-00-00 00:00:00'),
-(47, NULL, NULL, 'evalinasianturi77@gmail.com', '$2a$08$2ZepVygKguHtThz9Z8HZ9u8WDILygek4n64AmujQZe/vwQJvyv6xe', NULL, NULL, 'user', 1, '2021-02-01 07:55:31', '2021-02-01 07:56:57');
+(49, NULL, NULL, 'evalinasianturi77@gmail.com', '$2a$08$Vqyk5thgoU1Lj2VkW410YOdrVnLsK1cwk/cYbb4oghQVhaLOHTa26', NULL, NULL, 'user', 1, '2021-02-06 07:24:17', '2021-02-06 07:28:29');
 
 --
 -- Indexes for dumped tables
@@ -531,7 +530,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
