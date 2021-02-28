@@ -32,7 +32,8 @@ app.use(compression())
 // define client
 const clients = [
   'http://127.0.0.1:3000',
-  'http://localhost:3000'
+  'http://localhost:3000',
+  'http://192.168.1.32:3000'
 ]
 
 // setup cors options

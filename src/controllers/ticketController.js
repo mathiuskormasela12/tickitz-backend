@@ -63,19 +63,47 @@ exports.getTicketByMovieId = async (req, res) => {
 
 exports.getAllSoldSeats = async (req, res) => {
   const {
-    movieId,
-    cinemaId,
-    time
+    showTimeId
   } = req.params
 
   try {
-    let result = await soldSeatsModel.getAll(cinemaId, movieId, time)
+    let result = await soldSeatsModel.getAll(showTimeId)
 
     if (result.length < 1) {
       return response(res, 400, false, 'Failed to get all sold seats')
     } else {
       result = result.map(item => item.seatCode)
       return response(res, 200, true, 'Success to get all sold seats', result)
+    }
+  } catch (error) {
+    response(res, 500, false, 'Server Error')
+    throw new Error(error)
+  }
+}
+
+exports.getSelectedShowTimeId = async (req, res) => {
+  const {
+    showTimeDate,
+    timeId,
+    cinemaId,
+    movieId
+  } = req.params
+
+  try {
+    const result = await showTimesModel.findAllByCond({
+      showTimeDate,
+      timeId,
+      cinemaId,
+      movieId
+    })
+
+    if (result.length < 1) {
+      return response(res, 400, false, 'Failed to get selected show time')
+    } else {
+      console.log(result[0].id)
+      return response(res, 200, true, 'Success to get selected show time id', {
+        showTimeId: result[0].id
+      })
     }
   } catch (error) {
     response(res, 500, false, 'Server Error')

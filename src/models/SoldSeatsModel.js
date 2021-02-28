@@ -25,15 +25,11 @@ class SoldSeatsModel extends Database {
     })
   }
 
-  getAll (cinemaId, movieId, time) {
+  getAll (showTimeId) {
     const sql = `SELECT DISTINCT soldSeats.seatCode
-                 FROM soldSeats INNER JOIN show_times 
-                 ON soldSeats.showTimeId = show_times.id
-                 INNER JOIN times ON show_times.timeId = times.id
-                 WHERE show_times.cinemaId = ${cinemaId}
-                 AND show_times.movieId = ${movieId}
-                 AND times.showTime = '${time}'
+                 FROM soldSeats WHERE showTimeId = ${showTimeId}
                 `
+    console.log(sql)
     return new Promise((resolve, reject) => {
       this.db.query(sql, (err, result) => {
         if (err) {
