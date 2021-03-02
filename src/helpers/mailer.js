@@ -16,7 +16,7 @@ module.exports = (reciever, title, message) => {
 
   transporter.sendMail(mailOptions, (err, info) => {
     if (err) {
-      throw err
+      console.log(err)
     }
     console.log(info)
   })

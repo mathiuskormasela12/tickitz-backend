@@ -16,8 +16,8 @@ const router = express.Router()
 // setup express file upload
 router.use(upload(config.uploadOptions))
 
-router.get('/ticket/:id', auth.isUser, ticketController.getTicketByMovieId)
-router.get('/soldseats/:showTimeId', ticketController.getAllSoldSeats)
-router.get('/selectedShowTime/:showTimeDate/:movieId/:timeId/:cinemaId', auth.isUser, ticketController.getSelectedShowTimeId)
+router.get('/ticket/:id', ticketController.getTicketByMovieId)
+router.get('/soldseats/:showTimeId', auth.isUser, ticketController.getAllSoldSeats)
+router.get('/selectedShowTime/:showTimeDate/:movieId/:timeId/:cinemaId', ticketController.getSelectedShowTimeId)
 
 module.exports = router

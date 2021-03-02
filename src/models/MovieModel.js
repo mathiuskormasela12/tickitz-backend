@@ -137,7 +137,7 @@ class MovieModel extends Database {
       const sql = `SELECT movies.id, movies.title,
                    movies.poster, movies.releaseDate,
                    movies.duration, movies.direct,
-                   m.category, movies.casts, movies.synopsis,
+                   movies.category, movies.casts, movies.synopsis,
                    genres.name AS genres FROM movies
                    INNER JOIN moviesGenres ON 
                    movies.id = moviesGenres.movie_id

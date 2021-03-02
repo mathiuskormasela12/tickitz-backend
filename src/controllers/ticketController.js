@@ -43,7 +43,6 @@ exports.getTicketByMovieId = async (req, res) => {
         time: item.time
       })
     })
-
     data = data.map((item, index) => {
       return {
         ...data[index],
