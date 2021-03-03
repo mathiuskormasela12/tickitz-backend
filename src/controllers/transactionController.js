@@ -54,6 +54,7 @@ exports.buy = async (req, res) => {
     }
 
     const result = await transactions.create(req.data.id, req.body)
+    const transactionId = result.id
 
     if (!result) {
       return response(res, 400, false, 'Failed to buy ticket')
@@ -89,7 +90,9 @@ exports.buy = async (req, res) => {
         if (!result) {
           return response(res, 400, false, 'Failed to add sold seat')
         } else {
-          return response(res, 200, true, 'Success buy ticket')
+          return response(res, 200, true, 'Success buy ticket', {
+            transactionId
+          })
         }
       } catch (err) {
         console.log(err)
