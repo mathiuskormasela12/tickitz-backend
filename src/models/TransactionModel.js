@@ -53,7 +53,7 @@ class TransactionModel extends Database {
   }
 
   getOrderHistory (userId) {
-    const sql = `SELECT id, showTimeDate, ticketTime, cinemaPoster, cinemaName FROM ${this.table} WHERE userId = ?`
+    const sql = `SELECT id, showTimeDate, movieTitle, ticketTime, cinemaPoster, cinemaName FROM ${this.table} WHERE userId = ?`
     return new Promise((resolve, reject) => {
       this.db.query(sql, userId, (err, result) => {
         if (err) {

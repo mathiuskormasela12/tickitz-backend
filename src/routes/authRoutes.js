@@ -29,7 +29,8 @@ router.post('/register', isRegisterFill, isAuthFormCorrect, authController.regis
 router.patch('/active', authController.activated)
 router.post('/password', isForgotPasswordFill, authController.forgotPassword)
 router.patch('/password/:id/:email', isEditPasswordFill, authController.editPassword)
-router.patch('/user', auth.isUser, isEditUserFill, isAuthFormCorrect, authController.editUser)
+router.patch('/user', auth.isUser, isEditUserFill, authController.editUser)
+router.patch('/user/upload', auth.isUser, authController.uploadPhoto)
 router.get('/user', auth.isUser, authController.getUserByid)
 
 module.exports = router

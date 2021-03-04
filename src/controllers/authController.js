@@ -5,6 +5,7 @@ const response = require('../helpers/response')
 const jwt = require('jsonwebtoken')
 const upload = require('../helpers/upload')
 const Cryptr = require('cryptr')
+const fs = require('fs')
 const cryptr = new Cryptr(process.env.REACT_APP_SECRET)
 
 // Import model
@@ -157,26 +158,10 @@ exports.editPassword = async (req, res) => {
 
 exports.editUser = async (req, res) => {
   try {
-    const previousResult = await users.getUserByCondition({
-      id: req.data.id
-    })
-    console.log(req.data)
-    let poster = previousResult[0].poster
-    if (req.files) {
-      poster = await upload(req, 'profile photo')
-
-      if (typeof poster === 'object') {
-        return response(res, poster.status, poster.success, poster.message)
-      }
-    }
-
-    const hash = await bcrypt.hash(req.body.password, 8)
     const body = {
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       email: req.body.email,
-      password: hash,
-      poster,
       phone: req.body.phone
     }
     const results = await users.update(req.data.id, req.body.email, body)
@@ -210,5 +195,33 @@ exports.getUserByid = async (req, res) => {
   } catch (err) {
     console.log(err)
     return response(res, 500, false, 'Server Error')
+  }
+}
+
+exports.uploadPhoto = async (req, res) => {
+  const poster = await upload(req, 'profile picture')
+
+  if (typeof poster === 'object') {
+    return response(res, poster.status, poster.success, poster.message)
+  }
+
+  try {
+    const results = await users.updatePhoto(req.data.id, {
+      poster: poster
+    })
+
+    if (!results) {
+      fs.unlink('./public/uploads/' + poster, err => {
+        if (err) {
+          console.log(err)
+        }
+      })
+      return response(res, 400, false, 'Failed to upload profile')
+    } else {
+      return response(res, 200, true, 'Success to upload profile')
+    }
+  } catch (error) {
+    response(res, 500, false, 'Server Error')
+    throw new Error(error)
   }
 }

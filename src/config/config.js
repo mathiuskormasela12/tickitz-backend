@@ -57,9 +57,7 @@ module.exports = {
     'first_name',
     'last_name',
     'phone',
-    'email',
-    'password',
-    'password_confirm'
+    'email'
   ],
   addTime: [
     'time'
