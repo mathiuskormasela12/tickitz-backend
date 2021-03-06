@@ -180,8 +180,8 @@ exports.getAll = async (req, res) => {
       return response(res, 400, false, 'Bad Request')
     }
 
-    pagination(result.results, req.query, limit, 'movies', (results, prevPageLink, nextPageLink) => {
-      return response(res, result.status, result.success, result.message, results, prevPageLink, nextPageLink)
+    pagination(result.results, req.query, limit, 'movies', (results, prevPageLink, nextPageLink, page) => {
+      return response(res, result.status, result.success, result.message, results, prevPageLink, nextPageLink, page)
     })
   } catch (error) {
     response(res, 500, false, 'Server Error')

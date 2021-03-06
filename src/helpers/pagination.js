@@ -15,5 +15,5 @@ module.exports = (data, query, defaultLimit, url, sendResults) => {
   const nextPageLink = nextResults.length > 0 ? `${process.env.APP_URL}/${url}?${!query.page ? 'page=2&' : ''}${Object.keys(query).map((item, index) => `${item}=${(item === 'page') ? (Number(Object.values(query)[index]) + 1) : Object.values(query)[index]}`).join('&')}` : null
   const prevPageLink = currentPage > 1 ? `${process.env.APP_URL}/${url}?${!query.page ? 'page=2&' : ''}${Object.keys(query).map((item, index) => `${item}=${(item === 'page') ? (Number(Object.values(query)[index]) - 1) : Object.values(query)[index]}`).join('&')}` : null
 
-  sendResults(results, prevPageLink, nextPageLink)
+  sendResults(results, prevPageLink, nextPageLink, currentPage)
 }

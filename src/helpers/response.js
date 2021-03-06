@@ -1,6 +1,6 @@
 // ===== Response
 module.exports = (res, status, success, message, results, ...optionalProperty) => {
-  const [prevMovie, nextMovie] = optionalProperty
+  const [prevMovie, nextMovie, currentPage] = optionalProperty
 
   if (results && Array.isArray(results)) {
     return res.status(status).json({
@@ -10,7 +10,8 @@ module.exports = (res, status, success, message, results, ...optionalProperty) =
       pageInfo: {
         length: results.length,
         previousMovie: optionalProperty ? prevMovie : null,
-        nextMovie: optionalProperty ? nextMovie : null
+        nextMovie: optionalProperty ? nextMovie : null,
+        currentPage: optionalProperty ? currentPage : null
       }
     })
   } else if (results && !Array.isArray(results)) {
