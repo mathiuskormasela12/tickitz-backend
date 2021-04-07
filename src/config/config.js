@@ -55,7 +55,6 @@ module.exports = {
   ],
   editUserBody: [
     'first_name',
-    'last_name',
     'phone',
     'email'
   ],
