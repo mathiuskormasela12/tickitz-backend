@@ -1,6 +1,6 @@
 // ====== Database
 // import mysql
-const mysql = require('mysql')
+const mysql = require('mysql2')
 
 class Database {
   constructor () {

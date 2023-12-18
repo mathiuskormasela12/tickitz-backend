@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  tickitz-db:
+    container_name: tickitz-db
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tickitz
+    ports:
+      - protocol: tcp
+        target: 3306
+        published: 3306
